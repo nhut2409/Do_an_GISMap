@@ -12,7 +12,7 @@ $(document).ready(function() {
 var view = new ol.View({
     projection: "EPSG:4326",
     center: [106.95, 11.03],
-    zoom: 14,
+    zoom: 10,
 });
 
 var view_ov = new ol.View({
