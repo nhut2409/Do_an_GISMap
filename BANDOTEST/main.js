@@ -65,7 +65,7 @@ var overlays = new ol.layer.Group({
             source: new ol.source.ImageWMS({
                 url: "http://localhost:8080/geoserver/QLBDS/wms?",
                 params: {
-                    LAYERS: "QLBDS:qhsd",
+                    LAYERS: "QLBDS:htsd",
                 },
                 ratio: 1,
                 serverType: "geoserver",
@@ -77,7 +77,7 @@ var overlays = new ol.layer.Group({
             source: new ol.source.ImageWMS({
                 url: "http://localhost:8080/geoserver/QLBDS/wms?",
                 params: {
-                    LAYERS: "QLBDS:htsd",
+                    LAYERS: "QLBDS:ndc",
                 },
                 ratio: 1,
                 serverType: "geoserver",
@@ -89,7 +89,7 @@ var overlays = new ol.layer.Group({
             source: new ol.source.ImageWMS({
                 url: "http://localhost:8080/geoserver/QLBDS/wms?",
                 params: {
-                    LAYERS: "QLBDS:ndc",
+                    LAYERS: "QLBDS:qhsd",
                 },
                 ratio: 1,
                 serverType: "geoserver",
