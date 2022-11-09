@@ -12,7 +12,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>CAN</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -34,7 +34,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>CLN</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -56,7 +56,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>CQP</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -78,7 +78,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>DBV</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -100,7 +100,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>DCH</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -122,7 +122,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>DDT</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -144,7 +144,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>DGD</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -166,7 +166,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>DGT</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -188,7 +188,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>DHT</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -210,7 +210,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>DKH</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -232,7 +232,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>DKV</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -254,7 +254,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>DNL</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -276,7 +276,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>DRA</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -298,7 +298,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>DSH</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -320,7 +320,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>DTL</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -342,7 +342,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>DTS</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -364,7 +364,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>DTT</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -386,7 +386,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>DVH</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -408,7 +408,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>DXH</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -430,7 +430,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>DYT</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -452,7 +452,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>HNK</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -474,7 +474,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>LUA</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -496,7 +496,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>LUC</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -518,7 +518,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>MNC</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -540,7 +540,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>NKH</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -562,7 +562,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>NTD</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -584,7 +584,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>NTS</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -606,7 +606,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>ODT</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -628,7 +628,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>ODT+CLN</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -650,7 +650,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>ONT</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -672,7 +672,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>ONT+CLN</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -694,7 +694,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>RDD</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -716,7 +716,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>RPH</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -738,7 +738,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>RSN</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -760,7 +760,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>RSX</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -782,7 +782,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>SKC</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -804,7 +804,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>SKK</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -826,7 +826,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>SKN</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -848,7 +848,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>SKX</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -870,7 +870,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>SON</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -892,7 +892,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>TIN</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -914,7 +914,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>TMD</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -936,7 +936,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>TON</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -958,7 +958,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+              <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               <ogc:Literal>TSC</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -976,16 +976,16 @@
         <se:Rule>
           <se:Name></se:Name>
           <se:Description>
-            <se:Title>mucDichSuDung is ''</se:Title>
+            <se:Title>mucdichsud is ''</se:Title>
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:Or>
               <ogc:PropertyIsEqualTo>
-                <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+                <ogc:PropertyName>mucdichsud</ogc:PropertyName>
                 <ogc:Literal></ogc:Literal>
               </ogc:PropertyIsEqualTo>
               <ogc:PropertyIsNull>
-                <ogc:PropertyName>mucDichSuDung</ogc:PropertyName>
+                <ogc:PropertyName>mucdichsud</ogc:PropertyName>
               </ogc:PropertyIsNull>
             </ogc:Or>
           </ogc:Filter>
