@@ -36,12 +36,12 @@ var base_maps = new ol.layer.Group({
             visible: true,
             source: new ol.source.OSM(),
         }),
-        new ol.layer.Tile({
-            title: "Open Stret Map",
-            type: "base",
-            visible: true,
-            source: new ol.source.OSM(),
-        }),
+        // new ol.layer.Tile({
+        //     title: "Open Stret Map",
+        //     type: "base",
+        //     visible: true,
+        //     source: new ol.source.OSM(),
+        // }),
         new ol.layer.Tile({
             title: "None",
             type: "base",
@@ -133,6 +133,13 @@ var zoom_ex = new ol.control.ZoomToExtent({
 });
 map.addControl(zoom_ex);
 
+// Phóng to map toàn màn hình
+var full_sc = new ol.control.FullScreen({
+    label: "F",
+});
+map.addControl(full_sc);
+
+
 // Tạo layerSwitcher để tắt mở layer
 var layerSwitcher = new ol.control.LayerSwitcher({
     activationMode: "click",
@@ -185,6 +192,8 @@ function legend() {
 }
 legend();
 
+
+
 var container = document.getElementById("popup");
 var content = document.getElementById("popup-content");
 var closer = document.getElementById("popup-closer");
@@ -206,27 +215,6 @@ closer.onclick = function() {
     return false;
 };
 
-// Phóng to map toàn màn hình
-var full_sc = new ol.control.FullScreen({
-    label: "F",
-});
-map.addControl(full_sc);
-
-// reload de tro ve man hinh index chinh
-var homeButton = document.createElement('button');
-homeButton.innerHTML = '<img src="../img/home-icon.jpg" alt="home-icon" style="width: 25;height: 25px;margin-left: -6px; margin-top: -6px;  border-color:  rgba(112, 172, 250, 0.575);">';
-homeButton.className = "myButton";
-var homeElement = document.createElement("div");
-homeElement.className = "homButtonDiv";
-homeElement.appendChild(homeButton);
-var homControl = new ol.control.Control({
-    element: homeElement,
-});
-homeButton.addEventListener("click", () => {
-    location.href = "index.html";
-});
-
-map.addControl(homControl);
 
 // the hien chi tiet tua dat
 map.on("singleclick", function(evt) {
@@ -235,9 +223,9 @@ map.on("singleclick", function(evt) {
     var url = IndiaDsTile.getSource().getFeatureInFoUrl(
         evt.coordinate,
         resolution,
-        "EPSG:3405", {
-            INFO_FORMAT: "text/html",
-            propertyName: "sh_to, sh_thua",
+        "EPSG:5899", {
+            'INFO_FORMAT': "text/html",
+            'propertyName': "sh_to, sh_thua",
         }
     );
     if (url) {
@@ -258,3 +246,20 @@ map.on("singleclick", function(evt) {
     }
     alert("haah");
 });
+
+
+// reload de tro ve man hinh index chinh
+var homeButton = document.createElement('button');
+homeButton.innerHTML = '<img src="../img/home-icon.jpg" alt="home-icon" style="width: 25;height: 25px;margin-left: -6px; margin-top: -6px;  border-color:  rgba(112, 172, 250, 0.575);">';
+homeButton.className = "myButton";
+var homeElement = document.createElement("div");
+homeElement.className = "homButtonDiv";
+homeElement.appendChild(homeButton);
+var homControl = new ol.control.Control({
+    element: homeElement,
+});
+homeButton.addEventListener("click", () => {
+    location.href = "index.html";
+});
+
+map.addControl(homControl);
