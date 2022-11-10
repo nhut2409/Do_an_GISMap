@@ -64,8 +64,9 @@ var overlays = new ol.layer.Group({
     fold: true,
     // Tạo layer qhsdd
     layers: [
+
         new ol.layer.Image({
-            title: "Quy hoạch sử dụng đất",
+            title: "Hiện trạng sử dung đất",
             source: new ol.source.ImageWMS({
                 url: "http://localhost:8080/geoserver/QLBDS/wms?",
                 params: {
@@ -75,21 +76,12 @@ var overlays = new ol.layer.Group({
                 serverType: "geoserver",
             }),
         }),
+
         // Tạo layer htsdd
-        new ol.layer.Image({
-            title: "Hiện trạng sử dụng đất",
-            source: new ol.source.ImageWMS({
-                url: "http://localhost:8080/geoserver/QLBDS/wms?",
-                params: {
-                    LAYERS: "QLBDS:ndc",
-                },
-                ratio: 1,
-                serverType: "geoserver",
-            }),
-        }),
+
         // Tạo layer ndc
         new ol.layer.Image({
-            title: "Nền địa chính",
+            title: "Quy hoạch sử dụng đất",
             source: new ol.source.ImageWMS({
                 url: "http://localhost:8080/geoserver/QLBDS/wms?",
                 params: {
@@ -99,8 +91,34 @@ var overlays = new ol.layer.Group({
                 serverType: "geoserver",
             }),
         }),
+        // new ol.layer.Image({
+        //     title: "Nền địa chính",
+        //     source: new ol.source.ImageWMS({
+        //         url: "http://localhost:8080/geoserver/QLBDS/wms?",
+        //         params: {
+        //             LAYERS: "QLBDS:ndc",
+        //         },
+        //         ratio: 1,
+        //         serverType: "geoserver",
+        //     }),
+        // }),
     ],
 });
+
+var NdcTile = new ol.layer.Image({
+    title: "Nền địa chính",
+    source: new ol.source.ImageWMS({
+        url: "http://localhost:8080/geoserver/QLBDS/wms?",
+        params: {
+            LAYERS: "QLBDS:ndc",
+        },
+        ratio: 1,
+        serverType: "geoserver",
+    }),
+});
+
+overlays.getLayers().push(NdcTile);
+
 // add layergroup base_maps vào map
 map.addLayer(base_maps);
 // add layergroup overlays vào map
@@ -192,62 +210,6 @@ function legend() {
 }
 legend();
 
-
-
-var container = document.getElementById("popup");
-var content = document.getElementById("popup-content");
-var closer = document.getElementById("popup-closer");
-
-// Tao overlay chua banng show thong tin thua dat
-var popup = new ol.Overlay({
-    element: container,
-    autoPan: true,
-    autoPanAnimation: {
-        duration: 250,
-    },
-});
-
-map.addOverlay(popup);
-
-closer.onclick = function() {
-    popup.setPosition(undefined);
-    closer.blur();
-    return false;
-};
-
-
-// the hien chi tiet tua dat
-map.on("singleclick", function(evt) {
-    content.innerHTML = "";
-    var resolution = view.getResolution();
-    var url = IndiaDsTile.getSource().getFeatureInFoUrl(
-        evt.coordinate,
-        resolution,
-        "EPSG:5899", {
-            'INFO_FORMAT': "text/html",
-            'propertyName': "sh_to, sh_thua",
-        }
-    );
-    if (url) {
-        $.getJSON(url, function(data) {
-            var featute = data.featutes[0];
-            var props = featute.properties;
-
-            content.innerHTML =
-                "<h3> State: </h3><p>" +
-                props.sh_to.toUpperCase() +
-                "</p><h3> State: </h3><p>" +
-                props.sh_thua.toUpperCase() +
-                "</p>";
-            popup.setPosition(evt.coordinate);
-        });
-    } else {
-        popup.setPosition(undefined);
-    }
-    alert("haah");
-});
-
-
 // reload de tro ve man hinh index chinh
 var homeButton = document.createElement('button');
 homeButton.innerHTML = '<img src="../img/home-icon.jpg" alt="home-icon" style="width: 25;height: 25px;margin-left: -6px; margin-top: -6px;  border-color:  rgba(112, 172, 250, 0.575);">';
@@ -263,3 +225,74 @@ homeButton.addEventListener("click", () => {
 });
 
 map.addControl(homControl);
+
+var container = document.getElementById("popup");
+var content = document.getElementById("popup-content");
+var closer = document.getElementById("popup-closer");
+
+// Tao overlay chua banng show thong tin thua dat
+var popup = new ol.Overlay({
+    // element: container,
+    // autoPan: true,
+    // autoPanAnimation: {
+    //     duration: 250,
+    // },
+    element: container,
+    autoPan: {
+        animation: {
+            duration: 250,
+        },
+    },
+
+});
+
+map.addOverlay(popup);
+
+
+// dong bang
+closer.onclick = function() {
+    popup.setPosition(undefined);
+    closer.blur();
+    return false;
+};
+
+
+
+// the hien chi tiet tua dat
+// map.on('singleclick', function(evt) {
+//     const coordinate = evt.coordinate;
+
+//     content.innerHTML = '<p>You clicked here:</p><code>';
+//     popup.setPosition(coordinate);
+// });
+
+map.on("singleclick", function(evt) {
+    var coordinate = evt.coordinate;
+    var viewResolution = /** @type {number} */ (view.getResolution());
+
+    content.innerHTML = "dfgdfg";
+    var url = NdcTile.getSource().getFeatureInfoUrl(
+        coordinate,
+        viewResolution,
+        "EPSG:4326", {
+            'INFO_FORMAT': "text/html",
+            'propertyName': "sh_to, sh_thua",
+        }
+    );
+
+    if (url) {
+        $.getJSON(url, function(data) {
+            var featute = data.featutes[0];
+            var props = featute.properties;
+            content.innerHTML =
+                "<h3> State: </h3><p>" +
+                props.sh_to.toUpperCase() +
+                "</p><h3> State: </h3><p>" +
+                props.sh_thua.toUpperCase() +
+                "</p>";
+            popup.setPosition(evt.coordinate);
+        });
+    } else {
+        popup.setPosition(undefined);
+    }
+});
