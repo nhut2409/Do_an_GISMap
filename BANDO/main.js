@@ -1,8 +1,6 @@
 var map, geojson, layer_name, layerSwitcher, featureOverlay;
 var container, content, closer;
 
-
-
 // Tao viewmap
 $(document).ready(function() {
     $("p").click(function() {
@@ -32,6 +30,12 @@ var map = new ol.Map({
 var base_maps = new ol.layer.Group({
     title: "Base maps",
     layers: [
+        new ol.layer.Tile({
+            title: "Open Stret Map",
+            type: "base",
+            visible: true,
+            source: new ol.source.OSM(),
+        }),
         new ol.layer.Tile({
             title: "Open Stret Map",
             type: "base",
