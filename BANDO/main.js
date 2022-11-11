@@ -83,7 +83,8 @@ var overlays = new ol.layer.Group({
         new ol.layer.Image({
             title: "Quy hoạch sử dụng đất",
             source: new ol.source.ImageWMS({
-                url: "http://localhost:8080/geoserver/QLBDS/wms?",
+               
+                url: "http://localhost:8080/geoserver/QLBDS/wms?",         
                 params: {
                     LAYERS: "QLBDS:qhsd",
                 },
@@ -91,17 +92,6 @@ var overlays = new ol.layer.Group({
                 serverType: "geoserver",
             }),
         }),
-        // new ol.layer.Image({
-        //     title: "Nền địa chính",
-        //     source: new ol.source.ImageWMS({
-        //         url: "http://localhost:8080/geoserver/QLBDS/wms?",
-        //         params: {
-        //             LAYERS: "QLBDS:ndc",
-        //         },
-        //         ratio: 1,
-        //         serverType: "geoserver",
-        //     }),
-        // }),
     ],
 });
 
@@ -248,7 +238,6 @@ var popup = new ol.Overlay({
 
 map.addOverlay(popup);
 
-
 // dong bang
 closer.onclick = function() {
     popup.setPosition(undefined);
@@ -270,27 +259,27 @@ map.on("singleclick", function(evt) {
     var coordinate = evt.coordinate;
     var viewResolution = /** @type {number} */ (view.getResolution());
 
-    content.innerHTML = "dfgdfg";
+    content.innerHTML = coordinate;
     var url = NdcTile.getSource().getFeatureInfoUrl(
         coordinate,
         viewResolution,
         "EPSG:4326", {
             'INFO_FORMAT': "text/html",
-            'propertyName': "sh_to, sh_thua",
+            // 'propertyName': "sh_to, sh_thua",
         }
     );
-
     if (url) {
         $.getJSON(url, function(data) {
-            var featute = data.featutes[0];
-            var props = featute.properties;
-            content.innerHTML =
-                "<h3> State: </h3><p>" +
-                props.sh_to.toUpperCase() +
-                "</p><h3> State: </h3><p>" +
-                props.sh_thua.toUpperCase() +
-                "</p>";
-            popup.setPosition(evt.coordinate);
+            alert(data)
+            // var featute = data.featutes[0];
+            // var props = featute.properties;
+            // content.innerHTML =
+            //     "<h3> State: </h3><p>" +
+            //     props.sh_to.toUpperCase() +
+            //     "</p><h3> State: </h3><p>" +
+            //     props.sh_thua.toUpperCase() +
+            //     "</p>";
+            popup.setPosition(coordinate);
         });
     } else {
         popup.setPosition(undefined);
