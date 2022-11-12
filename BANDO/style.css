@@ -242,11 +242,11 @@ body {
 
 
 
-#FormSearch {
- 
+#query_tab {
   position: absolute;
-  /* display: block; */
-  margin: 10px auto auto 20px;
+  top: 10.9%;
+  width: 50%;
+  left: 4%;
 }
 
 
