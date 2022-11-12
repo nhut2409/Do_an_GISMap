@@ -1,6 +1,27 @@
 var map, geojson, layer_name, layerSwitcher, featureOverlay;
 var container, content, closer;
 
+var container = document.getElementById("popup");
+var content = document.getElementById("popup-content");
+var closer = document.getElementById("popup-closer");
+
+var overlay = new ol.Overlay({
+    element: container,
+    autoPan: true,
+    autoPanAnimation: {
+        duration: 250,
+    },
+});
+
+
+// dong bang
+closer.onclick = function() {
+    overlay.setPosition(undefined);
+    closer.blur();
+    return false;
+};
+
+
 // Tao viewmap
 $(document).ready(function() {
     $("p").click(function() {
@@ -23,6 +44,7 @@ var view_ov = new ol.View({
 var map = new ol.Map({
     target: "map",
     view: view,
+    overlays: [overlay],
     control: [],
 });
 
@@ -64,9 +86,9 @@ var overlays = new ol.layer.Group({
     fold: true,
     // Tạo layer qhsdd
     layers: [
-
+        // Tạo layer htsdd
         new ol.layer.Image({
-            title: "Hiện trạng sử dung đất",
+            title: "htsd",
             source: new ol.source.ImageWMS({
                 url: "http://localhost:8080/geoserver/QLBDS/wms?",
                 params: {
@@ -77,14 +99,12 @@ var overlays = new ol.layer.Group({
             }),
         }),
 
-        // Tạo layer htsdd
-
         // Tạo layer ndc
         new ol.layer.Image({
-            title: "Quy hoạch sử dụng đất",
+            title: "qhsd",
             source: new ol.source.ImageWMS({
-               
-                url: "http://localhost:8080/geoserver/QLBDS/wms?",         
+
+                url: "http://localhost:8080/geoserver/QLBDS/wms?",
                 params: {
                     LAYERS: "QLBDS:qhsd",
                 },
@@ -92,11 +112,24 @@ var overlays = new ol.layer.Group({
                 serverType: "geoserver",
             }),
         }),
+        // new ol.layer.Image({
+        //     title: "Nền địa chính",
+        //     source: new ol.source.ImageWMS({
+
+        //         url: "http://localhost:8080/geoserver/QLBDS/wms?",
+        //         params: {
+        //             LAYERS: "QLBDS:ndc",
+        //         },
+        //         ratio: 1,
+        //         serverType: "geoserver",
+        //     }),
+        // }),
     ],
 });
 
 var NdcTile = new ol.layer.Image({
-    title: "Nền địa chính",
+
+    title: "ndc",
     source: new ol.source.ImageWMS({
         url: "http://localhost:8080/geoserver/QLBDS/wms?",
         params: {
@@ -105,7 +138,10 @@ var NdcTile = new ol.layer.Image({
         ratio: 1,
         serverType: "geoserver",
     }),
+
 });
+
+
 
 overlays.getLayers().push(NdcTile);
 
@@ -216,72 +252,133 @@ homeButton.addEventListener("click", () => {
 
 map.addControl(homControl);
 
-var container = document.getElementById("popup");
-var content = document.getElementById("popup-content");
-var closer = document.getElementById("popup-closer");
 
 // Tao overlay chua banng show thong tin thua dat
-var popup = new ol.Overlay({
-    // element: container,
-    // autoPan: true,
-    // autoPanAnimation: {
-    //     duration: 250,
-    // },
-    element: container,
-    autoPan: {
-        animation: {
-            duration: 250,
-        },
-    },
+// var popup = new ol.Overlay({
+//     // element: container,
+//     // autoPan: true,
+//     // autoPanAnimation: {
+//     //     duration: 250,
+//     // },
+//     element: container,
+//     autoPan: {
+//         animation: {
+//             duration: 250,
+//         },
+//     },
 
-});
-
-map.addOverlay(popup);
-
-// dong bang
-closer.onclick = function() {
-    popup.setPosition(undefined);
-    closer.blur();
-    return false;
-};
-
-
-
-// the hien chi tiet tua dat
-// map.on('singleclick', function(evt) {
-//     const coordinate = evt.coordinate;
-
-//     content.innerHTML = '<p>You clicked here:</p><code>';
-//     popup.setPosition(coordinate);
 // });
 
-map.on("singleclick", function(evt) {
+// map.addOverlay(popup);
+
+
+
+// map.on("singleclick", function(evt) {
+//     var coordinate = evt.coordinate;
+//     var viewResolution = /** @type {number} */ (view.getResolution());
+
+//     content.innerHTML = coordinate;
+//     var url = NdcTile.getSource().getFeatureInfoUrl(
+//         coordinate,
+//         viewResolution,
+//         "EPSG:4326", {
+//             'INFO_FORMAT': "text/html",
+//             // 'propertyName': "sh_to, sh_thua",
+//         }
+//     );
+//     if (url) {
+//         $.getJSON(url, function(data) {
+//             alert(data)
+//             // var featute = data.featutes[0];
+//             // var props = featute.properties;
+//             // content.innerHTML =
+//             //     "<h3> State: </h3><p>" +
+//             //     props.sh_to.toUpperCase() +
+//             //     "</p><h3> State: </h3><p>" +
+//             //     props.sh_thua.toUpperCase() +
+//             //     "</p>";
+//             popup.setPosition(coordinate);
+//         });
+//     } else {
+//         popup.setPosition(undefined);
+//     }
+// });
+
+function getinfo(evt) {
     var coordinate = evt.coordinate;
     var viewResolution = /** @type {number} */ (view.getResolution());
 
-    content.innerHTML = coordinate;
-    var url = NdcTile.getSource().getFeatureInfoUrl(
-        coordinate,
-        viewResolution,
-        "EPSG:4326", {
-            'INFO_FORMAT': "text/html",
-            // 'propertyName': "sh_to, sh_thua",
+    // alert(coordinate);
+    $("#popup-content").empty();
+
+    document.getElementById("info").innerHTML = "";
+    var no_layers = overlays.getLayers().get("length");
+    // alert(no_layers);
+    var url = new Array();
+    var wmsSource = new Array();
+    var layer_title = new Array();
+
+    var i;
+    for (i = 0; i < no_layers; i++) {
+
+        var visibility = overlays.getLayers().item(i).getVisible();
+        if (visibility == true) {
+
+            layer_title[i] = overlays.getLayers().item(i).get("title");
+            wmsSource[i] = new ol.source.ImageWMS({
+                url: "http://localhost:8080/geoserver/QLBDS/wms",
+                params: {
+                    LAYERS: layer_title[i]
+                },
+                serverType: "geoserver",
+                crossOrigin: "anonymous",
+            });
+
+            url[i] = wmsSource[i].getFeatureInfoUrl(
+                evt.coordinate,
+                viewResolution,
+                "EPSG:4326", {
+                    INFO_FORMAT: "text/html"
+                }
+            );
+            $.get(url[i], function(data) {
+
+                $("#popup-content").append(data);
+                overlay.setPosition(coordinate);
+                layerSwitcher.renderPanel();
+            });
         }
-    );
-    if (url) {
-        $.getJSON(url, function(data) {
-            alert(data)
-            // var featute = data.featutes[0];
-            // var props = featute.properties;
-            // content.innerHTML =
-            //     "<h3> State: </h3><p>" +
-            //     props.sh_to.toUpperCase() +
-            //     "</p><h3> State: </h3><p>" +
-            //     props.sh_thua.toUpperCase() +
-            //     "</p>";
-            popup.setPosition(coordinate);
-        });
-    } else {
-        popup.setPosition(undefined);
     }
-});
+}
+
+
+map.on('singleclick', getinfo);
+// map.un('singleclick', getinfo);
+
+
+// getinfotype.onchange = function() {
+//     map.removeInteraction(draw);
+//     if (vectorLayer) {
+//         vectorLayer.getSource().clear();
+//     }
+//     map.removeOverlay(helpTooltip);
+//     if (measureTooltipElement) {
+//         var elem = document.getElementsByClassName("tooltip tooltip-static");
+
+//         for (var i = elem.length - 1; i >= 0; i--) {
+//             elem[i].remove();
+//             //alert(elem[i].innerHTML);
+//         }
+//     }
+
+//     if (getinfotype.value == "activate_getinfo") {
+//         map.on("singleclick", getinfo);
+//     } else if (
+//         getinfotype.value == "select" ||
+//         getinfotype.value == "deactivate_getinfo"
+//     ) {
+//         map.un("singleclick", getinfo);
+//         overlay.setPosition(undefined);
+//         closer.blur();
+//     }
+// };

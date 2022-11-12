@@ -229,7 +229,7 @@ function getinfo(evt) {
                 evt.coordinate,
                 viewResolution,
                 "EPSG:4326", {
-                    INFO_FORMAT : "text/html",
+                    INFO_FORMAT: "text/html",
                 }
             );
             //  alert(url[i]);
