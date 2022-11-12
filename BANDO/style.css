@@ -114,7 +114,6 @@ body {
   height: 25px;
   width: 25px;
   border-radius: 2px;
- 
   border: none;
   align-items: center;
 }
@@ -238,6 +237,16 @@ body {
 
 .layer-switcher.shown {
   max-height: 465px;
+}
+
+
+
+
+#FormSearch {
+ 
+  position: absolute;
+  /* display: block; */
+  margin: 10px auto auto 20px;
 }
 
 
