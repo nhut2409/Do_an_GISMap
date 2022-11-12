@@ -235,31 +235,25 @@ homeButton.addEventListener("click", () => {
 map.addControl(homControl);
 
 // Tao bang xuat thong tin bang tai noi click
-
-
 function getinfo(evt) {
     var coordinate = evt.coordinate;
     var viewResolution = /** @type {number} */ (view.getResolution());
-
-    //alert(coordinate1);
     $("#popup-content").empty();
 
     document.getElementById("info").innerHTML = "";
     var no_layers = overlays.getLayers().get("length");
-    // alert(no_layers);
     var url = new Array();
     var wmsSource = new Array();
     var layer_title = new Array();
 
     var i;
+    // Neu layer do dang hien moi hien thi thong tin
     for (i = 0; i < no_layers; i++) {
-        //alert(overlays.getLayers().item(i).getVisible());
         var visibility = overlays.getLayers().item(i).getVisible();
         //alert(visibility);
         if (visibility == true) {
-            //alert(i);
+
             layer_title[i] = overlays.getLayers().item(i).get("title");
-            //alert(layer_title[i]);
             wmsSource[i] = new ol.source.ImageWMS({
                 url: "http://localhost:8080/geoserver/QLBDS/wms",
                 params: {
@@ -268,9 +262,6 @@ function getinfo(evt) {
                 serverType: "geoserver",
                 crossOrigin: "anonymous",
             });
-            //alert(wmsSource[i]);
-            //var coordinate2 = evt.coordinate;
-            // alert(coordinate);
             url[i] = wmsSource[i].getFeatureInfoUrl(
                 evt.coordinate,
                 viewResolution,
@@ -278,104 +269,46 @@ function getinfo(evt) {
                     INFO_FORMAT: "text/html"
                 }
             );
-            //  alert(url[i]);
-
-            //assuming you use jquery
             $.get(url[i], function(data) {
-                //alert(i);
-                //append the returned html data
 
-                // $("#info").html(data);
-                //document.getElementById('info').innerHTML = data;
-                //document.getElementById('popup-content').innerHTML = '<p>Feature Info</p><code>' + data + '</code>';
-
-                //alert(dat[i]);
                 $("#popup-content").append(data);
-                //document.getElementById('popup-content').innerHTML = '<p>Feature Info</p><code>' + data + '</code>';
-
                 overlay.setPosition(coordinate);
-
                 layerSwitcher.renderPanel();
             });
-            //alert(layer_title[i]);
-            //alert(fid1[0]);
+
         }
     }
 }
 
-
-// function getinfo(evt) {
-//     var coordinate = evt.coordinate;
-//     var viewResolution = /** @type {number} */ (view.getResolution());
-//     $("#popup-content").empty();
-
-//     document.getElementById("info").innerHTML = "";
-//     var no_layers = overlays.getLayers().get("length");
-//     var url = new Array();
-//     var wmsSource = new Array();
-//     var layer_title = new Array();
-
-//     var i;
-//     // ney layer do ton tai se hien thong tin chi tiet cua layer do
-//     for (i = 0; i < no_layers; i++) {
-//         var visibility = overlays.getLayers().item(i).getVisible();
-//         if (visibility == true) {
-
-//             layer_title[i] = overlays.getLayers().item(i).get("title");
-//             wmsSource[i] = new ol.source.ImageWMS({
-//                 url: "http://localhost:8080/geoserver/QLBDS/wms",
-//                 params: {
-//                     LAYERS: layer_title[i]
-//                 },
-//                 serverType: "geoserver",
-//                 crossOrigin: "anonymous",
-//             });
-
-//             url[i] = wmsSource[i].getFeatureInfoUrl(
-//                 evt.coordinate,
-//                 viewResolution,
-//                 "EPSG:4326", {
-//                     INFO_FORMAT: "text/html"
-//                 }
-//             );
-//             $.get(url[i], function(data) {
-
-//                 $("#popup-content").append(data);
-//                 overlay.setPosition(coordinate);
-//                 layerSwitcher.renderPanel();
-//             });
-//         }
-//     }
-// }
 
 
 map.on('singleclick', getinfo);
 // map.un('singleclick', getinfo);
 
 
-// getinfotype.onchange = function() {
-//     map.removeInteraction(draw);
-//     if (vectorLayer) {
-//         vectorLayer.getSource().clear();
-//     }
-//     map.removeOverlay(helpTooltip);
-//     if (measureTooltipElement) {
-//         var elem = document.getElementsByClassName("tooltip tooltip-static");
+getinfotype.onchange = function() {
+    map.removeInteraction(draw);
+    if (vectorLayer) {
+        vectorLayer.getSource().clear();
+    }
+    map.removeOverlay(helpTooltip);
+    if (measureTooltipElement) {
+        var elem = document.getElementsByClassName("tooltip tooltip-static");
 
-//         for (var i = elem.length - 1; i >= 0; i--) {
-//             elem[i].remove();
-//             //alert(elem[i].innerHTML);
-//         }
-//     }
+        for (var i = elem.length - 1; i >= 0; i--) {
+            elem[i].remove();
+            //alert(elem[i].innerHTML);
+        }
+    }
 
-//     if (getinfotype.value == "activate_getinfo") {
-//         map.on("singleclick", getinfo);
-//     } else if (
-//         getinfotype.value == "select" ||
-//         getinfotype.value == "deactivate_getinfo"
-//     ) {
-//         map.un("singleclick", getinfo);
-//         overlay.setPosition(undefined);
-//         closer.blur();
-//     }
-// };
+    if (getinfotype.value == "activate_getinfo") {
+        map.on("singleclick", getinfo);
+    } else if (
+        getinfotype.value == "select" ||
+        getinfotype.value == "deactivate_getinfo"
+    ) {
+        map.un("singleclick", getinfo);
+        overlay.setPosition(undefined);
+        closer.blur();
+    }
+};
