@@ -238,3 +238,60 @@ function getinfo(evt) {
 map.on("singleclick", getinfo);
 
 //Bo Loc va thanh tim kiem
+$(function() {
+  $("#layer").change(function() {
+      var attributes = document.getElementById("attributes");
+      var length = attributes.options.length;
+      for (i = length - 1; i >= 0; i--) {
+          attributes.options[i] = null;
+      }
+
+      var value_layer = $(this).val();
+      //alert(value_crop);
+
+      //var level = document.getElementById("level");
+      //var value_level = level.options[level.selectedIndex].value;
+
+      // var url = "http://localhost:8082/geoserver/wfs?service=WFS&request=DescribeFeatureType&version=1.1.0&typeName="+value_layer;
+
+      //  alert(url);
+
+      attributes.options[0] = new Option("Select attributes", "");
+      //  alert(url);
+
+      $(document).ready(function() {
+          $.ajax({
+              type: "GET",
+              url: "http://localhost:8082/geoserver/wfs?service=WFS&request=DescribeFeatureType&version=1.1.0&typeName=" +
+                  value_layer,
+              dataType: "xml",
+              success: function(xml) {
+                  var select = $("#attributes");
+                  //var title = $(xml).find('xsd\\:complexType').attr('name');
+                  //	alert(title);
+                  $(xml)
+                      .find("xsd\\:sequence")
+                      .each(function() {
+                          $(this)
+                              .find("xsd\\:element")
+                              .each(function() {
+                                  var value = $(this).attr("name");
+                                  //alert(value);
+                                  var type = $(this).attr("type");
+                                  //alert(type);
+                                  if (value != "geom" && value != "the_geom") {
+                                      select.append(
+                                          "<option class='ddindent' value='" +
+                                          type +
+                                          "'>" +
+                                          value +
+                                          "</option>"
+                                      );
+                                  }
+                              });
+                      });
+              },
+          });
+      });
+  });
+});
