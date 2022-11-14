@@ -192,9 +192,6 @@ function chuthich() {
 chuthich();
 
 
-
-map.addControl(homControl);
-
 // Tao bang xuat thong tin bang tai noi click
 function getinfo(evt) {
   var coordinate = evt.coordinate;
@@ -233,7 +230,6 @@ function getinfo(evt) {
     
       if (url) {
         $.get(url[i], function (data) {
-
           $("#popup-content").append(data);
           overlay.setPosition(coordinate);
           layerSwitcher.renderPanel();
