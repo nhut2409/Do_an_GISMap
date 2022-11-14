@@ -171,62 +171,27 @@ var layerSwitcher = new ol.control.LayerSwitcher({
 });
 map.addControl(layerSwitcher);
 
-// Tạo hàm để hiển thị chú thích
-// function legend() {
-//   $("#legend").empty();
-//   var no_layers = overlays.getLayers().get("length");
-//   var head = document.createElement("h4");
-//   var txt = document.createTextNode("Chú thích");
-//   head.appendChild(txt);
-//   var element = document.getElementById("legend");
-//   element.appendChild(head);
-//   var ar = [];
-//   var i;
-//   ar.push(
-//     "http://localhost:8080/geoserver/QLBDS/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&LAYER=QLBDS:qhsd"
-//   );
-//   ar.push(
-//     "http://localhost:8080/geoserver/QLBDS/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&LAYER=QLBDS:htsd"
-//   );
-//   ar.push(
-//     "http://localhost:8080/geoserver/QLBDS/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&LAYER=QLBDS:ndc"
-//   );
 
-//   for (i = 0; i < no_layers; i++) {
-//     // Tạo một thẻ  <p>
-//     var head = document.createElement("p");
-//     // thêm title từng layer đã được đặt ở lớp trên vô thẻ <p>
-//     var txt = document.createTextNode(
-//       overlays.getLayers().item(i).get("title")
-//     );
-//     head.appendChild(txt);
-//     // Thêm head vào giao diện
-//     var element = document.getElementById("legend");
-//     element.appendChild(head);
-//     // Tạo hình ảnh chú thích
-//     var img = new Image();
-//     img.src = ar[i];
-//     // Thêm hìn ảnh chú thích vào thư viện
-//     var src = document.getElementById("legend");
-//     src.appendChild(img);
-//   }
-// }
-legend();
+function chuthich() {
+  var chuthich_htsd = document.getElementById("chuthich_htsd");
+  var img = new Image();
+  img.src = "http://localhost:8080/geoserver/QLBDS/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&LAYER=QLBDS:qhsd";
+  chuthich_htsd.appendChild(img)
 
-// reload de tro ve man hinh index chinh
-var homeButton = document.createElement("button");
-homeButton.innerHTML =
-  '<img src="../img/home-icon.jpg" alt="home-icon" style="width: 25;height: 25px;margin-left: -6px; margin-top: -6px;  border-color:  rgba(112, 172, 250, 0.575);">';
-homeButton.className = "myButton";
-var homeElement = document.createElement("div");
-homeElement.className = "homButtonDiv";
-homeElement.appendChild(homeButton);
-var homControl = new ol.control.Control({
-  element: homeElement,
-});
-homeButton.addEventListener("click", () => {
-  location.href = "index.html";
-});
+  var chuthich_htsd = document.getElementById("chuthich_qhsd");
+  var img = new Image();
+  img.src =  "http://localhost:8080/geoserver/QLBDS/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&LAYER=QLBDS:htsd"
+  chuthich_qhsd.appendChild(img)
+
+  var chuthich_ndc = document.getElementById("chuthich_ndc");
+  var img = new Image();
+  img.src ="http://localhost:8080/geoserver/QLBDS/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&LAYER=QLBDS:ndc"
+  chuthich_ndc.appendChild(img)
+
+}
+chuthich();
+
+
 
 map.addControl(homControl);
 

@@ -31,26 +31,10 @@ body {
 .control_right{
   position: absolute;
   top: 40%;
-  right: 3%;
+  right: 0.8%;
   
 }
-/* #legend {
-    z-index: 11;
-    padding: 4px 5px;
-    border: 1px solid grey;
-    position: absolute;
-    bottom: 0%;
-    height: 90%;
-    left: 85%;
-    overflow: scroll;
-    width: 15%;
-    background-color: #ffffff;
-    font-weight: bold;
-  } */
-  /* #legend {
-    position: absolute;
-  
-  } */
+
 .search-box {
   transition: width 0.6s, border-radius 0.6s, background 0.6s, box-shadow 0.6s;
   width: 40px;
