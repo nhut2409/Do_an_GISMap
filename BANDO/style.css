@@ -7,6 +7,7 @@ body {
   font-family: arial;
 }
 
+/* header */
 #header {
   position: absolute;
   top: 0%;
@@ -16,10 +17,8 @@ body {
   padding: 14px 20px;
   background-color: #1187d2;
 }
-#home_id {
-  width: 10px;
-  height: 100px;
-}
+
+/* map chinh */
 #map {
   position: absolute;
   top: 10%;
@@ -28,13 +27,15 @@ body {
   height: 90%;
   border: 0.5px solid #f7dddd;
 }
-.control_right{
+
+/* thanh cong cu chuc nang ben phai */
+.control_right {
   position: absolute;
   top: 40%;
   right: 0.8%;
-  
 }
 
+/* nut tim kiem tren header */
 .search-box {
   transition: width 0.6s, border-radius 0.6s, background 0.6s, box-shadow 0.6s;
   width: 40px;
@@ -69,17 +70,15 @@ body {
   color: black;
 }
 .search-box:focus + label .search-icon {
-  color: black;
+  color: rgb(75, 63, 63);
 }
 .search-box:not(:focus) {
   text-indent: -5000px;
 }
-
 #search-submit {
   position: relative;
   left: -5000px;
 }
-
 .search-icon {
   position: relative;
   left: -30px;
@@ -87,6 +86,7 @@ body {
   cursor: pointer;
 }
 
+/* Hiển thị vị trí tọa độ của trỏ chuột */
 .ol-mouse-position {
   top: auto;
   right: auto;
@@ -101,31 +101,8 @@ body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 12px;
 }
-.myButton {
-  color: #fff;
-  font-weight: 700;
-  text-align: center;
-  height: 25px;
-  width: 25px;
-  border-radius: 2px;
-  border: none;
-  align-items: center;
-}
-.myButton:hover {
-  background-color: rgba(0, 60, 136, 0.0);
-}
-.myButton.clicked {
-  background-color: rgba(43, 136, 0, 0.0);
-}
-.myButton:hover {
-  background-color: rgba(43, 136, 0, 0.0);
-}
-.homButtonDiv {
-  position: relative;
-  display: block;
-  margin: 520px auto auto 10px;
-}
 
+/* bamg thong tin chi tiet tai noi da chon */
 .ol-popup {
   position: absolute;
   background-color: white;
@@ -138,7 +115,6 @@ body {
   left: -50px;
   min-width: 280px;
 }
-
 .ol-popup:after,
 .ol-popup:before {
   top: 100%;
@@ -149,32 +125,37 @@ body {
   position: absolute;
   pointer-events: none;
 }
-
 .ol-popup:after {
   border-top-color: white;
   border-width: 10px;
   left: 48px;
   margin-left: -10px;
 }
-
 .ol-popup:before {
   border-top-color: #cccccc;
   border-width: 11px;
   left: 48px;
   margin-left: -11px;
 }
-
 .ol-popup-closer {
   text-decoration: none;
   position: absolute;
   top: 2px;
   right: 8px;
 }
-
 .ol-popup-closer:after {
   content: "X";
 }
 
+/* Bo Loc va thanh tim kiem*/
+#query_tab {
+  position: absolute;
+  top: 10.5%;
+  width: 50%;
+  left: 3%;
+}
+
+/* bang hien thi thong tin da loc */
 #data {
   width: 60%;
 }
@@ -232,18 +213,6 @@ body {
 .layer-switcher.shown {
   max-height: 465px;
 }
-
-
-
-
-#query_tab {
-  position: absolute;
-  top: 10.5%;
-  width: 50%;
-  left: 3%;
-}
-
-
 
 .tooltip {
   position: relative;

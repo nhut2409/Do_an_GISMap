@@ -56,17 +56,10 @@ var base_maps = new ol.layer.Group({
       visible: true,
       source: new ol.source.OSM(),
     }),
-    // new ol.layer.Tile({
-    //     title: "Open Stret Map",
-    //     type: "base",
-    //     visible: true,
-    //     source: new ol.source.OSM(),
-    // }),
     new ol.layer.Tile({
       title: "None",
       type: "base",
       visible: false,
-      // source: new ol.source.OSM()
     }),
   ],
   fold: true,
@@ -171,26 +164,28 @@ var layerSwitcher = new ol.control.LayerSwitcher({
 });
 map.addControl(layerSwitcher);
 
-
+// Tao chu thich de giai thich cac ky tu dac biet
 function chuthich() {
+  // chu thich hien trang su dung dat
   var chuthich_htsd = document.getElementById("chuthich_htsd");
   var img = new Image();
-  img.src = "http://localhost:8080/geoserver/QLBDS/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&LAYER=QLBDS:qhsd";
-  chuthich_htsd.appendChild(img)
-
+  img.src =
+    "http://localhost:8080/geoserver/QLBDS/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&LAYER=QLBDS:qhsd";
+  chuthich_htsd.appendChild(img);
+  // chu thich quy hoach su dung
   var chuthich_htsd = document.getElementById("chuthich_qhsd");
   var img = new Image();
-  img.src =  "http://localhost:8080/geoserver/QLBDS/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&LAYER=QLBDS:htsd"
-  chuthich_qhsd.appendChild(img)
-
+  img.src =
+    "http://localhost:8080/geoserver/QLBDS/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&LAYER=QLBDS:htsd";
+  chuthich_qhsd.appendChild(img);
+  // chu thich nen dia chinh
   var chuthich_ndc = document.getElementById("chuthich_ndc");
   var img = new Image();
-  img.src ="http://localhost:8080/geoserver/QLBDS/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&LAYER=QLBDS:ndc"
-  chuthich_ndc.appendChild(img)
-
+  img.src =
+    "http://localhost:8080/geoserver/QLBDS/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&LAYER=QLBDS:ndc";
+  chuthich_ndc.appendChild(img);
 }
 chuthich();
-
 
 // Tao bang xuat thong tin bang tai noi click
 function getinfo(evt) {
@@ -227,7 +222,7 @@ function getinfo(evt) {
           INFO_FORMAT: "text/html",
         }
       );
-    
+
       if (url) {
         $.get(url[i], function (data) {
           $("#popup-content").append(data);
@@ -240,33 +235,6 @@ function getinfo(evt) {
     }
   }
 }
-
 map.on("singleclick", getinfo);
-// map.un('singleclick', getinfo);
 
-getinfotype.onchange = function () {
-  map.removeInteraction(draw);
-  if (vectorLayer) {
-    vectorLayer.getSource().clear();
-  }
-  map.removeOverlay(helpTooltip);
-  if (measureTooltipElement) {
-    var elem = document.getElementsByClassName("tooltip tooltip-static");
-
-    for (var i = elem.length - 1; i >= 0; i--) {
-      elem[i].remove();
-      //alert(elem[i].innerHTML);
-    }
-  }
-
-  if (getinfotype.value == "activate_getinfo") {
-    map.on("singleclick", getinfo);
-  } else if (
-    getinfotype.value == "select" ||
-    getinfotype.value == "deactivate_getinfo"
-  ) {
-    map.un("singleclick", getinfo);
-    overlay.setPosition(undefined);
-    closer.blur();
-  }
-};
+//Bo Loc va thanh tim kiem
