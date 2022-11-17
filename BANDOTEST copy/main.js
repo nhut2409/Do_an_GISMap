@@ -790,7 +790,7 @@ layer_wms.getExtent(),
 $(document).ready(function() {
     $.ajax({
         type: "GET",
-        url: "http://localhost:8082/geoserver/wfs?request=getCapabilities",
+        url: "http://localhost:8080/geoserver/nhombaton/wms?request=getCapabilities",
         dataType: "xml",
         success: function(xml) {
             var select = $("#layer");
@@ -835,7 +835,7 @@ $(function() {
         //var level = document.getElementById("level");
         //var value_level = level.options[level.selectedIndex].value;
 
-        // var url = "http://localhost:8082/geoserver/wfs?service=WFS&request=DescribeFeatureType&version=1.1.0&typeName="+value_layer;
+        // var url = "http://localhost:8080/geoserver/nhombaton/wms?service=WFS&request=DescribeFeatureType&version=1.1.0&typeName="+value_layer;
 
         //  alert(url);
 
@@ -845,7 +845,7 @@ $(function() {
         $(document).ready(function() {
             $.ajax({
                 type: "GET",
-                url: "http://localhost:8082/geoserver/wfs?service=WFS&request=DescribeFeatureType&version=1.1.0&typeName=" +
+                url: "http://localhost:8080/geoserver/nhombaton/wms?service=WFS&request=DescribeFeatureType&version=1.1.0&typeName=" +
                     value_layer,
                 dataType: "xml",
                 success: function(xml) {
@@ -1229,7 +1229,7 @@ function query() {
 $(document).ready(function() {
     $.ajax({
         type: "GET",
-        url: "http://localhost:8082/geoserver/wfs?request=getCapabilities",
+        url: "http://localhost:8080/geoserver/nhombaton/wms?request=getCapabilities",
         dataType: "xml",
         success: function(xml) {
             var select = $("#layer1");
@@ -1361,7 +1361,7 @@ function add_draw_Interaction() {
                     layer_name.options[layer_name.selectedIndex].value;
 
                 var url =
-                    "http://localhost:8082/geoserver/wfs?request=GetFeature&version=1.0.0&typeName=" +
+                    "http://localhost:8080/geoserver/nhombaton/wms?request=GetFeature&version=1.0.0&typeName=" +
                     value_layer +
                     "&outputFormat=json&cql_filter=INTERSECTS(the_geom," +
                     wkt +

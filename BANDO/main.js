@@ -188,6 +188,7 @@ function chuthich() {
 chuthich();
 
 // Tao bang xuat thong tin bang tai noi click
+
 function getinfo(evt) {
   var coordinate = evt.coordinate;
   var viewResolution = /** @type {number} */ (view.getResolution());
@@ -238,60 +239,140 @@ function getinfo(evt) {
 map.on("singleclick", getinfo);
 
 //Bo Loc va thanh tim kiem
-$(function() {
-  $("#layer").change(function() {
-      var attributes = document.getElementById("attributes");
-      var length = attributes.options.length;
-      for (i = length - 1; i >= 0; i--) {
-          attributes.options[i] = null;
-      }
+//ham1 
 
-      var value_layer = $(this).val();
-      //alert(value_crop);
-
-      //var level = document.getElementById("level");
-      //var value_level = level.options[level.selectedIndex].value;
-
-      // var url = "http://localhost:8082/geoserver/wfs?service=WFS&request=DescribeFeatureType&version=1.1.0&typeName="+value_layer;
-
-      //  alert(url);
-
-      attributes.options[0] = new Option("Select attributes", "");
-      //  alert(url);
-
-      $(document).ready(function() {
-          $.ajax({
-              type: "GET",
-              url: "http://localhost:8082/geoserver/wfs?service=WFS&request=DescribeFeatureType&version=1.1.0&typeName=" +
-                  value_layer,
-              dataType: "xml",
-              success: function(xml) {
-                  var select = $("#attributes");
-                  //var title = $(xml).find('xsd\\:complexType').attr('name');
-                  //	alert(title);
-                  $(xml)
-                      .find("xsd\\:sequence")
-                      .each(function() {
-                          $(this)
-                              .find("xsd\\:element")
-                              .each(function() {
-                                  var value = $(this).attr("name");
-                                  //alert(value);
-                                  var type = $(this).attr("type");
-                                  //alert(type);
-                                  if (value != "geom" && value != "the_geom") {
-                                      select.append(
-                                          "<option class='ddindent' value='" +
-                                          type +
-                                          "'>" +
-                                          value +
-                                          "</option>"
-                                      );
-                                  }
-                              });
-                      });
-              },
+$(document).ready(function () {
+  $.ajax({
+      type: "GET",
+      url: "http://localhost:8080/geoserver/QLBDS/wfs?request=getCapabilities",
+      dataType: "xml",
+      success: function (xml) {
+          var select = $('#layer');
+          // select.append("<option class='ddindent' value=''></option>");
+          $(xml).find('FeatureType').each(function () {
+              $(this).find('Name').each(function () {
+                  var value = $(this).text();
+                  select.append("<option class='ddindent' value='" + value + "'>" + value + "</option>");
+              });
           });
-      });
+      }
   });
 });
+$(document).ready(function() {
+  $.ajax({
+      type: "GET",
+      url: "http://localhost:8080/geoserver/QLBDS/wms?request=getCapabilities",
+      dataType: "xml",
+      success: function(xml) {
+          var select = $("#layer");
+          $(xml)
+              .find("FeatureType")
+              .each(function() {
+                  //var title = $(this).find('ows:Operation').attr('name');
+                  //alert(title);
+                  var name = $(this).find("Name").text();
+                  //select.append("<option/><option class='ddheader' value='"+ name +"'>"+title+"</option>");
+                  $(this)
+                      .find("Name")
+                      .each(function() {
+                          var value = $(this).text();
+                          select.append(
+                              "<option class='ddindent' value='" +
+                              value +
+                              "'>" +
+                              value +
+                              "</option>"
+                          );
+                      });
+              });
+          //select.children(":first").text("please make a selection").attr("selected",true);
+      },
+  });
+});
+// // ham 2
+// $(function() {
+//   $("#layer").change(function() {
+//       var attributes = document.getElementById("attributes");
+//       var length = attributes.options.length;
+//       for (i = length - 1; i >= 0; i--) {
+//           attributes.options[i] = null;
+//       }
+
+//       var value_layer = $(this).val();
+//       //alert(value_crop);
+
+//       //var level = document.getElementById("level");
+//       //var value_level = level.options[level.selectedIndex].value;
+
+//       // var url = "http://localhost:8082/geoserver/wfs?service=WFS&request=DescribeFeatureType&version=1.1.0&typeName="+value_layer;
+
+//       //  alert(url);
+
+//       attributes.options[0] = new Option("Select attributes", "");
+//       //  alert(url);
+
+//       $(document).ready(function() {
+//           $.ajax({
+//               type: "GET",
+//               url: "http://localhost:8080/geoserver/QLBDS/wms?service=WFS&request=DescribeFeatureType&version=1.1.0&typeName=" +
+//                   value_layer,
+//               dataType: "xml",
+//               success: function(xml) {
+//                   var select = $("#attributes");
+//                   //var title = $(xml).find('xsd\\:complexType').attr('name');
+//                   //	alert(title);
+//                   $(xml)
+//                       .find("xsd\\:sequence")
+//                       .each(function() {
+//                           $(this)
+//                               .find("xsd\\:element")
+//                               .each(function() {
+//                                   var value = $(this).attr("name");
+//                                   //alert(value);
+//                                   var type = $(this).attr("type");
+//                                   //alert(type);
+//                                   if (value != "geom" && value != "the_geom") {
+//                                       select.append(
+//                                           "<option class='ddindent' value='" +
+//                                           type +
+//                                           "'>" +
+//                                           value +
+//                                           "</option>"
+//                                       );
+//                                   }
+//                               });
+//                       });
+//               },
+//           });
+//       });
+//   });
+// });
+// // ham 3
+// $(function() {
+//   $("#attributes").change(function() {
+//       var operator = document.getElementById("operator");
+//       var length = operator.options.length;
+//       for (i = length - 1; i >= 0; i--) {
+//           operator.options[i] = null;
+//       }
+
+//       var value_type = $(this).val();
+//       // alert(value_type);
+//       var value_attribute = $("#attributes option:selected").text();
+//       operator.options[0] = new Option("Select operator", "");
+
+//       if (
+//           value_type == "xsd:short" ||
+//           value_type == "xsd:int" ||
+//           value_type == "xsd:double"
+//       ) {
+//           var operator1 = document.getElementById("operator");
+//           operator1.options[1] = new Option("Greater than", ">");
+//           operator1.options[2] = new Option("Less than", "<");
+//           operator1.options[3] = new Option("Equal to", "=");
+//       } else if (value_type == "xsd:string") {
+//           var operator1 = document.getElementById("operator");
+//           operator1.options[1] = new Option("Like", "ILike");
+//       }
+//   });
+// });
