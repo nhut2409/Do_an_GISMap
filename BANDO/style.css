@@ -34,6 +34,46 @@ body {
   top: 40%;
   right: 0.8%;
 }
+   
+/* nut do do dai */
+#lengthElement {
+  position: relative;
+  display: block;
+  margin: 300px auto auto 0px;
+}
+#areaElement {
+  position: relative;
+  display: block;
+  /* margin: 30px auto auto 0px; */
+}
+
+.myButton {
+  background-color:rgb(255, 255, 255);
+  font-weight: 700;
+  text-align: center;
+  padding: 4px 6px;
+  border-radius: 2px;
+  border: none;
+  align-items: center;
+ 
+}
+.iconbutton{
+  color: #666666;
+  font-size: 16px;
+}
+
+.myButton:hover{
+background-color: rgba(22, 85, 167, 0.6);
+}
+
+.myButton.clicked{
+background-color: rgba(22, 170, 35, 0.8);
+}
+
+.myButton.clicked:hover{
+background-color: rgba(22, 170, 35, 1);
+}
+
 
 /* nut tim kiem tren header */
 .search-box {
@@ -151,7 +191,7 @@ body {
 #attQueryDiv {
   position: absolute;
   top: 10.5%;
-  width: 80%;
+  width: 60%;
   left: 3%;
 }
 
