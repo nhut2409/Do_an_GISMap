@@ -262,6 +262,7 @@ lengthButton.addEventListener("click", () => {
   document.getElementById("map").style.cursor = "default";
   if (lengthFlag) {
     map.removeInteraction(draw);
+
     addInteraction("LineString");
   } else {
     map.removeInteraction(draw);
@@ -300,19 +301,9 @@ areaButton.addEventListener("click", () => {
   }
 });
 
-/**
- * Message to show when the user is drawing a polygon.
- * @type {string}
- */
-var continuePolygonMsg = "Click to continue polygon, Double click to complete";
 
-/**
- * Message to show when the user is drawing a line.
- * @type {string}
- */
-var continueLineMsg = "Click to continue line, Double click to complete";
-
-var draw; // global so we can remove it later
+// edit màu
+var draw; 
 
 var source = new ol.source.Vector();
 var vector = new ol.layer.Vector({

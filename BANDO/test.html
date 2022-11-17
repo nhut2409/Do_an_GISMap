@@ -1,0 +1,107 @@
+<!--
+
+To run this demo, you need to replace 'YOUR_API_KEY' with an API key from the ArcGIS Developers dashboard.
+
+Sign up for a free account and get an API key.
+
+https://developers.arcgis.com/documentation/mapping-apis-and-services/get-started/
+
+-->
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <title>OpenLayers Tutorials: Display a Popup</title>
+
+    <style>
+      html,
+      body,
+      #map {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        color: #323232;
+      }
+    </style>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.15.1/css/ol.css"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.15.1/build/ol.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/ol-mapbox-style@6.1.4/dist/olms.js"
+      type="text/javascript"
+    ></script>
+
+    <script src="https://unpkg.com/ol-popup@4.0.0"></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/ol-popup@4.0.0/src/ol-popup.css"
+    />
+  </head>
+  <body>
+    <div id="map"></div>
+
+    <script>
+      const apiKey = "YOUR_API_KEY";
+
+      const map = new ol.Map({
+        target: "map",
+      });
+
+      map.setView(
+        new ol.View({
+          center: ol.proj.fromLonLat([-118.805, 34.027]),
+          zoom: 12,
+        })
+      );
+
+      const basemapId = "ArcGIS:Streets";
+
+      const trailheadsLayer = new ol.layer.Vector({
+        source: new ol.source.Vector({
+          format: new ol.format.GeoJSON(),
+          url: `https://services3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Trailheads/FeatureServer/0/query?where=1%3D1&outFields=*&returnGeometry=true&f=pgeojson`,
+        }),
+      });
+
+      olms(
+        map,
+        "https://basemaps-api.arcgis.com/arcgis/rest/services/styles/" +
+          basemapId +
+          "?type=style&token=" +
+          apiKey
+      ).then(function (map) {
+        map.addLayer(trailheadsLayer);
+      });
+
+      const popup = new Popup();
+      map.addOverlay(popup);
+
+      map.on("click", (event) => {
+        let trailName, parkName;
+
+        const trailheads = map.getFeaturesAtPixel(event.pixel, {
+          layerFilter: (layer) => layer === trailheadsLayer,
+        });
+
+        if (trailheads.length > 0) {
+          const trailName = trailheads[0].get("TRL_NAME");
+          const parkName = trailheads[0].get("PARK_NAME");
+          popup.show(event.coordinate, `<b>${trailName}</b></br>${parkName}`);
+        } else {
+          popup.hide();
+        }
+      });
+    </script>
+  </body>
+</html>
