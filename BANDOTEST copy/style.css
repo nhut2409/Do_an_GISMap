@@ -113,8 +113,8 @@ body {
     top: 1%;
     width: 85%;
     height: 85%;
-    //overflow: scroll;
-    // border: 1px solid blue;
+    overflow: scroll;
+    border: 1px solid blue;
 }
 
 #legend {
@@ -192,7 +192,7 @@ body {
     position: absolute;
     z-index: 50;
     top: 1%;
-    //height:15px;
+    height:15px;
     left: 30%;
 }
 

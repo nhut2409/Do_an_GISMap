@@ -29,7 +29,7 @@ $(document).ready(function () {
 var view = new ol.View({
   projection: "EPSG:4326",
   center: [106.95, 11.03],
-  zoom: 12,
+  zoom: 13,
 });
 
 var view_ov = new ol.View({
@@ -154,7 +154,7 @@ var full_sc = new ol.control.FullScreen({
 });
 map.addControl(full_sc);
 
-// Tạo layerSwitcher để tắt mở layer
+// Tạo layerSwitcher để lua chon an hay hien layer
 var layerSwitcher = new ol.control.LayerSwitcher({
   activationMode: "click",
   // startActive: true, // mặc định là mở hay tắt
@@ -187,53 +187,64 @@ function chuthich() {
 }
 chuthich();
 
+// tao nut dieu khien an hien thong tin
+var infoElement = document.getElementById("infoElement");
+var infoButton = document.getElementById("infoButton");
+var infoControl = new ol.control.Control({
+  element: infoElement,
+});
+var infoFlag = false;
+infoButton.addEventListener("click", () => {
+  infoButton.classList.toggle("clicked");
+  infoFlag = !infoFlag;
+});
+map.addControl(infoControl);
 // Tao bang xuat thong tin bang tai noi click
-
 function getinfo(evt) {
-  var coordinate = evt.coordinate;
-  var viewResolution = /** @type {number} */ (view.getResolution());
-  $("#popup-content").empty();
-
-  document.getElementById("info").innerHTML = "";
-  var no_layers = overlays.getLayers().get("length");
-  var url = new Array();
-  var wmsSource = new Array();
-  var layer_title = new Array();
-
-  var i;
-  // Neu layer do dang hien moi hien thi thong tin
-  for (i = 0; i < no_layers; i++) {
-    var visibility = overlays.getLayers().item(i).getVisible();
-    //alert(visibility);
-    if (visibility == true) {
-      layer_title[i] = overlays.getLayers().item(i).get("title");
-      wmsSource[i] = new ol.source.ImageWMS({
-        url: "http://localhost:8080/geoserver/QLBDS/wms",
-        params: {
-          LAYERS: layer_title[i],
-        },
-        serverType: "geoserver",
-        crossOrigin: "anonymous",
-      });
-      url[i] = wmsSource[i].getFeatureInfoUrl(
-        evt.coordinate,
-        viewResolution,
-        "EPSG:4326",
-        {
-          INFO_FORMAT: "text/html",
-        }
-      );
-
-      if (url) {
-        $.get(url[i], function (data) {
-          $("#popup-content").append(data);
-          overlay.setPosition(coordinate);
-          layerSwitcher.renderPanel();
+  if (infoFlag) {
+    var coordinate = evt.coordinate;
+    var viewResolution = /** @type {number} */ (view.getResolution());
+    $("#popup-content").empty();
+    document.getElementById("info").innerHTML = "";
+    var no_layers = overlays.getLayers().get("length");
+    var url = new Array();
+    var wmsSource = new Array();
+    var layer_title = new Array();
+    var i;
+    for (i = 0; i < no_layers; i++) {
+      var visibility = overlays.getLayers().item(i).getVisible();
+      if (visibility == true) {
+        layer_title[i] = overlays.getLayers().item(i).get("title");
+        wmsSource[i] = new ol.source.ImageWMS({
+          url: "http://localhost:8080/geoserver/QLBDS/wms",
+          params: {
+            LAYERS: layer_title[i],
+          },
+          serverType: "geoserver",
+          crossOrigin: "anonymous",
         });
-      } else {
-        popup.setPosition(undefined);
+        url[i] = wmsSource[i].getFeatureInfoUrl(
+          evt.coordinate,
+          viewResolution,
+          "EPSG:4326",
+          {
+            INFO_FORMAT: "text/html",
+          }
+        );
+
+        if (url) {
+          $.get(url[i], function (data) {
+            $("#popup-content").append(data);
+            overlay.setPosition(coordinate);
+            layerSwitcher.renderPanel();
+          });
+        } else {
+          popup.setPosition(undefined);
+        }
       }
     }
+  } else {
+    popup.setPosition(undefined);
   }
 }
 map.on("singleclick", getinfo);
@@ -242,300 +253,287 @@ map.on("singleclick", getinfo);
 var lengthElement = document.getElementById("lengthElement");
 var lengthButton = document.getElementById("lengthButton");
 var lengthControl = new ol.control.Control({
-  element: lengthElement
-})
+  element: lengthElement,
+});
 var lengthFlag = false;
 lengthButton.addEventListener("click", () => {
-
-    lengthButton.classList.toggle('clicked');
-    lengthFlag = !lengthFlag;
-    document.getElementById("map").style.cursor = "default";
-    if (lengthFlag) {
-        map.removeInteraction(draw);
-        addInteraction('LineString');
-    } else {
-        map.removeInteraction(draw);
-        source.clear();
-        const elements = document.getElementsByClassName("ol-tooltip ol-tooltip-static");
-        while (elements.length > 0) elements[0].remove();
-    }
-
-})
+  lengthButton.classList.toggle("clicked");
+  lengthFlag = !lengthFlag;
+  document.getElementById("map").style.cursor = "default";
+  if (lengthFlag) {
+    map.removeInteraction(draw);
+    addInteraction("LineString");
+  } else {
+    map.removeInteraction(draw);
+    source.clear();
+    const elements = document.getElementsByClassName(
+      "ol-tooltip ol-tooltip-static"
+    );
+    while (elements.length > 0) elements[0].remove();
+  }
+});
 
 map.addControl(lengthControl);
-
 
 // tao thanh cong cu tinh dien tich
 
 var areaElement = document.getElementById("areaElement");
 var areaButton = document.getElementById("areaButton");
 var areaControl = new ol.control.Control({
-  element: areaElement
-})
+  element: areaElement,
+});
 var areaFlag = false;
 areaButton.addEventListener("click", () => {
-  areaButton.classList.toggle('clicked');
+  areaButton.classList.toggle("clicked");
   areaFlag = !areaFlag;
   document.getElementById("map").style.cursor = "default";
   if (areaFlag) {
-      map.removeInteraction(draw);
-      addInteraction('Polygon');
+    map.removeInteraction(draw);
+    addInteraction("Polygon");
   } else {
-      map.removeInteraction(draw);
-      source.clear();
-      const elements = document.getElementsByClassName("ol-tooltip ol-tooltip-static");
-      while (elements.length > 0) elements[0].remove();
+    map.removeInteraction(draw);
+    source.clear();
+    const elements = document.getElementsByClassName(
+      "ol-tooltip ol-tooltip-static"
+    );
+    while (elements.length > 0) elements[0].remove();
   }
-})
+});
 
 /**
  * Message to show when the user is drawing a polygon.
  * @type {string}
  */
- var continuePolygonMsg = 'Click to continue polygon, Double click to complete';
+var continuePolygonMsg = "Click to continue polygon, Double click to complete";
 
- /**
-  * Message to show when the user is drawing a line.
-  * @type {string}
-  */
- var continueLineMsg = 'Click to continue line, Double click to complete';
- 
- var draw; // global so we can remove it later
- 
- var source = new ol.source.Vector();
- var vector = new ol.layer.Vector({
-     source: source,
-     style: new ol.style.Style({
-         fill: new ol.style.Fill({
-             color: 'rgba(255, 255, 255, 0.2)',
-         }),
-         stroke: new ol.style.Stroke({
-             color: '#ffcc33',
-             width: 2,
-         }),
-         image: new ol.style.Circle({
-             radius: 7,
-             fill: new ol.style.Fill({
-                 color: '#ffcc33',
-             }),
-         }),
-     }),
- });
- 
- map.addLayer(vector);
- 
- function addInteraction(intType) {
- 
-     draw = new ol.interaction.Draw({
-         source: source,
-         type: intType,
-         style: new ol.style.Style({
-             fill: new ol.style.Fill({
-                 color: 'rgba(200, 200, 200, 0.6)',
-             }),
-             stroke: new ol.style.Stroke({
-                 color: 'rgba(0, 0, 0, 0.5)',
-                 lineDash: [10, 10],
-                 width: 2,
-             }),
-             image: new ol.style.Circle({
-                 radius: 5,
-                 stroke: new ol.style.Stroke({
-                     color: 'rgba(0, 0, 0, 0.7)',
-                 }),
-                 fill: new ol.style.Fill({
-                     color: 'rgba(255, 255, 255, 0.2)',
-                 }),
-             }),
-         }),
-     });
-     map.addInteraction(draw);
- 
-     createMeasureTooltip();
-     createHelpTooltip();
- 
-     /**
-      * Currently drawn feature.
-      * @type {import("../src/ol/Feature.js").default}
-      */
-     var sketch;
- 
-     /**
-      * Handle pointer move.
-      * @param {import("../src/ol/MapBrowserEvent").default} evt The event.
-      */
-     var pointerMoveHandler = function (evt) {
-         if (evt.dragging) {
-             return;
-         }
-         /** @type {string} */
-         var helpMsg = 'Click to start drawing';
- 
-         if (sketch) {
-             var geom = sketch.getGeometry();
-             // if (geom instanceof ol.geom.Polygon) {
-             //   helpMsg = continuePolygonMsg;
-             // } else if (geom instanceof ol.geom.LineString) {
-             //   helpMsg = continueLineMsg;
-             // }
-         }
- 
-         //helpTooltipElement.innerHTML = helpMsg;
-         //helpTooltip.setPosition(evt.coordinate);
- 
-         //helpTooltipElement.classList.remove('hidden');
-     };
- 
-     map.on('pointermove', pointerMoveHandler);
- 
-     // var listener;
-     draw.on('drawstart', function (evt) {
-         // set sketch
-         sketch = evt.feature;
- 
-         /** @type {import("../src/ol/coordinate.js").Coordinate|undefined} */
-         var tooltipCoord = evt.coordinate;
- 
-         //listener = sketch.getGeometry().on('change', function (evt) {
-         sketch.getGeometry().on('change', function (evt) {
-             var geom = evt.target;
-             var output;
-             if (geom instanceof ol.geom.Polygon) {
-                 output = formatArea(geom);
-                 tooltipCoord = geom.getInteriorPoint().getCoordinates();
-             } else if (geom instanceof ol.geom.LineString) {
-                 output = formatLength(geom);
-                 tooltipCoord = geom.getLastCoordinate();
-             }
-             measureTooltipElement.innerHTML = output;
-             measureTooltip.setPosition(tooltipCoord);
-         });
-     });
- 
-     draw.on('drawend', function () {
-         measureTooltipElement.className = 'ol-tooltip ol-tooltip-static';
-         measureTooltip.setOffset([0, -7]);
-         // unset sketch
-         sketch = null;
-         // unset tooltip so that a new one can be created
-         measureTooltipElement = null;
-         createMeasureTooltip();
-         //ol.Observable.unByKey(listener);
-     });
- }
- 
- 
- /**
-  * The help tooltip element.
-  * @type {HTMLElement}
-  */
- var helpTooltipElement;
- 
- /**
-  * Overlay to show the help messages.
-  * @type {Overlay}
-  */
- var helpTooltip;
- 
- /**
-  * Creates a new help tooltip
-  */
- function createHelpTooltip() {
-     if (helpTooltipElement) {
-         helpTooltipElement.parentNode.removeChild(helpTooltipElement);
-     }
-     helpTooltipElement = document.createElement('div');
-     helpTooltipElement.className = 'ol-tooltip hidden';
-     helpTooltip = new ol.Overlay({
-         element: helpTooltipElement,
-         offset: [15, 0],
-         positioning: 'center-left',
-     });
-     map.addOverlay(helpTooltip);
- }
- 
- // map.getViewport().addEventListener('mouseout', function () {
- //     helpTooltipElement.classList.add('hidden');
- // });
- 
- /**
+/**
+ * Message to show when the user is drawing a line.
+ * @type {string}
+ */
+var continueLineMsg = "Click to continue line, Double click to complete";
+
+var draw; // global so we can remove it later
+
+var source = new ol.source.Vector();
+var vector = new ol.layer.Vector({
+  source: source,
+  style: new ol.style.Style({
+    fill: new ol.style.Fill({
+      // mau cua hinh sau khi ke
+      color: "rgb(240, 110, 170, 0.2)",
+    }),
+    stroke: new ol.style.Stroke({
+      // mau cua duong vien hinh sau khi ke
+      color: "rgb(240, 110, 170, 0.9)",
+      width: 2,
+    }),
+    image: new ol.style.Circle({
+      radius: 7,
+      fill: new ol.style.Fill({
+        color: "rgb(240, 110, 170, 0.2)",
+      }),
+    }),
+  }),
+});
+
+map.addLayer(vector);
+
+function addInteraction(intType) {
+  draw = new ol.interaction.Draw({
+    source: source,
+    type: intType,
+    style: new ol.style.Style({
+      fill: new ol.style.Fill({
+        // mau cua hinh trong khi ke 
+        color: "rgb(240, 110, 170, 0.2)",
+      }),
+      stroke: new ol.style.Stroke({
+        // mau cua duong vien trong khi ke
+        color: "rgb(240, 110, 170, 0.9)",
+        lineDash: [10, 10],
+        width: 1.5,
+      }),
+      image: new ol.style.Circle({
+        radius: 5,
+        // Mau vien cua hinh tron nho
+        stroke: new ol.style.Stroke({
+          color: "rgb(240, 110, 170, 0.9)",
+        }),
+        // mau cua hinh tron nho
+        fill: new ol.style.Fill({
+          color: "rgb(240, 110, 170, 0.3)",
+        }),
+      }),
+    }),
+  });
+  map.addInteraction(draw);
+
+  createMeasureTooltip();
+  createHelpTooltip();
+
+  /**
+   * Currently drawn feature.
+   * @type {import("../src/ol/Feature.js").default}
+   */
+  var sketch;
+
+  /**
+   * Handle pointer move.
+   * @param {import("../src/ol/MapBrowserEvent").default} evt The event.
+   */
+  var pointerMoveHandler = function (evt) {
+    if (evt.dragging) {
+      return;
+    }
+    /** @type {string} */
+    var helpMsg = "Click to start drawing";
+
+    if (sketch) {
+      var geom = sketch.getGeometry();
+      // if (geom instanceof ol.geom.Polygon) {
+      //   helpMsg = continuePolygonMsg;
+      // } else if (geom instanceof ol.geom.LineString) {
+      //   helpMsg = continueLineMsg;
+      // }
+    }
+
+    //helpTooltipElement.innerHTML = helpMsg;
+    //helpTooltip.setPosition(evt.coordinate);
+
+    //helpTooltipElement.classList.remove('hidden');
+  };
+
+  map.on("pointermove", pointerMoveHandler);
+
+  // var listener;
+  draw.on("drawstart", function (evt) {
+    // set sketch
+    sketch = evt.feature;
+
+    /** @type {import("../src/ol/coordinate.js").Coordinate|undefined} */
+    var tooltipCoord = evt.coordinate;
+
+    //listener = sketch.getGeometry().on('change', function (evt) {
+    sketch.getGeometry().on("change", function (evt) {
+      var geom = evt.target;
+      var output;
+      if (geom instanceof ol.geom.Polygon) {
+        output = formatArea(geom);
+        tooltipCoord = geom.getInteriorPoint().getCoordinates();
+      } else if (geom instanceof ol.geom.LineString) {
+        output = formatLength(geom);
+        tooltipCoord = geom.getLastCoordinate();
+      }
+      measureTooltipElement.innerHTML = output;
+      measureTooltip.setPosition(tooltipCoord);
+    });
+  });
+
+  draw.on("drawend", function () {
+    measureTooltipElement.className = "ol-tooltip ol-tooltip-static";
+    measureTooltip.setOffset([0, -7]);
+    // unset sketch
+    sketch = null;
+    // unset tooltip so that a new one can be created
+    measureTooltipElement = null;
+    createMeasureTooltip();
+    //ol.Observable.unByKey(listener);
+  });
+}
+
+/**
+ * The help tooltip element.
+ * @type {HTMLElement}
+ */
+var helpTooltipElement;
+
+/**
+ * Overlay to show the help messages.
+ * @type {Overlay}
+ */
+var helpTooltip;
+
+/**
+ * Creates a new help tooltip
+ */
+function createHelpTooltip() {
+  if (helpTooltipElement) {
+    helpTooltipElement.parentNode.removeChild(helpTooltipElement);
+  }
+  helpTooltipElement = document.createElement("div");
+  helpTooltipElement.className = "ol-tooltip hidden";
+  helpTooltip = new ol.Overlay({
+    element: helpTooltipElement,
+    offset: [15, 0],
+    positioning: "center-left",
+  });
+  map.addOverlay(helpTooltip);
+}
+
+// map.getViewport().addEventListener('mouseout', function () {
+//     helpTooltipElement.classList.add('hidden');
+// });
+
+/**
  * The measure tooltip element.
  * @type {HTMLElement}
  */
- var measureTooltipElement;
- 
- 
- /**
+var measureTooltipElement;
+
+/**
  * Overlay to show the measurement.
  * @type {Overlay}
  */
- var measureTooltip;
- 
- /**
-  * Creates a new measure tooltip
-  */
- 
- function createMeasureTooltip() {
-     if (measureTooltipElement) {
-         measureTooltipElement.parentNode.removeChild(measureTooltipElement);
-     }
-     measureTooltipElement = document.createElement('div');
-     measureTooltipElement.className = 'ol-tooltip ol-tooltip-measure';
-     measureTooltip = new ol.Overlay({
-         element: measureTooltipElement,
-         offset: [0, -15],
-         positioning: 'bottom-center',
-     });
-     map.addOverlay(measureTooltip);
- }
- /**
-  * Format length output.
-  * @param {LineString} line The line.
-  * @return {string} The formatted length.
-  */
- var formatLength = function (line) {
-     var length = ol.sphere.getLength(line);
-     var output;
-     if (length > 100) {
-         output = Math.round((length / 1000) * 100) / 100 + ' ' + 'km';
-     } else {
-         output = Math.round(length * 100) / 100 + ' ' + 'm';
-     }
-     return output;
- };
- 
- /**
-  * Format area output.
-  * @param {Polygon} polygon The polygon.
-  * @return {string} Formatted area.
-  */
- var formatArea = function (polygon) {
-     var area = ol.sphere.getArea(polygon);
-     var output;
-     if (area > 10000) {
-         output = Math.round((area / 1000000) * 100) / 100 + ' ' + 'km<sup>2</sup>';
-     } else {
-         output = Math.round(area * 100) / 100 + ' ' + 'm<sup>2</sup>';
-     }
-     return output;
- };
- 
+var measureTooltip;
 
+/**
+ * Creates a new measure tooltip
+ */
 
+function createMeasureTooltip() {
+  if (measureTooltipElement) {
+    measureTooltipElement.parentNode.removeChild(measureTooltipElement);
+  }
+  measureTooltipElement = document.createElement("div");
+  measureTooltipElement.className = "ol-tooltip ol-tooltip-measure";
+  measureTooltip = new ol.Overlay({
+    element: measureTooltipElement,
+    offset: [0, -15],
+    positioning: "bottom-center",
+  });
+  map.addOverlay(measureTooltip);
+}
+/**
+ * Format length output.
+ * @param {LineString} line The line.
+ * @return {string} The formatted length.
+ */
+var formatLength = function (line) {
+  var length = ol.sphere.getLength(line);
+  var output;
+  if (length > 100) {
+    output = Math.round((length / 1000) * 100) / 100 + " " + "km";
+  } else {
+    output = Math.round(length * 100) / 100 + " " + "m";
+  }
+  return output;
+};
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+/**
+ * Format area output.
+ * @param {Polygon} polygon The polygon.
+ * @return {string} Formatted area.
+ */
+var formatArea = function (polygon) {
+  var area = ol.sphere.getArea(polygon);
+  var output;
+  if (area > 10000) {
+    output = Math.round((area / 1000000) * 100) / 100 + " " + "km<sup>2</sup>";
+  } else {
+    output = Math.round(area * 100) / 100 + " " + "m<sup>2</sup>";
+  }
+  return output;
+};
 
 // Bo Loc va thanh tim kiem
 map.addControl(areaControl);

@@ -34,17 +34,20 @@ body {
   top: 40%;
   right: 0.8%;
 }
-   
+
+
+#infoElement {
+  position: relative;
+  display: block;
+  margin-top: 260px;}
 /* nut do do dai */
 #lengthElement {
   position: relative;
   display: block;
-  margin: 300px auto auto 0px;
 }
 #areaElement {
   position: relative;
   display: block;
-  /* margin: 30px auto auto 0px; */
 }
 
 .myButton {
@@ -54,6 +57,7 @@ body {
   padding: 4px 6px;
   border-radius: 2px;
   border: none;
+  margin-left: 5px;
   align-items: center;
  
 }
@@ -66,11 +70,12 @@ body {
 background-color: rgba(22, 85, 167, 0.6);
 }
 
+
 .myButton.clicked{
 background-color: rgba(22, 170, 35, 0.8);
 }
 
-.myButton.clicked:hover{
+.myButton.clicked:hover {
 background-color: rgba(22, 170, 35, 1);
 }
 
@@ -137,7 +142,7 @@ background-color: rgba(22, 170, 35, 1);
   border: 1px solid grey;
   border-radius: 10pt;
   padding: 5px;
-  background-color: rgba(225, 225, 225, 0.6);
+  background-color: rgba(225, 225, 225, 0.7);
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 12px;
 }
@@ -148,7 +153,7 @@ background-color: rgba(22, 170, 35, 1);
   background-color: white;
   -webkit-filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
   filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
-  padding: 15px;
+  padding: 15px 17px 10px 10px;
   border-radius: 10px;
   border: 1px solid #cccccc;
   bottom: 12px;
@@ -180,20 +185,32 @@ background-color: rgba(22, 170, 35, 1);
 .ol-popup-closer {
   text-decoration: none;
   position: absolute;
-  top: 2px;
-  right: 8px;
+  top: 1px;
+  right: 6px;
 }
 .ol-popup-closer:after {
-  content: "X";
+  content: "x";
 }
+#popup-content{
+  width: max-content;
+
+}
+
+
+
+
 
 /* Bo Loc va thanh tim kiem*/
 #attQueryDiv {
   position: absolute;
   top: 10.5%;
   width: 60%;
-  left: 3%;
+  left: 50px;
 }
+
+
+
+
 
 /* bang hien thi thong tin da loc */
 #data {
