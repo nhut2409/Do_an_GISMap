@@ -148,7 +148,7 @@ body {
 }
 
 /* Bo Loc va thanh tim kiem*/
-#query_tab {
+#attQueryDiv {
   position: absolute;
   top: 10.5%;
   width: 80%;

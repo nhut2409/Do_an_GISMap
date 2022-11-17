@@ -144,18 +144,19 @@
       </div>
     </div>
     <!-- Bo Loc va thanh tim kiem -->
-    <div class="row" id="query_tab">
-      <select class="col m-2 form-control" id="layer" name="layer">
-        <option class="ddindent" value="">Hiện trạng sdđ</option>
+    <div class="row" id="attQueryDiv">
+      <select class="col m-2 form-control" id="selectLayer" name="selectLayer">
+        <option class="" value="">Layer</option>
+        <!-- <option class="ddindent" value="">Hiện trạng sdđ</option>
         <option class="ddindent" value="">Nền địa chính</option>
-        <option class="ddindent" value="">Quy hoạch sdđ</option>
+        <option class="ddindent" value="">Quy hoạch sdđ</option> -->
       </select>
 
-      <select class="col m-2 form-control" id="attributes" name="attributes">
+      <select class="col m-2 form-control" id="selectAttribute" name="selectAttribute">
         <option class="" value="">Attributes</option>
       </select>
 
-      <select class="col m-2 form-control" id="operator" name="operator">
+      <select class="col m-2 form-control" id="selectOperator" name="selectOperator">
         <option class="" value="">operator</option>
       </select>
       <div class="col-7 m-2 row">
@@ -163,13 +164,17 @@
           type="text"
           class="col-8 form-control"
           placeholder="Nhập từ khóa"
-          id="value"
-          name="value"
+          id="enterValue"
+          name="enterValue"
         />
-        <button class="col-3 mx-2 btn btn-success" onclick="query()">
+        <button class="col-3 mx-2 btn btn-success attQryRun" id="attQryRun"  onclick="attributeQuery()">
           Tìm Kiếm
         </button>
       </div>
+    </div>
+
+
+    <div class="attListDiv" id="attListDiv">
     </div>
 
     <div id="table_data"></div>
