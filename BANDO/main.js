@@ -344,7 +344,7 @@ function addInteraction(intType) {
         // mau cua duong vien (net duc doan)
         color: "rgb(240, 110, 170, 0.9)",
         lineDash: [10, 10],
-        width: 1,
+        width: 2,
       }),
       image: new ol.style.Circle({
         radius: 5,
