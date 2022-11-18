@@ -187,7 +187,7 @@ function chuthich() {
 }
 chuthich();
 
-// tao nut dieu khien an hien thong tin
+// Tao nut dieu khien an hien thong tin
 var infoElement = document.getElementById("infoElement");
 var infoButton = document.getElementById("infoButton");
 var infoControl = new ol.control.Control({
@@ -249,6 +249,8 @@ function getinfo(evt) {
 }
 map.on("singleclick", getinfo);
 
+
+
 // tao thanh cong cu tinh do dai
 var lengthElement = document.getElementById("lengthElement");
 var lengthButton = document.getElementById("lengthButton");
@@ -262,7 +264,6 @@ lengthButton.addEventListener("click", () => {
   document.getElementById("map").style.cursor = "default";
   if (lengthFlag) {
     map.removeInteraction(draw);
-
     addInteraction("LineString");
   } else {
     map.removeInteraction(draw);
@@ -277,7 +278,6 @@ lengthButton.addEventListener("click", () => {
 map.addControl(lengthControl);
 
 // tao thanh cong cu tinh dien tich
-
 var areaElement = document.getElementById("areaElement");
 var areaButton = document.getElementById("areaButton");
 var areaControl = new ol.control.Control({
@@ -302,10 +302,12 @@ areaButton.addEventListener("click", () => {
 });
 
 
-// edit màu
+
 var draw; 
 var source = new ol.source.Vector();
+// Them cac layer sau khi ve vao map de tin dien tich
 var vector = new ol.layer.Vector({
+  // chon kieu source = Vector
   source: source,
   style: new ol.style.Style({
     fill: new ol.style.Fill({
@@ -320,7 +322,7 @@ var vector = new ol.layer.Vector({
     image: new ol.style.Circle({
       radius: 7,
       fill: new ol.style.Fill({
-        color: "rgb(240, 110, 170, 0.2)",
+        color: "rgb(240, 110, 170)",
       }),
     }),
   }),
@@ -328,6 +330,7 @@ var vector = new ol.layer.Vector({
 
 map.addLayer(vector);
 
+// then một tuong tac ve
 function addInteraction(intType) {
   draw = new ol.interaction.Draw({
     source: source,
@@ -338,10 +341,10 @@ function addInteraction(intType) {
         color: "rgb(240, 110, 170, 0.2)",
       }),
       stroke: new ol.style.Stroke({
-        // mau cua duong vien trong khi ke
+        // mau cua duong vien (net duc doan)
         color: "rgb(240, 110, 170, 0.9)",
         lineDash: [10, 10],
-        width: 1.5,
+        width: 1,
       }),
       image: new ol.style.Circle({
         radius: 5,

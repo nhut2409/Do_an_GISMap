@@ -64,7 +64,7 @@ body {
   font-weight: bold;
 }
 .ol-tooltip-static {
-  background-color: #ffcc33;
+  background-color: #33d6ffd5;
   color: black;
   border: 1px solid white;
 }
@@ -80,7 +80,7 @@ body {
   left: 50%;
 }
 .ol-tooltip-static:before {
-  border-top-color: #ffcc33;
+  border-top-color: #33d6ffd5;
 }
 
 
