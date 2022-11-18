@@ -42,6 +42,30 @@
             />
           </form>
         </div>
+        <div class="text-center col-7">
+          <form
+            class="search-container"
+            action="//llamaswill.tumblr.com/search"
+          >
+            <img
+              style="width: 75px; height: 45px"
+              src="../img/logo.png"
+              alt=""
+            />
+          </form>
+        </div>
+        <div class="text-left col order-last">
+          <form
+            class="search-container"
+            action="//llamaswill.tumblr.com/search"
+          >
+            <img
+              style="width: 75px; height: 45px"
+              src="../img/logo.png"
+              alt=""
+            />
+          </form>
+        </div>
       </div>
     </div>
     <!-- map -->
@@ -53,13 +77,18 @@
     </div>
     <!-- info: bang chua thong tin tai noi click -->
     <div id="infoElement" class="">
-      <br>
-      <button id="infoButton" class="btn btn-primary myButton" style="color:aliceblue"  role="button"><i
-          class="fa-solid fa-circle-info iconbutton"></i>
+      <br />
+      <button
+        id="infoButton"
+        class="btn btn-primary myButton"
+        style="color: aliceblue"
+        role="button"
+      >
+        <i class="fa-solid fa-circle-info iconbutton"></i>
       </button>
     </div>
     <div id="info">&nbsp;</div>
-    
+
     <!-- Day chuc nam ben phai -->
     <div class="control_right">
       <!-- 1. Quay tro lai trang chu -->
@@ -80,59 +109,75 @@
           class="btn btn-primary myButton"
           style="color: aliceblue"
           type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasRight"
-          aria-controls="offcanvasRight"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
         >
           <i class="fa-solid fa-palette iconbutton"></i>
         </button>
 
         <div
-          class="offcanvas offcanvas-end"
+          class="modal fade"
+          id="exampleModal"
           tabindex="-1"
-          id="offcanvasRight"
-          aria-labelledby="offcanvasRightLabel"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
         >
-          <div class="offcanvas-header">
-            <b class="offcanvas-title h3" id="offcanvasRightLabel"
-              >Bảng ký hiệu các loại đất trên bản đồ quy hoạch</b
-            >
+          <div
+            class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+          >
+            <div class="modal-content">
+              <div
+                class="modal-header"
+                style="background-color: #797273; padding: 25px"
+              >
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                  Bảng ký hiệu các loại đất trên bản đồ quy hoạch
+                </h1>
 
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="offcanvas"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="offcanvas-body">
-            <nav id="navbar-example2" class="navbar bg-light px-3 mb-3">
-              <ul class="nav nav-pills">
-                <li class="nav-item">
-                  <a class="nav-link" href="#chuthich_htsd">Hiện trạng sdđ</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#chuthich_qhsd">Quy hoạch sdđ</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#chuthich_ndc">Nền đc</a>
-                </li>
-              </ul>
-            </nav>
-            <div
-              data-bs-target="#navbar-example2"
-              data-bs-root-margin="0px 0px "
-              data-bs-smooth-scroll=""
-              class="scrollspy-example-2 bg-light p-3 rounded-2"
-            >
-              <div id="chuthich_htsd">
-                <h4>Hiện trạng sử dụng đất</h4>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
               </div>
-              <div id="chuthich_qhsd">
-                <h4>Quy hoạch sử dụng đất</h4>
-              </div>
-              <div id="chuthich_ndc">
-                <h4>Nền địa chính</h4>
+              <div class="modal-body">
+                <nav id="navbar-example2" class="navbar bg-light px-3 mb-3">
+                  <ul class="nav nav-pills">
+                    <li class="nav-item">
+                      <a class="nav-link" href="#chuthich_htsd"
+                        >Hiện trạng sdđ</a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#chuthich_qhsd"
+                        >Quy hoạch sdđ</a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#chuthich_ndc">Nền đc</a>
+                    </li>
+                  </ul>
+                </nav>
+                <div
+                  data-bs-target="#navbar-example2"
+                  data-bs-root-margin="0px 0px "
+                  data-bs-smooth-scroll=""
+                  class="scrollspy-example-2 bg-light p-3 rounded-2"
+                >
+                  <div id="chuthich_htsd">
+                    <br>
+                    <h5>Hiện trạng sử dụng đất</h5>
+                  </div>
+                  <div id="chuthich_qhsd">
+                    <br>
+                    <h5>Quy hoạch sử dụng đất</h5>
+                  </div>
+                  <div id="chuthich_ndc">
+                    <br>
+                    <h5>Nền địa chính</h5>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -140,15 +185,27 @@
       </div>
       <!-- 2. Tinh do dai-->
       <div id="lengthElement" class="">
-        <br>
-        <button id="lengthButton" class="btn btn-primary myButton" style="color:aliceblue"  role="button"><i
-            class="fa-solid fa-ruler iconbutton"></i>
+        <br />
+        <button
+          id="lengthButton"
+          class="btn btn-primary myButton"
+          style="color: aliceblue"
+          role="button"
+        >
+          <i class="fa-solid fa-ruler iconbutton"></i>
         </button>
       </div>
       <!-- 3. Tinh dien tich -->
       <div id="areaElement" class="">
-        <br>
-        <button id="areaButton" class="btn btn-primary myButton" style="color:aliceblue"  role="button"><i class="fa-solid fa-chart-area iconbutton"></i></button>
+        <br />
+        <button
+          id="areaButton"
+          class="btn btn-primary myButton"
+          style="color: aliceblue"
+          role="button"
+        >
+          <i class="fa-solid fa-chart-area iconbutton"></i>
+        </button>
       </div>
     </div>
     <!-- Bo Loc va thanh tim kiem -->
@@ -160,11 +217,19 @@
         <option class="ddindent" value="">Quy hoạch sdđ</option> -->
       </select>
 
-      <select class="col m-2 form-control" id="selectAttribute" name="selectAttribute">
+      <select
+        class="col m-2 form-control"
+        id="selectAttribute"
+        name="selectAttribute"
+      >
         <option class="" value="">Attributes</option>
       </select>
 
-      <select class="col m-2 form-control" id="selectOperator" name="selectOperator">
+      <select
+        class="col m-2 form-control"
+        id="selectOperator"
+        name="selectOperator"
+      >
         <option class="" value="">operator</option>
       </select>
       <div class="col-7 m-2 row">
@@ -175,15 +240,17 @@
           id="enterValue"
           name="enterValue"
         />
-        <button class="col-3 mx-2 btn btn-success attQryRun" id="attQryRun"  onclick="attributeQuery()">
+        <button
+          class="col-3 mx-2 btn btn-success attQryRun"
+          id="attQryRun"
+          onclick="attributeQuery()"
+        >
           Tìm Kiếm
         </button>
       </div>
     </div>
 
-
-    <div class="attListDiv" id="attListDiv">
-    </div>
+    <div class="attListDiv" id="attListDiv"></div>
 
     <div id="table_data"></div>
     <div

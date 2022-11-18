@@ -304,7 +304,6 @@ areaButton.addEventListener("click", () => {
 
 // edit màu
 var draw; 
-
 var source = new ol.source.Vector();
 var vector = new ol.layer.Vector({
   source: source,
