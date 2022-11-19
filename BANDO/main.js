@@ -249,8 +249,6 @@ function getinfo(evt) {
 }
 map.on("singleclick", getinfo);
 
-
-
 // tao thanh cong cu tinh do dai
 var lengthElement = document.getElementById("lengthElement");
 var lengthButton = document.getElementById("lengthButton");
@@ -300,10 +298,18 @@ areaButton.addEventListener("click", () => {
     while (elements.length > 0) elements[0].remove();
   }
 });
+/**
+ * Message to show when the user is drawing a polygon.
+ * @type {string}
+ */
+var continuePolygonMsg = "Click to continue polygon, Double click to complete";
 
-
-
-var draw; 
+/**
+ * Message to show when the user is drawing a line.
+ * @type {string}
+ */
+var continueLineMsg = "Click to continue line, Double click to complete";
+var draw;
 var source = new ol.source.Vector();
 // Them cac layer sau khi ve vao map de tin dien tich
 var vector = new ol.layer.Vector({
@@ -337,7 +343,7 @@ function addInteraction(intType) {
     type: intType,
     style: new ol.style.Style({
       fill: new ol.style.Fill({
-        // mau cua hinh trong khi ke 
+        // mau cua hinh trong khi ke
         color: "rgb(240, 110, 170, 0.2)",
       }),
       stroke: new ol.style.Stroke({
@@ -369,11 +375,12 @@ function addInteraction(intType) {
    * @type {import("../src/ol/Feature.js").default}
    */
   var sketch;
-
   /**
    * Handle pointer move.
    * @param {import("../src/ol/MapBrowserEvent").default} evt The event.
    */
+
+  
   var pointerMoveHandler = function (evt) {
     if (evt.dragging) {
       return;
@@ -383,17 +390,7 @@ function addInteraction(intType) {
 
     if (sketch) {
       var geom = sketch.getGeometry();
-      // if (geom instanceof ol.geom.Polygon) {
-      //   helpMsg = continuePolygonMsg;
-      // } else if (geom instanceof ol.geom.LineString) {
-      //   helpMsg = continueLineMsg;
-      // }
     }
-
-    //helpTooltipElement.innerHTML = helpMsg;
-    //helpTooltip.setPosition(evt.coordinate);
-
-    //helpTooltipElement.classList.remove('hidden');
   };
 
   map.on("pointermove", pointerMoveHandler);
@@ -405,8 +402,6 @@ function addInteraction(intType) {
 
     /** @type {import("../src/ol/coordinate.js").Coordinate|undefined} */
     var tooltipCoord = evt.coordinate;
-
-    //listener = sketch.getGeometry().on('change', function (evt) {
     sketch.getGeometry().on("change", function (evt) {
       var geom = evt.target;
       var output;
