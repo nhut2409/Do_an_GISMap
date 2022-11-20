@@ -130,7 +130,6 @@ var mouse_position = new ol.control.MousePosition({
   // coordinateFormat: createStringXY(4),
 });
 map.addControl(mouse_position);
-
 // Tạo một overview để coi tổng quát map
 var overview = new ol.control.OverviewMap({
   view: view_ov,

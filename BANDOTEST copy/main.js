@@ -85,6 +85,8 @@ var overlays = new ol.layer.Group({
     ],
 });
 
+
+
 var map = new ol.Map({
     target: "map",
     view: view,
@@ -109,7 +111,6 @@ var rainfall = new ol.layer.Image({
 
 overlays.getLayers().push(rainfall);
 //map.addLayer(rainfall);
-
 var mouse_position = new ol.control.MousePosition();
 map.addControl(mouse_position);
 
