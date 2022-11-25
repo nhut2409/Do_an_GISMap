@@ -1,4 +1,4 @@
-const client = require("./connection.js");
+const client = require("./app/config/PgConnection");
 const express = require("express");
 const morgan = require("morgan");
 const app = express();
