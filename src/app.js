@@ -3,7 +3,7 @@ const express = require("express");
 const morgan = require("morgan");
 const app = express();
 const path = require("path");
-const route = require('./routes');
+const route = require("./routes");
 const hbs = require("express-handlebars");
 
 const port = 3000;
@@ -27,17 +27,12 @@ app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "./resources/views"));
 // routes innit
 route(app);
-client.connect();
+
+client
+  .connect()
+  .then(() => console.log("connected"))
+  .catch((err) => console.error("connection error", err.stack));
 
 app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
-
-// app.get("/", (req, res) => {
-//   client.query(`Select maxa from htsd`, (err, result) => {
-//     if (!err) {
-//       res.send(result.rows);
-//     }
-//   });
-//   client.end;
-// });

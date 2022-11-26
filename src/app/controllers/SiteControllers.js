@@ -1,4 +1,3 @@
-
 const client = require("../config/PgConnection");
 class SiteControllers {
   // [GET] map
@@ -11,7 +10,6 @@ class SiteControllers {
     });
     client.end;
   }
-
   // [GET] search
   search(req, res) {
     res.send("NEW SEARCH DETAIL!!!");
