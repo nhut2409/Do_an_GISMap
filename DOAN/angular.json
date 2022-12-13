@@ -29,18 +29,17 @@
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/ol-layerswitcher/dist/ol-layerswitcher.css",
               "./node_modules/ol/ol.css",
-            
+
               "./node_modules/font-awesome/css/font-awesome.min.css"
             ],
             "scripts": [
               "./node_modules/bootstrap/dist/js/bootstrap.min.js",
               "./node_modules/jquery/dist/jquery.min.js",
               "./node_modules/ol-layerswitcher/dist/ol-layerswitcher.js",
-           
+              "./src/assets/js/map.js",
               "./node_modules/popper.js/dist/umd/popper.js",
               "./node_modules/ol/dist/ol.js",
               "./node_modules/bootstrap/dist/js/bootstrap.bundle.js"
-           
             ]
           },
           "configurations": {
