@@ -9,12 +9,6 @@ const hbs = require("express-handlebars");
 const port = 3000;
 const hostname = "127.0.0.1";
 app.use(morgan("combined"));
-// app.use(
-//   express.urlencoded({
-//     extended: true,
-//   })
-// );
-// app.use(express.json);
 
 app.use(express.static(path.join(__dirname, "./public")));
 app.engine(
