@@ -9,3 +9,4 @@ class HomesControllers {
   }
 }
 module.exports = new HomesControllers();
+  
