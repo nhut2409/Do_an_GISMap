@@ -3,9 +3,11 @@ class HomesControllers {
   homes(req, res) {
     res.render("homes");
   }
-  // [GET] / Homes detail
+  // [GET] / Homes detail: /homes/:slug
   homeDetail(req, res) {
-    res.send("NEW DETAIL!!!");
+    
+    
+    res.send("NEW DETAIL!!! --- " + req.params.slug);
   }
 }
 module.exports = new HomesControllers();
