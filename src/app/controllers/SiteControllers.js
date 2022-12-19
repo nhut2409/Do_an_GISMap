@@ -1,14 +1,14 @@
-const client = require("../config/PgConnection");
+const pgClient = require("../config/PgConnection");
 class SiteControllers {
   // [GET] map
   map(req, res) {
-    res.render("map");
-    // client.query(`Select * from qhsd`, (err, result) => {
-    //   if (!err) {
-    //     res.send(result.rows);
-    //   }
-    // });
-    // client.end;
+    // res.render("map");
+    pgClient.query(`Select * from qhsd`, (err, result) => {
+      if (!err) {
+        res.send(result.rows);
+      }
+    });
+    pgClient.end;
   }
   // [GET] search
   search(req, res) {
