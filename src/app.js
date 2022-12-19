@@ -1,4 +1,4 @@
-const client = require("./app/config/PgConnection");
+const pgClient = require("./app/config/PgConnection");
 const express = require("express");
 const morgan = require("morgan");
 const app = express();
@@ -18,14 +18,16 @@ app.engine(
   })
 );
 app.set("view engine", "hbs");
+
 app.set("views", path.join(__dirname, "./resources/views"));
 // routes innit
 route(app);
-
-client
+// conntct database
+pgClient
   .connect()
-  .then(() => console.log("connected"))
-  .catch((err) => console.error("connection error", err.stack));
+  .then(() => console.log("connected successfully!!!"))
+  .catch((err) => console.error("connection error", err.stack))
+ 
 
 app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);

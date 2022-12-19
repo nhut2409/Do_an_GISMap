@@ -1,1 +1,196 @@
-<h1>contten</h1>
+<!-- map -->
+<div id="map"></div>
+<!-- Bang thong tin chung -->
+<div id="popup" class="ol-popup">
+  <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+  <div id="popup-content"></div>
+</div>
+<!-- info: bang chua thong tin tai noi click -->
+<div id="infoElement" class="">
+  <br />
+  <button
+    id="infoButton"
+    class="btn btn-primary myButton"
+    style="color: aliceblue"
+    role="button"
+  >
+    <i class="fa-solid fa-circle-info iconbutton"></i>
+  </button>
+</div>
+<div id="info">&nbsp;</div>
+
+<!-- Day chuc nam ben phai -->
+<div class="control_right">
+  <!-- 1. Quay tro lai trang chu -->
+  <div class="myHome">
+    <br />
+    <a
+      class="btn btn-primary myButton"
+      style="color: aliceblue"
+      href="./index.html"
+      role="button"
+      ><i class="fa-solid fa-rotate iconbutton"></i>
+    </a>
+  </div>
+  <!-- 2. chu thich -->
+  <br />
+  <div class="chu_thich">
+    <button
+      class="btn btn-primary myButton"
+      style="color: aliceblue"
+      type="button"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+    >
+      <i class="fa-solid fa-palette iconbutton"></i>
+    </button>
+
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+      >
+        <div class="modal-content">
+          <div
+            class="modal-header"
+            style="background-color: #797273; padding: 25px"
+          >
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              Bảng ký hiệu các loại đất trên bản đồ quy hoạch
+            </h1>
+
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <nav id="navbar-example2" class="navbar bg-light px-3 mb-3">
+              <ul class="nav nav-pills">
+                <li class="nav-item">
+                  <a class="nav-link" href="#chuthich_htsd"
+                    >Hiện trạng sdđ</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#chuthich_qhsd"
+                    >Quy hoạch sdđ</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#chuthich_ndc">Nền đc</a>
+                </li>
+              </ul>
+            </nav>
+            <div
+              data-bs-target="#navbar-example2"
+              data-bs-root-margin="0px 0px "
+              data-bs-smooth-scroll=""
+              class="scrollspy-example-2 bg-light p-3 rounded-2"
+            >
+              <div id="chuthich_htsd">
+                <br />
+                <h5>Hiện trạng sử dụng đất</h5>
+              </div>
+              <div id="chuthich_qhsd">
+                <br />
+                <h5>Quy hoạch sử dụng đất</h5>
+              </div>
+              <div id="chuthich_ndc">
+                <br />
+                <h5>Nền địa chính</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 2. Tinh do dai-->
+  <div id="lengthElement" class="">
+    <br />
+    <button
+      id="lengthButton"
+      class="btn btn-primary myButton"
+      style="color: aliceblue"
+      role="button"
+    >
+      <i class="fa-solid fa-ruler iconbutton"></i>
+    </button>
+  </div>
+  <!-- 3. Tinh dien tich -->
+  <div id="areaElement" class="">
+    <br />
+    <button
+      id="areaButton"
+      class="btn btn-primary myButton"
+      style="color: aliceblue"
+      role="button"
+    >
+      <i class="fa-solid fa-chart-area iconbutton"></i>
+    </button>
+  </div>
+</div>
+<!-- Bo Loc va thanh tim kiem -->
+<div  style="display: flex;justify-content: space-between; " id="attQueryDiv">
+  <select style="width:10%;" class="form-control" id="selectLayer" name="selectLayer">
+    <option class="" value="">Layer</option>
+  </select>
+  <select
+  style="width:10%;"
+    class="form-control"
+    id="selectAttribute"
+    name="selectAttribute"
+  >
+    <option class="" value="">Attributes</option>
+  </select>
+
+  <select
+  style="width:10%;"
+    class="form-control"
+    id="selectOperator"
+    name="selectOperator"
+  >
+    <option class="" value="">operator</option>
+  </select>
+
+    <input
+      type="text" style="width:40%;"
+      class="form-control"
+      placeholder="Nhập từ khóa"
+      id="enterValue"
+      name="enterValue"
+    />
+    <button
+      style="width:20%;"
+      class="btn btn-success attQryRun"
+      id="attQryRun"
+      onclick="attributeQuery()"
+    >
+      Tìm Kiếm
+    </button>
+  </div>
+</div>
+
+<div class="attListDiv" id="attListDiv"></div>
+
+<div id="table_data"></div>
+<div
+  id="wms_layers_window"
+  title="Available WMS Layers"
+  style="display: none"
+></div>
+<table id="table_wms_layers" class="table-bordered"></table>
+<script>
+
+
+
+  
+</script>
