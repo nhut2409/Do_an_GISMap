@@ -17,7 +17,30 @@
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <se:PointSymbolizer>
-            <!--QgsMarkerSymbolLayer RasterMarker not implemented yet-->
+            <se:Graphic>
+              <!--Parametric SVG-->
+              <se:ExternalGraphic>
+                <se:OnlineResource xlink:type="simple" xlink:href="C:/PROGRA~1/QGIS32~1.0/apps/qgis/./svg/accommodation/accommodation_bed_and_breakfast.svg?fill=%23ff7f00&amp;fill-opacity=1&amp;outline=%23232323&amp;outline-opacity=1&amp;outline-width=0"/>
+                <se:Format>image/svg+xml</se:Format>
+              </se:ExternalGraphic>
+              <!--Plain SVG fallback, no parameters-->
+              <se:ExternalGraphic>
+                <se:OnlineResource xlink:type="simple" xlink:href="accommodation/accommodation_bed_and_breakfast.svg"/>
+                <se:Format>image/svg+xml</se:Format>
+              </se:ExternalGraphic>
+              <!--Well known marker fallback-->
+              <se:Mark>
+                <se:WellKnownName>square</se:WellKnownName>
+                <se:Fill>
+                  <se:SvgParameter name="fill">#ff7f00</se:SvgParameter>
+                </se:Fill>
+                <se:Stroke>
+                  <se:SvgParameter name="stroke">#232323</se:SvgParameter>
+                  <se:SvgParameter name="stroke-width">0.5</se:SvgParameter>
+                </se:Stroke>
+              </se:Mark>
+              <se:Size>36</se:Size>
+            </se:Graphic>
           </se:PointSymbolizer>
         </se:Rule>
         <se:Rule>
@@ -32,7 +55,30 @@
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <se:PointSymbolizer>
-            <!--QgsMarkerSymbolLayer RasterMarker not implemented yet-->
+            <se:Graphic>
+              <!--Parametric SVG-->
+              <se:ExternalGraphic>
+                <se:OnlineResource xlink:type="simple" xlink:href="C:/PROGRA~1/QGIS32~1.0/apps/qgis/./svg/accommodation/accommodation_bed_and_breakfast.svg?fill=%2301ddff&amp;fill-opacity=1&amp;outline=%2301ddff&amp;outline-opacity=1&amp;outline-width=1"/>
+                <se:Format>image/svg+xml</se:Format>
+              </se:ExternalGraphic>
+              <!--Plain SVG fallback, no parameters-->
+              <se:ExternalGraphic>
+                <se:OnlineResource xlink:type="simple" xlink:href="accommodation/accommodation_bed_and_breakfast.svg"/>
+                <se:Format>image/svg+xml</se:Format>
+              </se:ExternalGraphic>
+              <!--Well known marker fallback-->
+              <se:Mark>
+                <se:WellKnownName>square</se:WellKnownName>
+                <se:Fill>
+                  <se:SvgParameter name="fill">#01ddff</se:SvgParameter>
+                </se:Fill>
+                <se:Stroke>
+                  <se:SvgParameter name="stroke">#01ddff</se:SvgParameter>
+                  <se:SvgParameter name="stroke-width">1</se:SvgParameter>
+                </se:Stroke>
+              </se:Mark>
+              <se:Size>36</se:Size>
+            </se:Graphic>
           </se:PointSymbolizer>
         </se:Rule>
       </se:FeatureTypeStyle>
