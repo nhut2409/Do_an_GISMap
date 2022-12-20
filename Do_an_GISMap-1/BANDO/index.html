@@ -202,12 +202,17 @@
       </div>
     </div>
     <!-- Bo Loc va thanh tim kiem -->
-    <div  style="display: flex;justify-content: space-between; " id="attQueryDiv">
-      <select style="width:10%;" class="form-control" id="selectLayer" name="selectLayer">
+    <div style="display: flex; justify-content: space-between" id="attQueryDiv">
+      <select
+        style="width: 10%"
+        class="form-control"
+        id="selectLayer"
+        name="selectLayer"
+      >
         <option class="" value="">Layer</option>
       </select>
       <select
-      style="width:10%;"
+        style="width: 10%"
         class="form-control"
         id="selectAttribute"
         name="selectAttribute"
@@ -216,30 +221,30 @@
       </select>
 
       <select
-      style="width:10%;"
+        style="width: 10%"
         class="form-control"
         id="selectOperator"
         name="selectOperator"
       >
         <option class="" value="">operator</option>
       </select>
-    
-        <input
-          type="text" style="width:40%;"
-          class="form-control"
-          placeholder="Nhập từ khóa"
-          id="enterValue"
-          name="enterValue"
-        />
-        <button
-          style="width:20%;"
-          class="btn btn-success attQryRun"
-          id="attQryRun"
-          onclick="attributeQuery()"
-        >
-          Tìm Kiếm
-        </button>
-      </div>
+
+      <input
+        type="text"
+        style="width: 40%"
+        class="form-control"
+        placeholder="Nhập từ khóa"
+        id="enterValue"
+        name="enterValue"
+      />
+      <button
+        style="width: 20%"
+        class="btn btn-success attQryRun"
+        id="attQryRun"
+        onclick="attributeQuery()"
+      >
+        Tìm Kiếm
+      </button>
     </div>
 
     <div class="attListDiv" id="attListDiv"></div>

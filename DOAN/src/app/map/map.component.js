@@ -113,17 +113,6 @@ var overlays = new ol.layer.Group({
         serverType: "geoserver",
       }),
     }),
-    new ol.layer.Image({
-      title: "thongtinnha",
-      source: new ol.source.ImageWMS({
-        url: "http://localhost:8080/geoserver/QLBDS/wms?",
-        params: {
-          LAYERS: "QLBDS:thongtinnha",
-        },
-        ratio: 1,
-        serverType: "geoserver",
-      }),
-    }),
   ],
 });
 
@@ -230,7 +219,6 @@ function getinfo(evt) {
           params: {
             LAYERS: layer_title[i],
           },
-
           serverType: "geoserver",
           crossOrigin: "anonymous",
         });
@@ -242,11 +230,9 @@ function getinfo(evt) {
             INFO_FORMAT: "text/html",
           }
         );
-        alert(url[i]);
 
         if (url) {
           $.get(url[i], function (data) {
-            alert(data);
             $("#popup-content").append(data);
             overlay.setPosition(coordinate);
             layerSwitcher.renderPanel();
@@ -393,6 +379,7 @@ function addInteraction(intType) {
    * @param {import("../src/ol/MapBrowserEvent").default} evt The event.
    */
 
+  
   var pointerMoveHandler = function (evt) {
     if (evt.dragging) {
       return;
@@ -538,32 +525,32 @@ var formatArea = function (polygon) {
 // Bo Loc va thanh tim kiem
 map.addControl(areaControl);
 //ham1: doc cac layer trong ban do
-// $(document).ready(function () {
-//   $.ajax({
-//     type: "GET",
-//     url: "http://localhost:8080/geoserver/QLBDS/wfs?request=getCapabilities",
-//     dataType: "xml",
-//     success: function (xml) {
-//       var select = $("#selectLayer");
-//       $(xml)
-//         .find("FeatureType")
-//         .each(function () {
-//           $(this)
-//             .find("Name")
-//             .each(function () {
-//               var value = $(this).text();
-//               select.append(
-//                 "<option class='ddindent' value='" +
-//                   value +
-//                   "'>" +
-//                   value +
-//                   "</option>"
-//               );
-//             });
-//         });
-//     },
-//   });
-// });
+$(document).ready(function () {
+  $.ajax({
+    type: "GET",
+    url: "http://localhost:8080/geoserver/QLBDS/wfs?request=getCapabilities",
+    dataType: "xml",
+    success: function (xml) {
+      var select = $("#selectLayer");
+      $(xml)
+        .find("FeatureType")
+        .each(function () {
+          $(this)
+            .find("Name")
+            .each(function () {
+              var value = $(this).text();
+              select.append(
+                "<option class='ddindent' value='" +
+                  value +
+                  "'>" +
+                  value +
+                  "</option>"
+              );
+            });
+        });
+    },
+  });
+});
 // // ham 2
 $(function () {
   //ham2.1: doc cac thuoc tinh trong tung chuc nang

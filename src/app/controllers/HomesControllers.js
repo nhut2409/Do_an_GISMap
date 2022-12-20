@@ -5,10 +5,7 @@ class HomesControllers {
   }
   // [GET] / Homes detail: /homes/:slug
   homeDetail(req, res) {
-    
-    
     res.send("NEW DETAIL!!! --- " + req.params.slug);
   }
 }
 module.exports = new HomesControllers();
-  
