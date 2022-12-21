@@ -1,12 +1,21 @@
-// const pool = require("../config/PgConnection");
 const pool = require("../config/PgConnection");
+const pgClient = require("../config/PgConnection");
 class SiteControllers {
   // [GET] map
   async map(req, res, next) {
-    const xa = [{}];
-    const [rows, fields] = await pool.execute(`Select * from xa`);
-    return res.render("map", {
-      xaData: rows,
+    pgClient.query(`Select * from xa`, (err, result) => {
+      if (!err) {
+        res.render("map", {
+          xaData: result.rows,
+        });
+      }
+    });
+    pgClient.query(`Select * from qhsd`, (err, result) => {
+      if (!err) {
+        res.render("map", {
+          qhsdData:JSON.stringify(result.rows),
+        });
+      }
     });
   }
 

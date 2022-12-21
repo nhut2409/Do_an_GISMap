@@ -11,30 +11,6 @@ var overlay = new ol.Overlay({
     duration: 250,
   },
 });
-const mapConfig = {
-  layers: [
-    {
-      type: "cartodb",
-      options: {
-        cartocss_version: "2.1.1",
-        cartocss: "#layer { polygon-fill: #F00; }",
-      },
-    },
-  ],
-};
-function setXa(n) {
-  mapConfig.layers[0].options.sql = "SELECT * FROM ndc ";
-}
-const areaSelect = document.getElementById('select-xa');
-setXa('26170')
-const cartoDBSource = new ol.source.CartoDB({
-  account: "documentation",
-  config: mapConfig,
-});
-areaSelect.addEventListener("change", function () {
-  setArea("26170");
-  cartoDBSource.setConfig(mapConfig);
-});
 
 // dong bang
 closer.onclick = function () {

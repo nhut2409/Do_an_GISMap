@@ -87,7 +87,6 @@
   },
   "scripts": {
     "start": "nodemon --inspect src/app.js",
-    "watch": "node-sass --watch src/resources/scss/ --o src/public/css/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
