@@ -1,6 +1,5 @@
 var map, geojson, layer_name, layerSwitcher, featureOverlay;
 var container, content, closer;
-
 var container = document.getElementById("popup");
 var content = document.getElementById("popup-content");
 var closer = document.getElementById("popup-closer");
@@ -11,6 +10,30 @@ var overlay = new ol.Overlay({
   autoPanAnimation: {
     duration: 250,
   },
+});
+const mapConfig = {
+  layers: [
+    {
+      type: "cartodb",
+      options: {
+        cartocss_version: "2.1.1",
+        cartocss: "#layer { polygon-fill: #F00; }",
+      },
+    },
+  ],
+};
+function setXa(n) {
+  mapConfig.layers[0].options.sql = "SELECT * FROM ndc ";
+}
+const areaSelect = document.getElementById('select-xa');
+setXa('26170')
+const cartoDBSource = new ol.source.CartoDB({
+  account: "documentation",
+  config: mapConfig,
+});
+areaSelect.addEventListener("change", function () {
+  setArea("26170");
+  cartoDBSource.setConfig(mapConfig);
 });
 
 // dong bang
@@ -71,6 +94,11 @@ var OSM = new ol.layer.Tile({
   title: "OSM",
 });
 
+// var selectSearch = new ol.layer.Tile({
+//   title: "selectSearch",
+//   source: cartoDBSource,
+// })
+
 // Tạo overlays Group chứa các layer
 var overlays = new ol.layer.Group({
   title: "Overlays",
@@ -89,7 +117,6 @@ var overlays = new ol.layer.Group({
         serverType: "geoserver",
       }),
     }),
-
     // Tạo layer ndc
     new ol.layer.Image({
       title: "qhsd",
@@ -124,13 +151,18 @@ var overlays = new ol.layer.Group({
         serverType: "geoserver",
       }),
     }),
+   
   ],
 });
+
 
 // add layergroup base_maps vào map
 map.addLayer(base_maps);
 // add layergroup overlays vào map
 map.addLayer(overlays);
+
+
+// xuất xa
 
 // Hiển thị vị trí tọa độ của trỏ chuột
 var mouse_position = new ol.control.MousePosition({
@@ -261,6 +293,13 @@ function getinfo(evt) {
   }
 }
 map.on("singleclick", getinfo);
+map.on("singleclick", function (evt) {
+  const coordinate = evt.coordinate;
+  const hdms = toStringHDMS(toLonLat(coordinate));
+
+  content.innerHTML = "<p>You clicked here:</p><code>" + hdms + "</code>";
+  overlay.setPosition(coordinate);
+});
 
 // tao thanh cong cu tinh do dai
 var lengthElement = document.getElementById("lengthElement");
@@ -456,6 +495,7 @@ var helpTooltip;
 /**
  * Creates a new help tooltip
  */
+
 function createHelpTooltip() {
   if (helpTooltipElement) {
     helpTooltipElement.parentNode.removeChild(helpTooltipElement);
@@ -690,89 +730,6 @@ $(function () {
   };
 });
 
-// $(function() {
-//   $("#layer").change(function() {
-//       var attributes = document.getElementById("attributes");
-//       var length = attributes.options.length;
-//       for (i = length - 1; i >= 0; i--) {
-//           attributes.options[i] = null;
-//       }
-
-//       var value_layer = $(this).val();
-//       //alert(value_crop);
-
-//       //var level = document.getElementById("level");
-//       //var value_level = level.options[level.selectedIndex].value;
-
-//       // var url = "http://localhost:8082/geoserver/wfs?service=WFS&request=DescribeFeatureType&version=1.1.0&typeName="+value_layer;
-
-//       //  alert(url);
-
-//       attributes.options[0] = new Option("Select attributes", "");
-//       //  alert(url);
-
-//       $(document).ready(function() {
-//           $.ajax({
-//               type: "GET",
-//               url: "http://localhost:8080/geoserver/QLBDS/wms?service=WFS&request=DescribeFeatureType&version=1.1.0&typeName=" +
-//                   value_layer,
-//               dataType: "xml",
-//               success: function(xml) {
-//                   var select = $("#attributes");
-//                   //var title = $(xml).find('xsd\\:complexType').attr('name');
-//                   //	alert(title);
-//                   $(xml)
-//                       .find("xsd\\:sequence")
-//                       .each(function() {
-//                           $(this)
-//                               .find("xsd\\:element")
-//                               .each(function() {
-//                                   var value = $(this).attr("name");
-//                                   //alert(value);
-//                                   var type = $(this).attr("type");
-//                                   //alert(type);
-//                                   if (value != "geom" && value != "the_geom") {
-//                                       select.append(
-//                                           "<option class='ddindent' value='" +
-//                                           type +
-//                                           "'>" +
-//                                           value +
-//                                           "</option>"
-//                                       );
-//                                   }
-//                               });
-//                       });
-//               },
-//           });
-//       });
-//   });
-// });
-// // ham 3
-// $(function() {
-//   $("#attributes").change(function() {
-//       var operator = document.getElementById("operator");
-//       var length = operator.options.length;
-//       for (i = length - 1; i >= 0; i--) {
-//           operator.options[i] = null;
-//       }
-
-//       var value_type = $(this).val();
-//       // alert(value_type);
-//       var value_attribute = $("#attributes option:selected").text();
-//       operator.options[0] = new Option("Select operator", "");
-
-//       if (
-//           value_type == "xsd:short" ||
-//           value_type == "xsd:int" ||
-//           value_type == "xsd:double"
-//       ) {
-//           var operator1 = document.getElementById("operator");
-//           operator1.options[1] = new Option("Greater than", ">");
-//           operator1.options[2] = new Option("Less than", "<");
-//           operator1.options[3] = new Option("Equal to", "=");
-//       } else if (value_type == "xsd:string") {
-//           var operator1 = document.getElementById("operator");
-//           operator1.options[1] = new Option("Like", "ILike");
-//       }
-//   });
-// });
+function setXa() {
+  mapConfig.layers[0].options.sql = "SELECT * FROM ndc WHERE ma_xa ='26170'";
+}
