@@ -13,7 +13,7 @@ class SiteControllers {
     pgClient.query(`Select * from qhsd`, (err, result) => {
       if (!err) {
         res.render("map", {
-          qhsdData:JSON.stringify(result.rows),
+          qhsdData: JSON.stringify(result.rows),
         });
       }
     });
