@@ -28,7 +28,7 @@ $(document).ready(function () {
 var view = new ol.View({
   projection: "EPSG:4326",
   center: [107.105, 11.165],
-  zoom: 11,
+  zoom: 12,
 });
 
 var view_ov = new ol.View({
@@ -101,19 +101,6 @@ var overlays = new ol.layer.Group({
         serverType: "geoserver",
       }),
     }),
-
-    // new ol.layer.Image({
-    //   title: "ndc",
-    //   source: new ol.source.ImageWMS({
-    //     url: "http://localhost:8080/geoserver/QLBDS/wms?",
-    //     params: {
-    //       LAYERS: "QLBDS:ndc",
-    //       // cql_filter: select_xa,
-    //     },
-    //     ratio: 1,
-    //     serverType: "geoserver",
-    //   }),
-    // }),
   ],
 });
 
@@ -217,21 +204,16 @@ function submitSearch() {
   console.log(select);
   ndc_search.values_.source.params_.cql_filter = select;
   ndc_search.getSource().refresh();
+}
+function showsearchInfore() {
+  
 
-  // var ndc_search = new ol.layer.Image({
-  //   title: "ndc_search",
-  //   source: new ol.source.ImageWMS({
-  //     url: "http://localhost:8080/geoserver/QLBDS/wms?",
-  //     params: {
-  //       LAYERS: "QLBDS:ndc",
-  //       cql_filter: select_xa,
-  //     },
-  //     ratio: 1,
-  //     serverType: "geoserver",
-  //   }),
-  // });
-  // select_xa = "";
-  // overlays.getLayers().push(ndc_search);
+  var element = document.getElementById("table_search_info");
+  if (element.style.display === "none") {
+    element.style.display = "block";
+  } else {
+    element.style.display = "none";
+  }
 }
 
 var mouse_position = new ol.control.MousePosition({
@@ -343,11 +325,9 @@ function getinfo(evt) {
             INFO_FORMAT: "text/html",
           }
         );
-        alert(url[i]);
 
         if (url) {
           $.get(url[i], function (data) {
-            alert(data);
             $("#popup-content").append(data);
             overlay.setPosition(coordinate);
             layerSwitcher.renderPanel();
@@ -674,131 +654,3 @@ map.addControl(areaControl);
 //   });
 // });
 // // ham 2
-$(function () {
-  //ham2.1: doc cac thuoc tinh trong tung chuc nang
-  document.getElementById("selectLayer").onchange = function () {
-    var select = document.getElementById("selectAttribute");
-    while (select.options.length > 0) {
-      select.remove(0);
-    }
-    var value_layer = $(this).val();
-    $(document).ready(function () {
-      $.ajax({
-        type: "GET",
-        url:
-          "http://localhost:8080/geoserver/QLBDS/wfs?service=WFS&request=DescribeFeatureType&version=1.1.0&typeName=" +
-          value_layer,
-        dataType: "xml",
-        success: function (xml) {
-          var select = $("#selectAttribute");
-          //var title = $(xml).find('xsd\\:complexType').attr('name');
-          //	alert(title);
-          select.append("<option class='ddindent' value=''></option>");
-          $(xml)
-            .find("xsd\\:sequence")
-            .each(function () {
-              $(this)
-                .find("xsd\\:element")
-                .each(function () {
-                  var value = $(this).attr("name");
-                  //alert(value);
-                  var type = $(this).attr("type");
-                  //alert(type);
-                  if (value != "geom" && value != "the_geom") {
-                    select.append(
-                      "<option class='ddindent' value='" +
-                        type +
-                        "'>" +
-                        value +
-                        "</option>"
-                    );
-                  }
-                });
-            });
-        },
-      });
-    });
-  };
-  document.getElementById("selectAttribute").onchange = function () {
-    var operator = document.getElementById("selectOperator");
-    while (operator.options.length > 0) {
-      operator.remove(0);
-    }
-
-    var value_type = $(this).val();
-    // alert(value_type);
-    var value_attribute = $("#selectAttribute option:selected").text();
-    operator.options[0] = new Option("Select operator", "");
-
-    if (
-      value_type == "xsd:short" ||
-      value_type == "xsd:int" ||
-      value_type == "xsd:double"
-    ) {
-      var operator1 = document.getElementById("selectOperator");
-      operator1.options[1] = new Option("Greater than", ">");
-      operator1.options[2] = new Option("Less than", "<");
-      operator1.options[3] = new Option("Equal to", "=");
-    } else if (value_type == "xsd:string") {
-      var operator1 = document.getElementById("selectOperator");
-      operator1.options[1] = new Option("Like", "Like");
-      operator1.options[2] = new Option("Equal to", "=");
-    }
-  };
-
-  document.getElementById("attQryRun").onclick = function () {
-    map.set("isLoading", "YES");
-
-    if (featureOverlay) {
-      featureOverlay.getSource().clear();
-      map.removeLayer(featureOverlay);
-    }
-
-    var layer = document.getElementById("selectLayer");
-    var attribute = document.getElementById("selectAttribute");
-    var operator = document.getElementById("selectOperator");
-    var txt = document.getElementById("enterValue");
-
-    if (layer.options.selectedIndex == 0) {
-      alert("Select Layer");
-    } else if (attribute.options.selectedIndex == -1) {
-      alert("Select Attribute");
-    } else if (operator.options.selectedIndex <= 0) {
-      alert("Select Operator");
-    } else if (txt.value.length <= 0) {
-      alert("Enter Value");
-    } else {
-      var value_layer = layer.options[layer.selectedIndex].value;
-      var value_attribute = attribute.options[attribute.selectedIndex].text;
-      var value_operator = operator.options[operator.selectedIndex].value;
-      var value_txt = txt.value;
-      if (value_operator == "Like") {
-        value_txt = "%25" + value_txt + "%25";
-      } else {
-        value_txt = value_txt;
-      }
-      alert(value_layer);
-      var url =
-        "http://localhost:8080/geoserver/QLBDS/GISSimplified/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" +
-        value_layer +
-        "&CQL_FILTER=" +
-        value_attribute +
-        "+" +
-        value_operator +
-        "+'" +
-        value_txt +
-        "'&outputFormat=application/json";
-      // console.log(url);
-      newaddGeoJsonToMap(url);
-      newpopulateQueryTable(url);
-      setTimeout(function () {
-        newaddRowHandlers(url);
-      }, 300);
-      map.set("isLoading", "NO");
-    }
-  };
-});
-
-// function setXa() {
-//   mapConfig.layers[0].options.sql = "SELECT * FROM ndc WHERE ma_xa ='26170'";
-// }

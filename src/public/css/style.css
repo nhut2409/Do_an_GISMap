@@ -282,6 +282,8 @@ background-color: rgba(22, 170, 35, 1);
 }
 
 #table_wms_layers {
+  height: 400;
+  width: 800;
   white-space: nowrap;
   border-collapse: separate;
   font-family: arial;

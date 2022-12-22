@@ -21,6 +21,7 @@ body {
 /* map chinh */
 #map {
   position: absolute;
+
   top: 10%;
   left: 0%;
   width: 100%;
@@ -233,53 +234,18 @@ body {
   left: 50px;
 }
 
-/* bang hien thi thong tin da loc */
-#data {
-  width: 60%;
-}
-
-#table_data {
-  position: absolute;
-  bottom: 0%;
-  overflow: scroll;
-  left: 70%;
-  right: 0%;
-  height: 0%;
-  border: 1px solid #4caf50;
-}
-
-#table {
-  white-space: nowrap;
-  grid-template-areas: "head-fixed" "body-scrollable";
-}
-
-#showData {
-  overflow: auto;
+#table_search_info {
+  max-height: 200px;
   width: 100%;
-}
-
-#table th {
-  position: -webkit-sticky;
-
-  position: sticky;
-  top: 0;
-  background-color: darksalmon;
-}
-
-#table_wms_layers {
-  white-space: nowrap;
-  border-collapse: separate;
+  position: fixed;
+  bottom: 0px;
+  background-color: white;
   font-family: arial;
   font-size: 14px;
+  /* display: none; */
 }
 
-#table_wms_layers th {
-  position: -webkit-sticky;
 
-  position: sticky;
-  top: 0;
-  background-color: darksalmon;
-}
 
 #clear_btn {
   position: absolute;
