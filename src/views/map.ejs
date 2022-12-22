@@ -128,17 +128,23 @@
 
   <div style="display: flex; justify-content: space-between" id="attQueryDiv">
     <select id="select_xa" style="width: 15%">
-      <option class="" value="0">Chọn qh</option>
+      <option class="" value="0">Chọn xã</option>
       <% for(let  i=0; i<xaData.length; i++) {%>
       <option class="" value="<%=xaData[i].ma_xa %>"><%= xaData[i].ten_xa %></option>
       <% } %>
     </select>
-    <select style="width: 15%" id="select_qhsd" name="selectAttribute">
-      <option class="" value="">Quy hoạch sử dụng</option>
+    <select id="select_qhsd" style="width: 17%">
+      <option class="" value="0">Chọn quy hoạch</option>
+      <% for(let  i=0; i<loaidatData.length; i++) {%>
+      <option class="" value="<%=loaidatData[i].ma_dat %>"><%= loaidatData[i].ten_dat %></option>
+      <% } %>
     </select>
-    <input type="number" name="" id="">
+
+    <input style="width: 15%" type="number" placeholder="S nhỏ nhất" name="" id="input_dientich">
+    <input style="width: 15%" type="text" name="" placeholder="Số tờ" id="input_soto">
+    <input style="width: 15%" type="text"  name="" placeholder="Số thửa" id="input_sothua">
     <!-- <input type="text" style="width: 40%" placeholder="Nhập từ khóa" id="enterValue" name="enterValue" /> -->
-    <button style="width: 20%" class="btn btn-success " id="submitSearch" onclick="submitSearch()">
+    <button style="width: 14%" class="btn btn-success " id="submitSearch" onclick="submitSearch()">
       Tìm Kiếm
     </button>
   </div>

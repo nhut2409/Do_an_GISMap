@@ -101,6 +101,7 @@ var overlays = new ol.layer.Group({
         serverType: "geoserver",
       }),
     }),
+
     // new ol.layer.Image({
     //   title: "ndc",
     //   source: new ol.source.ImageWMS({
@@ -113,14 +114,20 @@ var overlays = new ol.layer.Group({
     //     serverType: "geoserver",
     //   }),
     // }),
-    
   ],
 });
 
 map.addLayer(base_maps);
 map.addLayer(overlays);
 var select_xa =
-  "ma_xa IN ( '26191', '26197', '26185', '26203', '26176', '26182', '26200',  '26173','26170', '26188', '26194', '26179')";
+  "ma_xa IN ( '26191', '26197', '26185', '26182',  '26173','26170', '26188', '26194', '26179')";
+
+var select_qhsd =
+  "loaidat IN ('BCS','BHK','CAN','CLN','CQP','DBV','DCH','DCK','DCS','DDL','DDT','DGD','DGT','DKH','DKV','DNG','DNL','DRA','DSH','DSK','DTL','DTS','DTT','DVH','DXH','DYT','LMU','LUK','LUN','MNC','NCS','NHK','NKH','NTD','NTS','ODT','ONT','PNK','RDD','RPH','RSX','SKC','SKK','SKN','SKS','SKT','SKX','SON','TIN','TMD','TON','TSC')";
+
+var select_dientich = "dien_tich < 3602415.27972696";
+
+var select = select_xa + " AND " + select_qhsd + " AND " + select_dientich;
 
 var ndc_search = new ol.layer.Image({
   title: "ndc",
@@ -128,7 +135,7 @@ var ndc_search = new ol.layer.Image({
     url: "http://localhost:8080/geoserver/QLBDS/wms?",
     params: {
       LAYERS: "QLBDS:ndc",
-      cql_filter: select_xa,
+      cql_filter: select,
     },
     ratio: 1,
     serverType: "geoserver",
@@ -136,15 +143,80 @@ var ndc_search = new ol.layer.Image({
 });
 overlays.getLayers().push(ndc_search);
 
+var ttn_layer = new ol.layer.Image({
+  title: "thongtinnha",
+  source: new ol.source.ImageWMS({
+    url: "http://localhost:8080/geoserver/QLBDS/wms?",
+    params: {
+      LAYERS: "QLBDS:thongtinnha",
+    },
+    ratio: 1,
+    serverType: "geoserver",
+  }),
+});
+overlays.getLayers().push(ttn_layer);
+
 // 26191, 26197, 26185, 26203, 26176, 26182, 26200,  26173,26170, 26188, 26194, 26179
 
 function submitSearch() {
   xa = document.getElementById("select_xa").value;
-  select_xa = "ma_xa=" + xa;
-  ndc_search.values_.source.params_.cql_filter = select_xa;
-  console.log(ndc_search.values_.source.params_.cql_filter);
-  ndc_search.getSource().refresh()
-  
+  qhsd = document.getElementById("select_qhsd").value;
+  dientich = document.getElementById("input_dientich").value;
+  sothua = document.getElementById("input_sothua").value;
+  soto = document.getElementById("input_soto").value;
+  dem = 0;
+
+  if (sothua != "" && soto != "") {
+    var select = "sh_to=" + sothua + " AND " + "sh_thua=" + sothua;
+  } else if (sothua !== "") {
+    var select = "sh_thua=" + sothua;
+  } else if (soto !== "") {
+    var select = "sh_to=" + soto;
+  } else if (xa == 0 && qhsd == 0 && dientich == 0) {
+    var select = select;
+  } else if (xa == 0 && qhsd == 0) {
+    var select = "dien_tich>" + dientich;
+  } else if (xa == 0 && dientich == 0) {
+    var select = "loaidat=" + "'" + qhsd + "'";
+  } else if (qhsd == 0 && dientich == 0) {
+    var select = "ma_xa=" + xa;
+  } else if (xa == 0) {
+    // xa = select_xa;
+    var select =
+      select_xa +
+      " AND " +
+      "loaidat=" +
+      "'" +
+      qhsd +
+      "'" +
+      " AND " +
+      "dien_tich>" +
+      dientich;
+
+    console.log(select);
+  } else if (qhsd == 0) {
+    // qhsd = select_qhsd;
+    var select =
+      select_qhsd + " AND " + "ma_xa=" + xa + " AND " + "dien_tich>" + dientich;
+  } else if (dientich == 0) {
+    var select =
+      select_dientich +
+      " AND " +
+      "ma_xa=" +
+      xa +
+      " AND " +
+      "loaidat=" +
+      "'" +
+      qhsd +
+      "'";
+  } else {
+    xa = "ma_xa=" + xa;
+    qhsd = "loaidat=" + "'" + qhsd + "'";
+    var select = xa + " AND " + qhsd + " AND " + "dien_tich>" + dientich;
+  }
+  console.log(select);
+  ndc_search.values_.source.params_.cql_filter = select;
+  ndc_search.getSource().refresh();
 
   // var ndc_search = new ol.layer.Image({
   //   title: "ndc_search",
