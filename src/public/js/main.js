@@ -27,8 +27,8 @@ $(document).ready(function () {
 });
 var view = new ol.View({
   projection: "EPSG:4326",
-  center: [106.95, 11.03],
-  zoom: 13,
+  center: [107.105, 11.165],
+  zoom: 11,
 });
 
 var view_ov = new ol.View({
@@ -70,12 +70,8 @@ var OSM = new ol.layer.Tile({
   title: "OSM",
 });
 
-// var selectSearch = new ol.layer.Tile({
-//   title: "selectSearch",
-//   source: cartoDBSource,
-// })
-
 // Tạo overlays Group chứa các layer
+
 var overlays = new ol.layer.Group({
   title: "Overlays",
   fold: true,
@@ -93,7 +89,7 @@ var overlays = new ol.layer.Group({
         serverType: "geoserver",
       }),
     }),
-    // Tạo layer ndc
+    // Tạo layer qhsd
     new ol.layer.Image({
       title: "qhsd",
       source: new ol.source.ImageWMS({
@@ -105,42 +101,67 @@ var overlays = new ol.layer.Group({
         serverType: "geoserver",
       }),
     }),
-    new ol.layer.Image({
-      title: "ndc",
-      source: new ol.source.ImageWMS({
-        url: "http://localhost:8080/geoserver/QLBDS/wms?",
-        params: {
-          LAYERS: "QLBDS:ndc",
-        },
-        ratio: 1,
-        serverType: "geoserver",
-      }),
-    }),
-    new ol.layer.Image({
-      title: "thongtinnha",
-      source: new ol.source.ImageWMS({
-        url: "http://localhost:8080/geoserver/QLBDS/wms?",
-        params: {
-          LAYERS: "QLBDS:thongtinnha",
-        },
-        ratio: 1,
-        serverType: "geoserver",
-      }),
-    }),
-   
+    // new ol.layer.Image({
+    //   title: "ndc",
+    //   source: new ol.source.ImageWMS({
+    //     url: "http://localhost:8080/geoserver/QLBDS/wms?",
+    //     params: {
+    //       LAYERS: "QLBDS:ndc",
+    //       // cql_filter: select_xa,
+    //     },
+    //     ratio: 1,
+    //     serverType: "geoserver",
+    //   }),
+    // }),
+    
   ],
 });
 
-
-// add layergroup base_maps vào map
 map.addLayer(base_maps);
-// add layergroup overlays vào map
 map.addLayer(overlays);
+var select_xa =
+  "ma_xa IN ( '26191', '26197', '26185', '26203', '26176', '26182', '26200',  '26173','26170', '26188', '26194', '26179')";
 
+var ndc_search = new ol.layer.Image({
+  title: "ndc",
+  source: new ol.source.ImageWMS({
+    url: "http://localhost:8080/geoserver/QLBDS/wms?",
+    params: {
+      LAYERS: "QLBDS:ndc",
+      cql_filter: select_xa,
+    },
+    ratio: 1,
+    serverType: "geoserver",
+  }),
+});
+overlays.getLayers().push(ndc_search);
 
-// xuất xa
+// 26191, 26197, 26185, 26203, 26176, 26182, 26200,  26173,26170, 26188, 26194, 26179
 
-// Hiển thị vị trí tọa độ của trỏ chuột
+function submitSearch() {
+  xa = document.getElementById("select_xa").value;
+  select_xa = "ma_xa=" + xa;
+  ndc_search.values_.source.params_.cql_filter = select_xa;
+  console.log(ndc_search.values_.source.params_.cql_filter);
+  ndc_search.getSource().refresh()
+  
+
+  // var ndc_search = new ol.layer.Image({
+  //   title: "ndc_search",
+  //   source: new ol.source.ImageWMS({
+  //     url: "http://localhost:8080/geoserver/QLBDS/wms?",
+  //     params: {
+  //       LAYERS: "QLBDS:ndc",
+  //       cql_filter: select_xa,
+  //     },
+  //     ratio: 1,
+  //     serverType: "geoserver",
+  //   }),
+  // });
+  // select_xa = "";
+  // overlays.getLayers().push(ndc_search);
+}
+
 var mouse_position = new ol.control.MousePosition({
   projection: "EPSG:4326",
   coordinateFormat: function (coordinate) {
@@ -706,6 +727,6 @@ $(function () {
   };
 });
 
-function setXa() {
-  mapConfig.layers[0].options.sql = "SELECT * FROM ndc WHERE ma_xa ='26170'";
-}
+// function setXa() {
+//   mapConfig.layers[0].options.sql = "SELECT * FROM ndc WHERE ma_xa ='26170'";
+// }
