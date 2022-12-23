@@ -133,7 +133,6 @@ var ndc_search = new ol.layer.Image({
   }),
 });
 overlays.getLayers().push(ndc_search);
-
 var ttn_layer = new ol.layer.Image({
   title: "thongtinnha",
   source: new ol.source.ImageWMS({
@@ -171,7 +170,6 @@ function submitSearch() {
   $("#detail_div").empty();
   if (sothua != "" && soto != "") {
     var select = "sh_to=" + sothua + " AND " + "sh_thua=" + sothua;
-
     for (let index = 0; index < ndcDataCopy.length; index++) {
       if (
         ndcDataCopy[index].sh_to == soto &&
@@ -256,6 +254,7 @@ function submitSearch() {
     }
   } else if (xa == 0 && qhsd == 0 && dientich == 0) {
     var select = select;
+
     for (let index = 0; index < ndcDataCopy.length; index++) {
       {
         $("<ul ></ul>")
@@ -284,11 +283,6 @@ function submitSearch() {
   } else if (xa == 0 && qhsd == 0) {
     var select = "dien_tich>" + dientich;
     for (let index = 0; index < ndcDataCopy.length; index++) {
-      console.log(
-        ndcDataCopy[index].dien_tich,
-        dientich,
-        ndcDataCopy[index].dien_tich > dientich
-      );
       if (ndcDataCopy[index].dien_tich > dientich) {
         $("<ul ></ul>")
           .html(
@@ -483,10 +477,18 @@ function submitSearch() {
     qhsd = "loaidat=" + "'" + qhsd + "'";
     var select = xa + " AND " + qhsd + " AND " + "dien_tich>" + dientich;
     for (let index = 0; index < ndcDataCopy.length; index++) {
+      console.log(
+        ndcDataCopy[index].dien_tich,
+        dientich,
+        ndcDataCopy[index].dien_tich > dientich,
+        type(dientich),
+        type(ndcDataCopy[index].dien_tich)
+      );
+
       if (
         ndcDataCopy[index].ma_xa == xa &&
         ndcDataCopy[index].loaidat == qhsd &&
-        ndcDataCopy[index].dien_tich > dientich
+        parseInt(ndcDataCopy[index].dien_tich) > dientich
       ) {
         $("<ul ></ul>")
           .html(
@@ -512,9 +514,9 @@ function submitSearch() {
       }
     }
   }
-  console.log(ndcShare);
   console.log(select);
   ndc_search.values_.source.params_.cql_filter = select;
+
   ndc_search.getSource().refresh();
 }
 
@@ -608,6 +610,7 @@ function getinfo(evt) {
   if (infoFlag) {
     var coordinate = evt.coordinate;
     var viewResolution = /** @type {number} */ (view.getResolution());
+
     $("#popup-content").empty();
     document.getElementById("info").innerHTML = "";
     var no_layers = overlays.getLayers().get("length");
@@ -617,7 +620,10 @@ function getinfo(evt) {
     var i;
     for (i = 0; i < no_layers; i++) {
       var visibility = overlays.getLayers().item(i).getVisible();
+      // neu layer ton tai
+
       if (visibility == true) {
+        // lay title
         layer_title[i] = overlays.getLayers().item(i).get("title");
         wmsSource[i] = new ol.source.ImageWMS({
           url: "http://localhost:8080/geoserver/QLBDS/wms",
@@ -628,6 +634,7 @@ function getinfo(evt) {
           serverType: "geoserver",
           crossOrigin: "anonymous",
         });
+
         url[i] = wmsSource[i].getFeatureInfoUrl(
           evt.coordinate,
           viewResolution,
@@ -648,17 +655,29 @@ function getinfo(evt) {
         }
       }
     }
-  } else {
-    popup.setPosition(undefined);
   }
 }
-map.on("singleclick", getinfo);
+
 map.on("singleclick", function (evt) {
-  const coordinate = evt.coordinate;
-  const hdms = toStringHDMS(toLonLat(coordinate));
-  content.innerHTML = "<p>You clicked here:</p><code>" + hdms + "</code>";
-  overlay.setPosition(coordinate);
+  var feature = map.forEachFeatureAtPixel(evt.pixel, function (feature, layer) {
+    if (layer == ttn_layer) {
+      return feature;
+    }
+  });
+  console.log(evt.pixel);
+
+  if (feature) {
+    console.log(feature);
+  }
 });
+
+// map.on("singleclick", getinfo);
+// map.on("singleclick", function (evt) {
+//   const coordinate = evt.coordinate;
+//   const hdms = toStringHDMS(toLonLat(coordinate));
+//   content.innerHTML = "<p>You clicked here:</p><code>" + hdms + "</code>";
+//   overlay.setPosition(coordinate);
+// });
 
 // tao thanh cong cu tinh do dai
 var lengthElement = document.getElementById("lengthElement");
