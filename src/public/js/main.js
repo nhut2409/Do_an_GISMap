@@ -3,6 +3,10 @@ var container, content, closer;
 var container = document.getElementById("popup");
 var content = document.getElementById("popup-content");
 var closer = document.getElementById("popup-closer");
+var center = [107.105, 11.165];
+var zoom = 12;
+var ndc_click_show;
+var ndcShare;
 
 var overlay = new ol.Overlay({
   element: container,
@@ -27,8 +31,8 @@ $(document).ready(function () {
 });
 var view = new ol.View({
   projection: "EPSG:4326",
-  center: [107.105, 11.165],
-  zoom: 12,
+  center: center,
+  zoom: zoom,
 });
 
 var view_ov = new ol.View({
@@ -145,6 +149,17 @@ overlays.getLayers().push(ttn_layer);
 
 // 26191, 26197, 26185, 26203, 26176, 26182, 26200,  26173,26170, 26188, 26194, 26179
 
+var ndcDataCopy = JSON.parse(ndcData);
+
+function moveNdcAnm(index) {
+  ndc_click_show = ndcDataCopy[index].geom;
+  console.log(ndc_click_show);
+  view.animate({
+    center: ndc_click_show,
+    duration: 2000,
+  });
+}
+
 function submitSearch() {
   xa = document.getElementById("select_xa").value;
   qhsd = document.getElementById("select_qhsd").value;
@@ -152,21 +167,200 @@ function submitSearch() {
   sothua = document.getElementById("input_sothua").value;
   soto = document.getElementById("input_soto").value;
   dem = 0;
-
+  $("#detail_div").empty();
   if (sothua != "" && soto != "") {
     var select = "sh_to=" + sothua + " AND " + "sh_thua=" + sothua;
+
+    for (let index = 0; index < ndcDataCopy.length; index++) {
+      if (
+        ndcDataCopy[index].sh_to == soto &&
+        ndcDataCopy[index].sh_thua == sothua
+      ) {
+        $("<ul ></ul>")
+          .html(
+            "<li onclick='moveNdcAnm(this.id)'  id=" +
+              index +
+              " style='width: 6%' >" +
+              index +
+              "</li><li style='width: 7%'>" +
+              ndcDataCopy[index].sh_to +
+              "</li><li  style='width: 9%'>" +
+              ndcDataCopy[index].sh_thua +
+              "</li><li  style='width: 20%'>" +
+              ndcDataCopy[index].ten_chusd +
+              "</li><li  style='width: 18%'>" +
+              ndcDataCopy[index].dien_tich +
+              "</li><li  style='width: 20%'>" +
+              ndcDataCopy[index].ma_xa +
+              "</li><li  style='width: 20%'>" +
+              ndcDataCopy[index].loaidat +
+              "</li>"
+          )
+          .appendTo("#detail_div");
+      }
+    }
   } else if (sothua !== "") {
     var select = "sh_thua=" + sothua;
+    for (let index = 0; index < ndcDataCopy.length; index++) {
+      if (ndcDataCopy[index].sh_thua == sothua) {
+        $("<ul ></ul>")
+          .html(
+            "<li onclick='moveNdcAnm(this.id)'  id=" +
+              index +
+              " style='width: 6%' >" +
+              index +
+              "</li><li style='width: 7%'>" +
+              ndcDataCopy[index].sh_to +
+              "</li><li  style='width: 9%'>" +
+              ndcDataCopy[index].sh_thua +
+              "</li><li  style='width: 20%'>" +
+              ndcDataCopy[index].ten_chusd +
+              "</li><li  style='width: 18%'>" +
+              ndcDataCopy[index].dien_tich +
+              "</li><li  style='width: 20%'>" +
+              ndcDataCopy[index].ma_xa +
+              "</li><li  style='width: 20%'>" +
+              ndcDataCopy[index].loaidat +
+              "</li>"
+          )
+          .appendTo("#detail_div");
+      }
+    }
   } else if (soto !== "") {
     var select = "sh_to=" + soto;
+    for (let index = 0; index < ndcDataCopy.length; index++) {
+      if (ndcDataCopy[index].sh_to == soto) {
+        $("<ul ></ul>")
+          .html(
+            "<li onclick='moveNdcAnm(this.id)'  id=" +
+              index +
+              " style='width: 6%' >" +
+              index +
+              "</li><li style='width: 7%'>" +
+              ndcDataCopy[index].sh_to +
+              "</li><li  style='width: 9%'>" +
+              ndcDataCopy[index].sh_thua +
+              "</li><li  style='width: 20%'>" +
+              ndcDataCopy[index].ten_chusd +
+              "</li><li  style='width: 18%'>" +
+              ndcDataCopy[index].dien_tich +
+              "</li><li  style='width: 20%'>" +
+              ndcDataCopy[index].ma_xa +
+              "</li><li  style='width: 20%'>" +
+              ndcDataCopy[index].loaidat +
+              "</li>"
+          )
+          .appendTo("#detail_div");
+      }
+    }
   } else if (xa == 0 && qhsd == 0 && dientich == 0) {
     var select = select;
+    for (let index = 0; index < ndcDataCopy.length; index++) {
+      {
+        $("<ul ></ul>")
+          .html(
+            "<li onclick='moveNdcAnm(this.id)'  id=" +
+              index +
+              " style='width: 6%' >" +
+              index +
+              "</li><li style='width: 7%'>" +
+              ndcDataCopy[index].sh_to +
+              "</li><li  style='width: 9%'>" +
+              ndcDataCopy[index].sh_thua +
+              "</li><li  style='width: 20%'>" +
+              ndcDataCopy[index].ten_chusd +
+              "</li><li  style='width: 18%'>" +
+              ndcDataCopy[index].dien_tich +
+              "</li><li  style='width: 20%'>" +
+              ndcDataCopy[index].ma_xa +
+              "</li><li  style='width: 20%'>" +
+              ndcDataCopy[index].loaidat +
+              "</li>"
+          )
+          .appendTo("#detail_div");
+      }
+    }
   } else if (xa == 0 && qhsd == 0) {
     var select = "dien_tich>" + dientich;
+    for (let index = 0; index < ndcDataCopy.length; index++) {
+      if (ndcDataCopy[index].dien_tich == dientich) {
+        $("<ul ></ul>")
+          .html(
+            "<li onclick='moveNdcAnm(this.id)'  id=" +
+              index +
+              " style='width: 6%' >" +
+              index +
+              "</li><li style='width: 7%'>" +
+              ndcDataCopy[index].sh_to +
+              "</li><li  style='width: 9%'>" +
+              ndcDataCopy[index].sh_thua +
+              "</li><li  style='width: 20%'>" +
+              ndcDataCopy[index].ten_chusd +
+              "</li><li  style='width: 18%'>" +
+              ndcDataCopy[index].dien_tich +
+              "</li><li  style='width: 20%'>" +
+              ndcDataCopy[index].ma_xa +
+              "</li><li  style='width: 20%'>" +
+              ndcDataCopy[index].loaidat +
+              "</li>"
+          )
+          .appendTo("#detail_div");
+      }
+    }
   } else if (xa == 0 && dientich == 0) {
     var select = "loaidat=" + "'" + qhsd + "'";
+    for (let index = 0; index < ndcDataCopy.length; index++) {
+      if (ndcDataCopy[index].loaidat == qhsd) {
+        $("<ul ></ul>")
+          .html(
+            "<li onclick='moveNdcAnm(this.id)'  id=" +
+              index +
+              " style='width: 6%' >" +
+              index +
+              "</li><li style='width: 7%'>" +
+              ndcDataCopy[index].sh_to +
+              "</li><li  style='width: 9%'>" +
+              ndcDataCopy[index].sh_thua +
+              "</li><li  style='width: 20%'>" +
+              ndcDataCopy[index].ten_chusd +
+              "</li><li  style='width: 18%'>" +
+              ndcDataCopy[index].dien_tich +
+              "</li><li  style='width: 20%'>" +
+              ndcDataCopy[index].ma_xa +
+              "</li><li  style='width: 20%'>" +
+              ndcDataCopy[index].loaidat +
+              "</li>"
+          )
+          .appendTo("#detail_div");
+      }
+    }
   } else if (qhsd == 0 && dientich == 0) {
     var select = "ma_xa=" + xa;
+    for (let index = 0; index < ndcDataCopy.length; index++) {
+      if (ndcDataCopy[index].ma_xa == xa) {
+        $("<ul ></ul>")
+          .html(
+            "<li onclick='moveNdcAnm(this.id)'  id=" +
+              index +
+              " style='width: 6%' >" +
+              index +
+              "</li><li style='width: 7%'>" +
+              ndcDataCopy[index].sh_to +
+              "</li><li  style='width: 9%'>" +
+              ndcDataCopy[index].sh_thua +
+              "</li><li  style='width: 20%'>" +
+              ndcDataCopy[index].ten_chusd +
+              "</li><li  style='width: 18%'>" +
+              ndcDataCopy[index].dien_tich +
+              "</li><li  style='width: 20%'>" +
+              ndcDataCopy[index].ma_xa +
+              "</li><li  style='width: 20%'>" +
+              ndcDataCopy[index].loaidat +
+              "</li>"
+          )
+          .appendTo("#detail_div");
+      }
+    }
   } else if (xa == 0) {
     // xa = select_xa;
     var select =
@@ -179,12 +373,66 @@ function submitSearch() {
       " AND " +
       "dien_tich>" +
       dientich;
-
-    console.log(select);
+    for (let index = 0; index < ndcDataCopy.length; index++) {
+      if (
+        ndcDataCopy[index].dien_tich == dientich &&
+        ndcDataCopy[index].loaidat == qhsd
+      ) {
+        $("<ul ></ul>")
+          .html(
+            "<li onclick='moveNdcAnm(this.id)'  id=" +
+              index +
+              " style='width: 6%' >" +
+              index +
+              "</li><li style='width: 7%'>" +
+              ndcDataCopy[index].sh_to +
+              "</li><li  style='width: 9%'>" +
+              ndcDataCopy[index].sh_thua +
+              "</li><li  style='width: 20%'>" +
+              ndcDataCopy[index].ten_chusd +
+              "</li><li  style='width: 18%'>" +
+              ndcDataCopy[index].dien_tich +
+              "</li><li  style='width: 20%'>" +
+              ndcDataCopy[index].ma_xa +
+              "</li><li  style='width: 20%'>" +
+              ndcDataCopy[index].loaidat +
+              "</li>"
+          )
+          .appendTo("#detail_div");
+      }
+    }
   } else if (qhsd == 0) {
     // qhsd = select_qhsd;
     var select =
       select_qhsd + " AND " + "ma_xa=" + xa + " AND " + "dien_tich>" + dientich;
+    for (let index = 0; index < ndcDataCopy.length; index++) {
+      if (
+        ndcDataCopy[index].ma_xa == xa &&
+        ndcDataCopy[index].dien_tich == dientich
+      ) {
+        $("<ul ></ul>")
+          .html(
+            "<li onclick='moveNdcAnm(this.id)'  id=" +
+              index +
+              " style='width: 6%' >" +
+              index +
+              "</li><li style='width: 7%'>" +
+              ndcDataCopy[index].sh_to +
+              "</li><li  style='width: 9%'>" +
+              ndcDataCopy[index].sh_thua +
+              "</li><li  style='width: 20%'>" +
+              ndcDataCopy[index].ten_chusd +
+              "</li><li  style='width: 18%'>" +
+              ndcDataCopy[index].dien_tich +
+              "</li><li  style='width: 20%'>" +
+              ndcDataCopy[index].ma_xa +
+              "</li><li  style='width: 20%'>" +
+              ndcDataCopy[index].loaidat +
+              "</li>"
+          )
+          .appendTo("#detail_div");
+      }
+    }
   } else if (dientich == 0) {
     var select =
       select_dientich +
@@ -196,18 +444,75 @@ function submitSearch() {
       "'" +
       qhsd +
       "'";
+    for (let index = 0; index < ndcDataCopy.length; index++) {
+      if (
+        ndcDataCopy[index].ma_xa == xa &&
+        ndcDataCopy[index].loaidat == qhsd
+      ) {
+        $("<ul ></ul>")
+          .html(
+            "<li onclick='moveNdcAnm(this.id)'  id=" +
+              index +
+              " style='width: 6%' >" +
+              index +
+              "</li><li style='width: 7%'>" +
+              ndcDataCopy[index].sh_to +
+              "</li><li  style='width: 9%'>" +
+              ndcDataCopy[index].sh_thua +
+              "</li><li  style='width: 20%'>" +
+              ndcDataCopy[index].ten_chusd +
+              "</li><li  style='width: 18%'>" +
+              ndcDataCopy[index].dien_tich +
+              "</li><li  style='width: 20%'>" +
+              ndcDataCopy[index].ma_xa +
+              "</li><li  style='width: 20%'>" +
+              ndcDataCopy[index].loaidat +
+              "</li>"
+          )
+          .appendTo("#detail_div");
+      }
+    }
   } else {
     xa = "ma_xa=" + xa;
     qhsd = "loaidat=" + "'" + qhsd + "'";
     var select = xa + " AND " + qhsd + " AND " + "dien_tich>" + dientich;
+    for (let index = 0; index < ndcDataCopy.length; index++) {
+      if (
+        ndcDataCopy[index].ma_xa == xa &&
+        ndcDataCopy[index].loaidat == qhsd &&
+        ndcDataCopy[index].dien_tich > dientich
+      ) {
+        $("<ul ></ul>")
+          .html(
+            "<li onclick='moveNdcAnm(this.id)'  id=" +
+              index +
+              " style='width: 6%' >" +
+              index +
+              "</li><li style='width: 7%'>" +
+              ndcDataCopy[index].sh_to +
+              "</li><li  style='width: 9%'>" +
+              ndcDataCopy[index].sh_thua +
+              "</li><li  style='width: 20%'>" +
+              ndcDataCopy[index].ten_chusd +
+              "</li><li  style='width: 18%'>" +
+              ndcDataCopy[index].dien_tich +
+              "</li><li  style='width: 20%'>" +
+              ndcDataCopy[index].ma_xa +
+              "</li><li  style='width: 20%'>" +
+              ndcDataCopy[index].loaidat +
+              "</li>"
+          )
+          .appendTo("#detail_div");
+      }
+    }
   }
+  console.log(ndcShare);
   console.log(select);
   ndc_search.values_.source.params_.cql_filter = select;
   ndc_search.getSource().refresh();
 }
-function showsearchInfore() {
-  
 
+function showsearchInfore() {
   var element = document.getElementById("table_search_info");
   if (element.style.display === "none") {
     element.style.display = "block";
@@ -345,7 +650,6 @@ map.on("singleclick", getinfo);
 map.on("singleclick", function (evt) {
   const coordinate = evt.coordinate;
   const hdms = toStringHDMS(toLonLat(coordinate));
-
   content.innerHTML = "<p>You clicked here:</p><code>" + hdms + "</code>";
   overlay.setPosition(coordinate);
 });
