@@ -13,7 +13,7 @@ body {
 
 }
 /* header */
-#header {
+/* #header {
   position: absolute;
   top: 0%;
   left: 0%;
@@ -21,7 +21,7 @@ body {
   height: 10%;
   padding: 14px 20px;
   background-color: #1187d2;
-}
+} */
 select, input{
   opacity:unset;
   border-radius: 5px;
@@ -33,8 +33,6 @@ select, input{
 /* map chinh */
 #map {
   position: absolute;
-
-  top: 10%;
   left: 0%;
   width: 100%;
   height: 100%;
@@ -241,7 +239,7 @@ select, input{
 /* Bo Loc va thanh tim kiem*/
 #attQueryDiv {
   position: absolute;
-  top: 10.5%;
+  top: 4%;
   width: 60%;
   left: 50px;
 }
@@ -265,13 +263,14 @@ select, input{
   width: 100%;
   list-style-type: none;
   text-align: center;
-  display: flex;
+ 
 
 }
 .table_ul_li > #detail_div{
   width: 100%;
 }
 .table_ul_li> #detail_div >ul{
+  display: flex;
   margin: 0px !important;
   background-color: white;
 }

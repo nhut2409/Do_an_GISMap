@@ -155,6 +155,7 @@ function moveNdcAnm(index) {
   ndc_click_show = ndcDataCopy[index].geom;
   console.log(ndc_click_show);
   view.animate({
+    projection: "EPSG:4326",
     center: ndc_click_show,
     duration: 2000,
   });
@@ -283,7 +284,12 @@ function submitSearch() {
   } else if (xa == 0 && qhsd == 0) {
     var select = "dien_tich>" + dientich;
     for (let index = 0; index < ndcDataCopy.length; index++) {
-      if (ndcDataCopy[index].dien_tich == dientich) {
+      console.log(
+        ndcDataCopy[index].dien_tich,
+        dientich,
+        ndcDataCopy[index].dien_tich > dientich
+      );
+      if (ndcDataCopy[index].dien_tich > dientich) {
         $("<ul ></ul>")
           .html(
             "<li onclick='moveNdcAnm(this.id)'  id=" +
@@ -375,7 +381,7 @@ function submitSearch() {
       dientich;
     for (let index = 0; index < ndcDataCopy.length; index++) {
       if (
-        ndcDataCopy[index].dien_tich == dientich &&
+        ndcDataCopy[index].dien_tich > dientich &&
         ndcDataCopy[index].loaidat == qhsd
       ) {
         $("<ul ></ul>")
@@ -408,7 +414,7 @@ function submitSearch() {
     for (let index = 0; index < ndcDataCopy.length; index++) {
       if (
         ndcDataCopy[index].ma_xa == xa &&
-        ndcDataCopy[index].dien_tich == dientich
+        ndcDataCopy[index].dien_tich > dientich
       ) {
         $("<ul ></ul>")
           .html(
