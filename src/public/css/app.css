@@ -275,7 +275,7 @@ select, input{
   background-color: white;
 }
 .table_ul_li > #detail_div > ul > li {
-    border: 0.5px solid rgba(0, 0, 0, 0.5);
+    border: 0.5px solid rgba(255, 255, 255, 0.2);
     padding: 10px;
 }
 .table_ul_li > #detail_div2 > ul {
