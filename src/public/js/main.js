@@ -610,6 +610,7 @@ function getinfo(evt) {
   if (infoFlag) {
     var coordinate = evt.coordinate;
     var viewResolution = /** @type {number} */ (view.getResolution());
+
     $("#popup-content").empty();
     document.getElementById("info").innerHTML = "";
     var no_layers = overlays.getLayers().get("length");
@@ -620,6 +621,7 @@ function getinfo(evt) {
     for (i = 0; i < no_layers; i++) {
       var visibility = overlays.getLayers().item(i).getVisible();
       // neu layer ton tai
+
       if (visibility == true) {
         // lay title
         layer_title[i] = overlays.getLayers().item(i).get("title");
@@ -632,9 +634,6 @@ function getinfo(evt) {
           serverType: "geoserver",
           crossOrigin: "anonymous",
         });
-        console.log(wmsSource[3].params.layer);
-
-
 
         url[i] = wmsSource[i].getFeatureInfoUrl(
           evt.coordinate,
@@ -659,17 +658,18 @@ function getinfo(evt) {
   }
 }
 
-// map.on("click", function (evt) {
-//   var feature = map.forEachFeatureAtPixel(evt.pixel, function (feature, layer) {
-//     console.log(layer);
-//     if (layer == ttn_layer) {
-//       return feature;
-//     }
-//   });
-//   if (feature) {
-//     console.log(feature.id_nha);
-//   }
-// });
+map.on("singleclick", function (evt) {
+  var feature = map.forEachFeatureAtPixel(evt.pixel, function (feature, layer) {
+    if (layer == ttn_layer) {
+      return feature;
+    }
+  });
+  console.log(evt.pixel);
+
+  if (feature) {
+    console.log(feature);
+  }
+});
 
 map.on("singleclick", getinfo);
 map.on("singleclick", function (evt) {
