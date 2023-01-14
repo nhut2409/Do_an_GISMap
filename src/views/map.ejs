@@ -16,24 +16,6 @@
 <body>
 
 
-  <!-- <div class="row">
-  >
-    <div class="text-left col order-first">
-      <form class="search-container" action="//llamaswill.tumblr.com/search">
-        <img style="width: 75px; height: 45px" src="../img/logo.png" alt="" />
-      </form>
-    </div>
-    <div class="text-center col-7">
-      <form class="search-container" action="//llamaswill.tumblr.com/search">
-        <img style="width: 75px; height: 45px" src="../img/logo.png" alt="" />
-      </form>
-    </div>
-    <div class="text-left col order-last">
-      <form class="search-container" action="//llamaswill.tumblr.com/search">
-        <img style="width: 75px; height: 45px" src="../img/logo.png" alt="" />
-      </form>
-    </div>
-  </div> -->
 
   <div id="map"></div>
 
@@ -59,10 +41,14 @@
       <a class="btn btn-primary myButton" style="color: aliceblue" role="button" href="./"><i class="fa-solid fa-rotate iconbutton"></i>
       </a>
     </div>
-    <div 
-     class="bnt_search_info">
+    <div onclick="showsearchInfore()" class="bnt_search_info">
       <br />
       <a class="btn btn-primary myButton" style="color: aliceblue" role="button"><i class="fa-regular fa-map iconbutton"></i>
+      </a>
+    </div>
+    <div onclick="showListHome()">
+      <br />
+      <a class="btn btn-primary myButton" style="color: aliceblue" role="button"><i class="fa-solid fa-house-user iconbutton"></i>
       </a>
     </div>
 
@@ -133,6 +119,49 @@
     </div>
   </div>
 
+  <button class="bnt_home_1" style="margin-top: 300px; right: 500px; position:absolute; width: 50px; height: 50px;" onclick="showItemHome1()"></button>
+  <button class="bnt_home_1" style="bottom: 100px; left: 300px; position:absolute; width: 50px; height: 50px; " onclick="showItemHome2()"> </button>
+
+  <!-- nha cho thue -->
+  <div class="item " id="item_home_1">
+    <div class="img">
+      <img src="../img/home_img/1.jpg" alt="">
+    </div>
+    <div class="content">
+      <a href="#">Cho thuê căn hộ dịch vụ cao cấp Bùi Đình Tuý, Bình Thạnh, giá rẻ - TP Hồ Chí Minh</a>
+      <div style="margin-top:10px; "><span style="font-weight: 500;"> Giá</span>: 6,7 triệu/tháng</div>
+      <div> <span style="font-weight: 500;">Diện tích</span> : 35m2</div>
+    </div>
+  </div>
+  <!-- nha cho bán  -->
+  <div class="item " id="item_home_2">
+    <div class="img">
+      <img src="../img/home_img/1.jpg" alt="">
+    </div>
+    <div class="content">
+      <a href="#">mua bán mha</a>
+      <div style="margin-top:10px; "><span style="font-weight: 500;"> Giá</span>: 6,7 triệu/tháng</div>
+      <div> <span style="font-weight: 500;">Diện tích</span> : 35m2</div>
+    </div>
+  </div>
+  <!-- danh sach nhà  -->
+  <div class="list-home-conten" id="list-home-conten">
+
+    <% for(let  i=0; i<homeData.length; i++) { %>
+    <div class="item2">
+      <img src="../img/home_img/<%=homeData[i].hinh_anh%>" alt="'../img/home_img/'+<%=homeData[i].hinh_anh%>">
+      <div>
+        <a href=""><%=homeData[i].tieu_de %> </a> <br>
+        <span> <span style="font-weight: 500;">Giá: </span><%=homeData[i].gia %></span> <br>
+        <span> <span style="font-weight: 500;">Diện tích: </span> <%=homeData[i].dien_tich %></span> <br>
+        <span> <span style="font-weight: 500;">Loại hình: </span><%=homeData[i].trang_thai %></span>
+      </div>
+    </div>
+    <% } %>
+
+  </div>
+
+
   <!-- Bo Loc va thanh tim kiem -->
 
   <h2 style="display:none;" id="xaData"><%=xaData %></h2>
@@ -159,7 +188,7 @@
     </button>
   </div>
 
-  <div id="table_search_info" class="table_ul_li" >
+  <div id="table_search_info" class="table_ul_li">
     <div class="detail_div2" id="detail_div2" style=" position: -webkit-sticky; position: sticky; top: 0;">
       <ul style="font-weight: 600; background-color: coral;">
         <li style="width: 6%">STT</li>
@@ -190,6 +219,7 @@
     const xaData = '<%- JSON.stringify(xaData) %>';
     const loaidatData = '<%-  JSON.stringify(loaidatData) %>';
     const ndcData = '<%-  JSON.stringify(ndcData) %>';
+    const homeData = '<%-  JSON.stringify(homeData) %>';
   </script>
   <script src="https://unpkg.com/elm-pep@1.0.6/dist/elm-pep.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>

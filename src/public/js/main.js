@@ -133,6 +133,7 @@ var ndc_search = new ol.layer.Image({
   }),
 });
 overlays.getLayers().push(ndc_search);
+
 var ttn_layer = new ol.layer.Image({
   title: "thongtinnha",
   source: new ol.source.ImageWMS({
@@ -154,7 +155,6 @@ function moveNdcAnm(index) {
   ndc_click_show = ndcDataCopy[index].geom;
   console.log(ndc_click_show);
   view.animate({
-    projection: "EPSG:4326",
     center: ndc_click_show,
     duration: 2000,
   });
@@ -170,6 +170,7 @@ function submitSearch() {
   $("#detail_div").empty();
   if (sothua != "" && soto != "") {
     var select = "sh_to=" + sothua + " AND " + "sh_thua=" + sothua;
+
     for (let index = 0; index < ndcDataCopy.length; index++) {
       if (
         ndcDataCopy[index].sh_to == soto &&
@@ -254,7 +255,6 @@ function submitSearch() {
     }
   } else if (xa == 0 && qhsd == 0 && dientich == 0) {
     var select = select;
-
     for (let index = 0; index < ndcDataCopy.length; index++) {
       {
         $("<ul ></ul>")
@@ -283,7 +283,7 @@ function submitSearch() {
   } else if (xa == 0 && qhsd == 0) {
     var select = "dien_tich>" + dientich;
     for (let index = 0; index < ndcDataCopy.length; index++) {
-      if (ndcDataCopy[index].dien_tich > dientich) {
+      if (ndcDataCopy[index].dien_tich == dientich) {
         $("<ul ></ul>")
           .html(
             "<li onclick='moveNdcAnm(this.id)'  id=" +
@@ -375,7 +375,7 @@ function submitSearch() {
       dientich;
     for (let index = 0; index < ndcDataCopy.length; index++) {
       if (
-        ndcDataCopy[index].dien_tich > dientich &&
+        ndcDataCopy[index].dien_tich == dientich &&
         ndcDataCopy[index].loaidat == qhsd
       ) {
         $("<ul ></ul>")
@@ -408,7 +408,7 @@ function submitSearch() {
     for (let index = 0; index < ndcDataCopy.length; index++) {
       if (
         ndcDataCopy[index].ma_xa == xa &&
-        ndcDataCopy[index].dien_tich > dientich
+        ndcDataCopy[index].dien_tich == dientich
       ) {
         $("<ul ></ul>")
           .html(
@@ -477,18 +477,10 @@ function submitSearch() {
     qhsd = "loaidat=" + "'" + qhsd + "'";
     var select = xa + " AND " + qhsd + " AND " + "dien_tich>" + dientich;
     for (let index = 0; index < ndcDataCopy.length; index++) {
-      console.log(
-        ndcDataCopy[index].dien_tich,
-        dientich,
-        ndcDataCopy[index].dien_tich > dientich,
-        type(dientich),
-        type(ndcDataCopy[index].dien_tich)
-      );
-
       if (
         ndcDataCopy[index].ma_xa == xa &&
         ndcDataCopy[index].loaidat == qhsd &&
-        parseInt(ndcDataCopy[index].dien_tich) > dientich
+        ndcDataCopy[index].dien_tich > dientich
       ) {
         $("<ul ></ul>")
           .html(
@@ -514,9 +506,9 @@ function submitSearch() {
       }
     }
   }
+  console.log(ndcShare);
   console.log(select);
   ndc_search.values_.source.params_.cql_filter = select;
-
   ndc_search.getSource().refresh();
 }
 
@@ -528,6 +520,35 @@ function showsearchInfore() {
     element.style.display = "none";
   }
 }
+function showItemHome1() {
+  var element = document.getElementById("item_home_1");
+  if (element.style.display === "none") {
+    element.style.display = "block";
+  } else {
+    element.style.display = "none";
+  }
+}
+function showItemHome2() {
+  var element = document.getElementById("item_home_2");
+  if (element.style.display === "none") {
+    element.style.display = "block";
+  } else {
+    element.style.display = "none";
+  }
+}
+
+function showListHome() {
+  var element = document.getElementById("list-home-conten");
+  if (element.style.display === "none") {
+    element.style.display = "block";
+  } else {
+    element.style.display = "none";
+  }
+}
+
+
+
+
 
 var mouse_position = new ol.control.MousePosition({
   projection: "EPSG:4326",
@@ -610,7 +631,6 @@ function getinfo(evt) {
   if (infoFlag) {
     var coordinate = evt.coordinate;
     var viewResolution = /** @type {number} */ (view.getResolution());
-
     $("#popup-content").empty();
     document.getElementById("info").innerHTML = "";
     var no_layers = overlays.getLayers().get("length");
@@ -620,10 +640,7 @@ function getinfo(evt) {
     var i;
     for (i = 0; i < no_layers; i++) {
       var visibility = overlays.getLayers().item(i).getVisible();
-      // neu layer ton tai
-
       if (visibility == true) {
-        // lay title
         layer_title[i] = overlays.getLayers().item(i).get("title");
         wmsSource[i] = new ol.source.ImageWMS({
           url: "http://localhost:8080/geoserver/QLBDS/wms",
@@ -634,7 +651,6 @@ function getinfo(evt) {
           serverType: "geoserver",
           crossOrigin: "anonymous",
         });
-
         url[i] = wmsSource[i].getFeatureInfoUrl(
           evt.coordinate,
           viewResolution,
@@ -655,22 +671,10 @@ function getinfo(evt) {
         }
       }
     }
+  } else {
+    popup.setPosition(undefined);
   }
 }
-
-map.on("singleclick", function (evt) {
-  var feature = map.forEachFeatureAtPixel(evt.pixel, function (feature, layer) {
-    if (layer == ttn_layer) {
-      return feature;
-    }
-  });
-  console.log(evt.pixel);
-
-  if (feature) {
-    console.log(feature);
-  }
-});
-
 map.on("singleclick", getinfo);
 map.on("singleclick", function (evt) {
   const coordinate = evt.coordinate;

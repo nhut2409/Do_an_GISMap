@@ -20,6 +20,12 @@ class SiteControllers {
             callback(err, result.rows);
           });
         },
+        homeData: function (callback) {
+          pgClient.query(`Select * from thongtinnha`, (err, result) => {
+            callback(err, result.rows);
+            console.log(result.rows);
+          });
+        },
         // ndcData: function (callback) {
         //   pgClient.query(`SELECT * FROM xa INNER JOIN ndc ON xa.ma_xa = ndc.ma_xa`, (err, result) => {
         //     callback(err, result.rows);
