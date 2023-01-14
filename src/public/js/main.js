@@ -191,7 +191,7 @@ function submitSearch() {
               "</li><li  style='width: 18%'>" +
               ndcDataCopy[index].dien_tich +
               "</li><li  style='width: 20%'>" +
-              ndcDataCopy[index].ma_xa +
+              ndcDataCopy[index].ten_xa +
               "</li><li  style='width: 20%'>" +
               ndcDataCopy[index].loaidat +
               "</li>"
@@ -218,7 +218,7 @@ function submitSearch() {
               "</li><li  style='width: 18%'>" +
               ndcDataCopy[index].dien_tich +
               "</li><li  style='width: 20%'>" +
-              ndcDataCopy[index].ma_xa +
+              ndcDataCopy[index].ten_xa +
               "</li><li  style='width: 20%'>" +
               ndcDataCopy[index].loaidat +
               "</li>"
@@ -245,7 +245,7 @@ function submitSearch() {
               "</li><li  style='width: 18%'>" +
               ndcDataCopy[index].dien_tich +
               "</li><li  style='width: 20%'>" +
-              ndcDataCopy[index].ma_xa +
+              ndcDataCopy[index].ten_xa +
               "</li><li  style='width: 20%'>" +
               ndcDataCopy[index].loaidat +
               "</li>"
@@ -272,7 +272,7 @@ function submitSearch() {
               "</li><li  style='width: 18%'>" +
               ndcDataCopy[index].dien_tich +
               "</li><li  style='width: 20%'>" +
-              ndcDataCopy[index].ma_xa +
+              ndcDataCopy[index].ten_xa +
               "</li><li  style='width: 20%'>" +
               ndcDataCopy[index].loaidat +
               "</li>"
@@ -299,7 +299,7 @@ function submitSearch() {
               "</li><li  style='width: 18%'>" +
               ndcDataCopy[index].dien_tich +
               "</li><li  style='width: 20%'>" +
-              ndcDataCopy[index].ma_xa +
+              ndcDataCopy[index].ten_xa +
               "</li><li  style='width: 20%'>" +
               ndcDataCopy[index].loaidat +
               "</li>"
@@ -326,7 +326,7 @@ function submitSearch() {
               "</li><li  style='width: 18%'>" +
               ndcDataCopy[index].dien_tich +
               "</li><li  style='width: 20%'>" +
-              ndcDataCopy[index].ma_xa +
+              ndcDataCopy[index].ten_xa +
               "</li><li  style='width: 20%'>" +
               ndcDataCopy[index].loaidat +
               "</li>"
@@ -353,7 +353,7 @@ function submitSearch() {
               "</li><li  style='width: 18%'>" +
               ndcDataCopy[index].dien_tich +
               "</li><li  style='width: 20%'>" +
-              ndcDataCopy[index].ma_xa +
+              ndcDataCopy[index].ten_xa +
               "</li><li  style='width: 20%'>" +
               ndcDataCopy[index].loaidat +
               "</li>"
@@ -393,7 +393,7 @@ function submitSearch() {
               "</li><li  style='width: 18%'>" +
               ndcDataCopy[index].dien_tich +
               "</li><li  style='width: 20%'>" +
-              ndcDataCopy[index].ma_xa +
+              ndcDataCopy[index].ten_xa +
               "</li><li  style='width: 20%'>" +
               ndcDataCopy[index].loaidat +
               "</li>"
@@ -425,7 +425,7 @@ function submitSearch() {
               "</li><li  style='width: 18%'>" +
               ndcDataCopy[index].dien_tich +
               "</li><li  style='width: 20%'>" +
-              ndcDataCopy[index].ma_xa +
+              ndcDataCopy[index].ten_xa +
               "</li><li  style='width: 20%'>" +
               ndcDataCopy[index].loaidat +
               "</li>"
@@ -464,7 +464,7 @@ function submitSearch() {
               "</li><li  style='width: 18%'>" +
               ndcDataCopy[index].dien_tich +
               "</li><li  style='width: 20%'>" +
-              ndcDataCopy[index].ma_xa +
+              ndcDataCopy[index].ten_xa +
               "</li><li  style='width: 20%'>" +
               ndcDataCopy[index].loaidat +
               "</li>"
@@ -497,7 +497,7 @@ function submitSearch() {
               "</li><li  style='width: 18%'>" +
               ndcDataCopy[index].dien_tich +
               "</li><li  style='width: 20%'>" +
-              ndcDataCopy[index].ma_xa +
+              ndcDataCopy[index].ten_xa +
               "</li><li  style='width: 20%'>" +
               ndcDataCopy[index].loaidat +
               "</li>"
@@ -545,10 +545,6 @@ function showListHome() {
     element.style.display = "none";
   }
 }
-
-
-
-
 
 var mouse_position = new ol.control.MousePosition({
   projection: "EPSG:4326",

@@ -15,22 +15,31 @@ class SiteControllers {
             callback(err, result.rows);
           });
         },
-        ndcData: function (callback) {
-          pgClient.query(`Select * from xa`, (err, result) => {
-            callback(err, result.rows);
-          });
-        },
-        homeData: function (callback) {
-          pgClient.query(`Select * from thongtinnha`, (err, result) => {
-            callback(err, result.rows);
-            console.log(result.rows);
-          });
-        },
         // ndcData: function (callback) {
-        //   pgClient.query(`SELECT * FROM xa INNER JOIN ndc ON xa.ma_xa = ndc.ma_xa`, (err, result) => {
+        //   pgClient.query(`Select * from xa`, (err, result) => {
         //     callback(err, result.rows);
         //   });
         // },
+        homeData: function (callback) {
+          pgClient.query(
+            `SELECT *
+          FROM thongtinnha, ndc, xa 
+          WHERE (thongtinnha.id_ndc = ndc.gid) and (ndc.ma_xa = xa.ma_xa)
+          ORDER BY thongtinnha.id_nha`,
+            (err, result) => {
+              callback(err, result.rows);
+              console.log(result.rows);
+            }
+          );
+        },
+        ndcData: function (callback) {
+          pgClient.query(
+            `SELECT * FROM xa INNER JOIN ndc ON xa.ma_xa = ndc.ma_xa`,
+            (err, result) => {
+              callback(err, result.rows);
+            }
+          );
+        },
       },
       function (err, results) {
         if (!err) {
@@ -40,9 +49,9 @@ class SiteControllers {
     );
   }
 
-  search(req, res) {
-    console.log(req.params);
-    res.send("NEW SEARCH DETAIL!!!");
-  }
+  // search(req, res) {
+  //   console.log(req.params);
+  //   res.send("NEW SEARCH DETAIL!!!");
+  // }
 }
 module.exports = new SiteControllers();

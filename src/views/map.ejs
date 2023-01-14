@@ -14,9 +14,6 @@
 </head>
 
 <body>
-
-
-
   <div id="map"></div>
 
   <!-- Bang thong tin chung -->
@@ -119,29 +116,35 @@
     </div>
   </div>
 
-  <button class="bnt_home_1" style="margin-top: 300px; right: 500px; position:absolute; width: 50px; height: 50px;" onclick="showItemHome1()"></button>
-  <button class="bnt_home_1" style="bottom: 100px; left: 300px; position:absolute; width: 50px; height: 50px; " onclick="showItemHome2()"> </button>
+  <button class="bnt_home_1" style="margin-top: 300px; right: 500px; position:absolute; width: 60px; height: 60px; background-color: rgba(0, 255, 255, 0);" onclick="showItemHome1()"></button>
+  <button class="bnt_home_1" style="bottom: 100px; left: 300px; position:absolute; width: 60px; height: 60px; background-color: rgba(240, 248, 255, 0); " onclick="showItemHome2()"> </button>
 
-  <!-- nha cho thue -->
+  <!-- nha cho bán-->
   <div class="item " id="item_home_1">
     <div class="img">
-      <img src="../img/home_img/1.jpg" alt="">
+      <img src="../img/home_img/<%=homeData[7].hinh_anh%>" alt="">
     </div>
     <div class="content">
-      <a href="#">Cho thuê căn hộ dịch vụ cao cấp Bùi Đình Tuý, Bình Thạnh, giá rẻ - TP Hồ Chí Minh</a>
-      <div style="margin-top:10px; "><span style="font-weight: 500;"> Giá</span>: 6,7 triệu/tháng</div>
-      <div> <span style="font-weight: 500;">Diện tích</span> : 35m2</div>
+      <a href="http://127.0.0.1:3000/homes/<%=homeData[7].id_nha -1%>"><%=homeData[7].tieu_de%> </a>
+      <div style="margin-top:10px; "><span style="font-weight: 500;"> Giá: </span> <%=homeData[7].gia%> </div>
+      <div> <span style="font-weight: 500;">Diện tích: </span> <%=homeData[7].dien_tich%> </div>
+      <div> <span style="font-weight: 500;">Trạng thái: </span> <%=homeData[7].trang_thai%> </div>
+      <div> <span style="font-weight: 500;">Xã: </span> <%=homeData[7].ten_xa%> </div>
+      <div> <span style="font-weight: 500;">Số tờ: </span><%=homeData[7].sh_to%> <span style="font-weight: 500;">Số thửa: </span><%=homeData[7].sh_thua%></div>
     </div>
   </div>
-  <!-- nha cho bán  -->
+  <!-- nha cho thuê  -->
   <div class="item " id="item_home_2">
     <div class="img">
-      <img src="../img/home_img/1.jpg" alt="">
+      <img src="../img/home_img/<%=homeData[22].hinh_anh%>" alt="">
     </div>
     <div class="content">
-      <a href="#">mua bán mha</a>
-      <div style="margin-top:10px; "><span style="font-weight: 500;"> Giá</span>: 6,7 triệu/tháng</div>
-      <div> <span style="font-weight: 500;">Diện tích</span> : 35m2</div>
+      <a href="http://127.0.0.1:3000/homes/<%=homeData[22].id_nha -1%>"><%=homeData[22].tieu_de%> </a>
+      <div style="margin-top:10px; "><span style="font-weight: 500;"> Giá: </span> <%=homeData[22].gia%> </div>
+      <div> <span style="font-weight: 500;">Diện tích: </span> <%=homeData[22].dien_tich%> </div>
+      <div> <span style="font-weight: 500;">Trạng thái: </span> <%=homeData[22].trang_thai%> </div>
+      <div> <span style="font-weight: 500;">Xã: </span> <%=homeData[22].ten_xa%> </div>
+      <div> <span style="font-weight: 500;">Số tờ: </span><%=homeData[22].sh_to%> <span style="font-weight: 500;">Số thửa: </span><%=homeData[22].sh_thua%></div>
     </div>
   </div>
   <!-- danh sach nhà  -->
@@ -151,10 +154,11 @@
     <div class="item2">
       <img src="../img/home_img/<%=homeData[i].hinh_anh%>" alt="'../img/home_img/'+<%=homeData[i].hinh_anh%>">
       <div>
-        <a href=""><%=homeData[i].tieu_de %> </a> <br>
+        <a href="http://127.0.0.1:3000/homes/<%=homeData[i].id_nha -1%>"><%=homeData[i].tieu_de %> </a> <br>
         <span> <span style="font-weight: 500;">Giá: </span><%=homeData[i].gia %></span> <br>
         <span> <span style="font-weight: 500;">Diện tích: </span> <%=homeData[i].dien_tich %></span> <br>
-        <span> <span style="font-weight: 500;">Loại hình: </span><%=homeData[i].trang_thai %></span>
+        <span> <span style="font-weight: 500;">Loại hình: </span><%=homeData[i].trang_thai %></span><br>
+        <span> <span style="font-weight: 500;">Số tờ: </span><%=homeData[i].sh_to%> <span style="font-weight: 500;">Số thửa: </span><%=homeData[i].sh_thua%></span>
       </div>
     </div>
     <% } %>

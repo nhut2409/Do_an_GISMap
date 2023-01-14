@@ -2,25 +2,420 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./style.css">
-  <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+  <link href="../img/icon.ico" rel="icon" />
+  <link href="../img/icon.ico" rel="icon" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.1.0/ol.css" />
+  <link rel="stylesheet" href="https://unpkg.com/ol-layerswitcher@4.1.0/dist/ol-layerswitcher.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/style.css" />
+  <title>quản lý nhà đất</title>
+
+
+  <style>
+    .homeDetail {
+
+      font-family: Roboto, sans-serif, "Arial Narrow Bold";
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      place-content: center;
+      align-items: center;
+      height: 100%;
+    }
+
+    .homeDetail>div {
+      display: flex;
+      /* flex-direction: column; */
+      place-content: center;
+      align-items: center;
+      justify-content: center;
+      width: 100vw;
+      background-color: rgba(128, 128, 128, 0.273);
+    }
+
+    .homeDetail>div>.img {
+      display: grid;
+      grid-template-columns: repeat(4, 328px);
+      grid-template-rows: repeat(2, 200px);
+      column-gap: 10px;
+      row-gap: 10px;
+      padding-top: 20px;
+      padding-bottom: 18px;
+    }
+
+    .homeDetail>div>.img>img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .homeDetail>div>.img>.homeDetail1 {
+      grid-column: 1/3;
+      grid-row: 1/3;
+    }
+
+    .homeDetail>div>.img>.homeDetail2 {
+      grid-column: 3/4;
+      grid-row: 1/2;
+    }
+
+    .homeDetail>div>.img>.homeDetail3 {
+      grid-column: 3/4;
+      grid-row: 2/3;
+    }
+
+    .homeDetail>div>.img .homeDetail4 {
+      grid-column: 4/5;
+      grid-row: 1/2;
+    }
+
+    .homeDetail>div>.img .homeDetail5 {
+      grid-column: 4/5;
+      grid-row: 2/3;
+    }
+
+    .homeDetail>.detail {
+      background-color: white;
+      display: flex;
+      width: calc(70% + -4px);
+    }
+
+    .homeDetail>.detail>.left {
+      width: 70%;
+      margin-right: 20px;
+    }
+
+    .homeDetail>.detail>.left>.homeDetail-1 {
+      padding-top: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(128, 128, 128, 0.189);
+    }
+
+    .homeDetail>.detail>.left>.homeDetail-1>.lien-ket {
+      margin-bottom: 13px;
+    }
+
+    .homeDetail>.detail>.left>.homeDetail-1>.lien-ket>span {
+      color: #3d4d65;
+      font-size: 13px;
+    }
+
+    .homeDetail>.detail>.left>.homeDetail-1>.lien-ket>span>a {
+      text-decoration: none;
+      color: #3d4d65;
+    }
+
+    .homeDetail>.detail>.left>.homeDetail-1>.title {
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid rgba(128, 128, 128, 0.226);
+    }
+
+    .homeDetail>.detail>.left>.homeDetail-1>.title>h3 {
+      font-size: 24px;
+      color: #30456e;
+      margin-bottom: 20px;
+    }
+
+    .homeDetail>.detail>.left>.homeDetail-1>.title>span {
+      font-size: 15px;
+    }
+
+    .homeDetail>.detail>.left>.homeDetail-1>.title>span>a {
+      text-decoration: none;
+      color: #0098da;
+    }
+
+    .homeDetail>.detail>.left>.homeDetail-1>.detail {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .homeDetail>.detail>.left>.homeDetail-1>.detail>.left {
+      display: flex;
+    }
+
+    .homeDetail>.detail>.left>.homeDetail-1>.detail>.left>.left-1 {
+      display: grid;
+      margin-right: 30px;
+    }
+
+    .homeDetail>.detail>.left>.homeDetail-1>.detail>.left>.left-1>p {
+      margin-bottom: 5px;
+      font-size: 16px;
+    }
+
+    .homeDetail>.detail>.left>.homeDetail-1>.detail>.left>.left-1>span {
+      font-size: 12px;
+      margin-bottom: 5px;
+      margin-top: 5px;
+    }
+
+    .homeDetail>.detail>.left>.homeDetail-1>.detail>.left>.left-2>p {
+      margin-bottom: 5px;
+    }
+
+    .homeDetail>.detail>.left>.homeDetail-1>.detail>.right>button {
+      margin-left: 16px;
+      padding: 9px 20px;
+      background-color: white;
+      border: #0298da 1px solid;
+      border-radius: 5px;
+    }
+
+    .homeDetail>.detail>.left>.homeDetail-1>.detail>.right>button>i {
+      margin-right: 8px;
+    }
+
+    .homeDetail>.detail>.left>.homeDetail-2>.title>h3 {
+      margin-top: 24px;
+      margin-bottom: 8px;
+      font-size: 20px;
+    }
+
+    .homeDetail>.detail>.left>.homeDetail-2>.content {
+      padding: 16px;
+      border: 1px solid rgba(128, 128, 128, 0.313);
+      border-radius: 5px;
+    }
+
+    .homeDetail>.detail>.left>.homeDetail-2>.content>p {
+      line-height: 30px;
+      color: #000000cc;
+    }
+
+
+    .homeDetail>.detail>.right {
+      width: 30%;
+    }
+
+    .homeDetail>.detail>.right>.homeDetail-1 {
+      padding: 16px;
+      border: 1px solid rgba(128, 128, 128, 0.268);
+      box-shadow: 3px 3px 3px 3px rgba(128, 128, 128, 0.13);
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
+    .homeDetail>.detail>.right>.homeDetail-1>h3 {
+      color: #30456e;
+      font-size: 16px;
+    }
+
+    .homeDetail>.detail>.right>.homeDetail-1>a {
+      display: flex;
+      text-decoration: none;
+      align-items: center;
+      padding: 25px 15px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.145);
+    }
+
+    .homeDetail>.detail>.right>.homeDetail-1>a>img {
+      width: 56px;
+      height: 56px;
+      object-fit: cover;
+      border-radius: 100%;
+      display: grid;
+      place-content: center;
+
+      overflow: hidden;
+    }
+
+    .homeDetail>.detail>.right>.homeDetail-1>a>strong {
+      height: 100%;
+      color: #4a4a4a;
+      font-size: 18px;
+      padding-left: 8px;
+    }
+
+    .homeDetail>.detail>.right>.homeDetail-1>div {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .homeDetail>.detail>.right>.homeDetail-1>div>button {
+      margin-top: 16px;
+      padding: 10px 15px 10px 15px;
+      border-radius: 10px;
+      border: 1px solid black;
+      width: 45%;
+      font-size: 14px;
+    }
+
+    .homeDetail>.detail>.right>.homeDetail-1>div>button>i {
+      font-size: 16px;
+      margin-right: 8px;
+    }
+
+    .homeDetail>.detail>.right>.homeDetail-2 {
+      padding: 16px;
+      border: 1px solid rgba(128, 128, 128, 0.194);
+      box-shadow: 1px 1px 1px 1px rgba(128, 128, 128, 0.238);
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
+    .homeDetail>.detail>.right>.homeDetail-2>.link {
+      display: grid;
+    }
+
+    .homeDetail>.detail>.right>.homeDetail-2>.link>a {
+      text-decoration: none;
+      color: #0098da;
+      margin-top: 7px;
+    }
+
+    .homeDetail>.detail>.right>.homeDetail-3 {
+      padding: 16px;
+      border: 1px solid rgba(128, 128, 128, 0.196);
+      box-shadow: 1px 1px 1px 1px rgba(128, 128, 128, 0.238);
+      border-radius: 5px;
+    }
+
+    .homeDetail>.detail>.right>.homeDetail-3>.link {
+      display: grid;
+    }
+
+    .homeDetail>.detail>.right>.homeDetail-3>.link>a {
+      text-decoration: none;
+
+      margin-top: 7px;
+    }
+  </style>
 </head>
 
 <body>
-  <div class="item">
-    <div class="img">
-      <img src="../img/6.jpg" alt="">
+  <div class="homeDetail">
+    <div>
+      <div class="img">
+        <img src="../img//home_img/<%=homeDataDetal.hinh_anh %>" alt="" class="homeDetail1" />
+        <img src="../img/home_img/2.jpg" alt="" class="homeDetail2" />
+        <img src="../img/home_img/3.jpg" alt="" class="homeDetail3" />
+        <img src="../img/home_img/4.jpg" alt="" class="homeDetail4" />
+        <img src="../img/home_img/5.jpg" alt="" class="homeDetail5" />
+      </div>
     </div>
-    <div class="content">
-      <a href="#">Cho thuê căn hộ dịch vụ cao cấp Bùi Đình Tuý, Bình Thạnh, giá rẻ - TP Hồ Chí Minh</a>
-      <p style="margin-top:10px">Giá: 6,7 triệu/tháng</p>
-      <p>Diện tích: 35m2</p>
+
+    <div class="detail">
+      <div class="left">
+        <div class="homeDetail-1">
+          <div class="lien-ket">
+            <!-- <span>
+              <a href="#">Homedy </a> > <a href="#"> Cho thuê nhà đất </a> >
+              <a href="#"> Căn hộ dịch vụ </a> >
+              <a href="#"> TP Hồ Chí Minh </a> >
+              <a href="#"> Quận Bình Thạnh </a>
+            </span> -->
+          </div>
+          <div class="title">
+            <h2>
+              <%=homeDataDetal.tieu_de %>
+            </h2>
+            <span style="color:#0098da ; font-size: 14px;">
+              Cho thuê căn hộ tại xã <%=homeDataDetal.ten_xa %> Huyện Vĩnh Cữu Tỉnh Bình Dương
+            </span>
+          </div>
+          <div class="detail">
+            <div class="left">
+              <div class="left-1">
+                <p style="font-weight: 500;">Giá: </p>
+                <strong><%=homeDataDetal.gia %>/tháng</strong>
+
+              </div>
+              <div class="left-2">
+                <p style="font-weight: 500;">Diện tích: </p>
+                <%=homeDataDetal.dien_tich %>
+              </div>
+            </div>
+            <div class="right">
+              <button><i class="fa-regular fa-bookmark"></i>Lưu tin ngay</button>
+              <button><i class="fa-solid fa-share-nodes"></i>Chia sẻ</button>
+              <button><i class="fa-solid fa-triangle-exclamation"></i>Báo xấu</button>
+            </div>
+          </div>
+        </div>
+        <div class="homeDetail-2">
+          <div class="title">
+            <h4 style="font-weight: 600;">Thông tin mô tả</h4>
+          </div>
+          <div class="content">
+            <p> Căn họ tại xã  <%=homeDataDetal.ten_xa %> <br>  <%=homeDataDetal.dien_tich %> .Giá full nội thất chỉ <%=homeDataDetal.gia %> /tháng tuyệt đẹp như hình. <br>- Vị trí trung tâm Bình Thạnh, đường trước nhà lớn 8m thuận tiện giao thông, ngay bên cạnh chợ Long Vân đi thẳng ra hẻm 194 Bạch Đằng <br> - Căn hộ mới xây, sạch sẽ, thông thoáng, mỗi tầng chỉ 04 căn hộ trang bị hiện đại và chất lượng lấy sự an toàn của mùa dịch và thoải mái của khách hàng làm thước đo cho sự thành công. <br> Tiện ích chung bao gồm: Cổng từ vân tay ra vào thuận tiện, camera an ninh cao; Báo trộm, Bãi xe đẹp, Thang máy; Máy NN năng lượng mặt trời; Wifi riêng cho từng phòng, rất mạnh; Giờ giấc tự do; Dịch vụ vệ sinh khu công cộng định kỳ 2 lần/ tuần. <br>Tiện ích riêng bao gồm: Máy lạnh Inverter; Tủ lạnh mới; Máy giặt và sân phơi riêng cho mỗi Phòng; Tivi internet (option); Bàn làm việc; Tủ tivi; Tủ quần áo gỗ phủ Melamine cao cấp; Giường, ga, nệm; Bếp nấu ăn + bồn rửa chén trong phòng; Tủ chén treo tường; Toilet riêng trong phòng cùng trang thiết bị vệ sinh hiện đại; <br>Mời bạn đến xem và cảm nhận trước khi quyết định chọn cho mình một nơi xứng đáng để định cư. U. Home căn hộ cao cấp giá không thể tốt hơn. <br>LH A. Tấn (Zalo, Viber, Whats app). </p>
+          </div>
+        </div>
+      </div>
+      <div class="right">
+        <div class="homeDetail-1">
+          <h3>Liên hệ tư vấn</h3>
+          <a href="">
+            <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg" alt="">
+            <strong>Cang Ngô Tấn</strong>
+          </a>
+          <div>
+            <button><i class="fa-brands fa-facebook-messenger"></i>Chat ngay</button>
+            <button><i class="fa-solid fa-phone-volume"></i>0368311698</button>
+          </div>
+        </div>
+        <div class="homeDetail-2">
+          <div class="title">
+            <strong>Cho thuê căn hộ tại Quận Bình Thạnh, Tp Hồ Chí Minh</strong>
+          </div>
+          <div class="link">
+            <a href="#">Cho thuê căn hộ dịch vụ Phường 1</a>
+            <a href="#">Cho thuê căn hộ dịch vụ Phường 2</a>
+            <a href="#">Cho thuê căn hộ dịch vụ Phường 3</a>
+            <a href="#">Cho thuê căn hộ dịch vụ Phường 4</a>
+            <a href="#">Cho thuê căn hộ dịch vụ Phường 5</a>
+            <a href="#">Cho thuê căn hộ dịch vụ Phường 6</a>
+            <a href="#">Cho thuê căn hộ dịch vụ Phường 7</a>
+            <a href="#">Cho thuê căn hộ dịch vụ Phường 8</a>
+            <a href="#">Cho thuê căn hộ dịch vụ Phường 9</a>
+            <a href="#">Cho thuê căn hộ dịch vụ Phường 10</a>
+            <a href="#">Cho thuê căn hộ dịch vụ Phường 11</a>
+            <a href="#">Cho thuê căn hộ dịch vụ Phường 12</a>
+          </div>
+        </div>
+        <div class="homeDetail-3">
+          <div class="title">
+            <strong>Bất động sản nổi bật</strong>
+          </div>
+          <div class="link">
+            <a href="#">Cho thuê văn phòng Bình Thạnh</a>
+            <a href="#">Cho thuê văn phòng Nhơn Trạch</a>
+            <a href="#">Bán nhà Phong Điền</a>
+            <a href="#">Cho thuê văn phòng Cờ Đỏ</a>
+            <a href="#">Cho thuê nhà Sơn Tây</a>
+            <a href="#">Cho thuê nhà Đồng Phú</a>
+            <a href="#">Cho thuê văn phòng Bù Đăng</a>
+            <a href="#">Cho thuê căn hộ Hồng Bàng</a>
+            <a href="#">Bán đất nền Bình Phước</a>
+            <a href="#">Mua bán căn hộ Mini</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+  <script>
+    const homeDataDetal = '<%- JSON.stringify(homeDataDetal) %>';
+  </script>
+  <script src="https://unpkg.com/elm-pep@1.0.6/dist/elm-pep.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ol@v7.1.0/dist/ol.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/ol-layerswitcher@4.1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js"></script>
 
+  <script src="./js/main.js"></script>
 </body>
+
 
 </html>

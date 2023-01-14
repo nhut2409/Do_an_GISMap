@@ -3,7 +3,7 @@ const express = require("express");
 const morgan = require("morgan");
 const app = express();
 const path = require("path");
-const route = require("./routes");
+const routes = require("./routes");
 const port = 3000;
 const hostname = "127.0.0.1";
 app.use(morgan("combined"));
@@ -20,7 +20,7 @@ app.set("view engine", "ejs")
 
 app.set("views", path.join(__dirname, "./views"));
 // routes innit
-route(app);
+routes(app);
 // conntct database
 pool
   .connect()
